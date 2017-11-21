@@ -1,218 +1,141 @@
-<template>
-  <div class="home">
-    <el-carousel :interval="5000" arrow="always" class="carousel" height="500px">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
-      </el-carousel-item>
-    </el-carousel>
-    <div class="approach">
-
+<template lang="html">
+  <div class="frontpage">
+    <div class="banner"></div>
+    <div class="commitment">
+      <div class="title">
+        <h1>我们的承诺</h1>
+        <h2>OUR COMMITMENT</h2>
+      </div>
+      <div class="content">
+        <div class="bg1">
+          <img src="../assets/img/commitment1.png" alt="COMMITMENT">
+          <span>一对一超优质服务</span>
+        </div>
+        <div class="bg2">
+          <img src="../assets/img/commitment2.png" alt="COMMITMENT">
+          <span>客户隐私严格保密</span>
+        </div>
+        <div class="bg3">
+          <img src="../assets/img/commitment3.png" alt="COMMITMENT">
+          <span>不成功无任何费用</span>
+        </div>
+      </div>
     </div>
-    <div class="body">
-      <!-- 快速查找贷款 -->
-      <div class="find-loan">
-        <div class="title">
-          <h1>快速查找贷款</h1>
+    <div class="advantage">
+      <div class="title">
+        <h1>我们的优势</h1>
+        <h2>OUR ADVANTAGE</h2>
+      </div>
+      <div class="content">
+        <div class="left">
+          <div class="bank">
+            <div class="france ">
+              <div class="sub-title">
+                月均费用
+              </div>
+              <div class="number">0.86%</div >
+            </div>
+            <div class="amount">
+              <div class="sub-title">
+                借10万，每月还
+              </div>
+              <div class="number">3637.78元</div >
+            </div>
+          </div>
+          <div class="our">
+            <div class="france ">
+              <div class="sub-title">
+                月均费用
+              </div>
+              <div class="number">0.60%</div >
+            </div>
+            <div class="amount">
+              <div class="sub-title">
+                借10万，每月还
+              </div>
+              <div class="number">3377.78元</div >
+            </div>
+          </div>
+          <div class="petty">
+            <div class="france ">
+              <div class="sub-title">
+                月均费用
+              </div>
+              <div class="number">1.98%</div >
+            </div>
+            <div class="amount">
+              <div class="sub-title">
+                借10万，每月还
+              </div>
+              <div class="number">4737.78元</div >
+            </div>
+          </div>
         </div>
-        <div class="content">
-          <span>职业身份：</span>
-          <el-select v-model="occupation" placeholder="请选择">
-            <el-option
-              v-for="item in occupationOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          <span>贷款金额：</span>
-          <el-select v-model="loanAmount" placeholder="请选择">
-            <el-option
-              v-for="item in loanAmountOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          <span>贷款期限：</span>
-          <el-select v-model="loanTimeLimit" placeholder="请选择">
-            <el-option
-              v-for="item in loanTimeLimitOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          <el-button type="primary" class="find-btn" size="small">搜索</el-button>
+        <div class="right">
+          <div class="count">
+            <div class="count-title">
+              <span>贷款前算一算</span>
+            </div>
+            <div class="count-content">
+              <span>借款金额：{{loanAmount*10000}}</span>
+              <span>还款总额：{{payment}}元</span>
+              <span>每月还款：</span>
+              <span class="price">{{balance}}元</span>
+            </div>
+          </div>
+          <div class="loan-amount">
+            <span class="t">借款数额：</span>
+            <div>
+              <el-input placeholder="请输入内容" v-model="loanAmount">
+                <template slot="append">万元</template>
+              </el-input>
+            </div>
+          </div>
+          <div class="loan-limit-time">
+            <span class="t">借款数额：</span>
+            <div>
+              <el-radio-group v-model="loanTimeLimit"  size="mini" class="radio-group">
+                <el-radio-button label="12期"></el-radio-button>
+                <el-radio-button label="24期"></el-radio-button>
+                <el-radio-button label="36期"></el-radio-button>
+                <el-radio-button label="48期"></el-radio-button>
+                <el-radio-button label="60期"></el-radio-button>
+              </el-radio-group>
+            </div>
+          </div>
+          <el-button type="primary" class="apply" >立即申请</el-button>
         </div>
       </div>
-      <!-- 信用贷 -->
-      <div class="credit-loan">
-        <div class="main-title">
-          <h1>信用贷</h1>
-          <div class="more">
-            更多
-          </div>
-        </div>
-        <div class="content">
-          <div class="left">
-            <div class="title">
-              <!-- <img src="../assets/img/credit-loan.jpg" alt=""> -->
-            </div>
-            <el-tabs v-model="creditActiveName" >
-              <el-tab-pane label="工薪贷" name="first">
-                <el-table
-                 :data="payrollLoan"
-                 stripe
-                 :show-header="false">
-                 <el-table-column
-                   prop="date"
-                   width="100">
-                 </el-table-column>
-                 <el-table-column
-                   prop="name"
-                   min-width="400">
-                 </el-table-column>
-                 <el-table-column width="100">
-                   <template slot-scope="scope">
-                     <el-button  type="primary" size="small">查看</el-button>
-                   </template>
-                 </el-table-column>
-               </el-table>
-              </el-tab-pane>
-              <el-tab-pane label="经营贷" name="second">经营贷</el-tab-pane>
-              <el-tab-pane label="保单贷" name="third">保单贷</el-tab-pane>
-              <el-tab-pane label="房贷" name="fourth">房贷</el-tab-pane>
-              <el-tab-pane label="车贷" name="five">车贷</el-tab-pane>
-            </el-tabs>
-          </div>
-          <!-- 最新放款动态 -->
-          <div class="right">
-            <div class="title">
-              最新放款动态
-            </div>
-            <el-table
-             :data="loan"
-             :show-header="false"
-             >
-             <el-table-column
-               prop="date"
-               min-width="50">
-             </el-table-column>
-             <el-table-column
-               prop="name"
-               min-width="60">
-             </el-table-column>
-             <el-table-column
-               prop="status"
-               min-width="60">
-             </el-table-column>
-             <el-table-column
-               prop="money"
-               min-width="80" class="money">
-             </el-table-column>
-           </el-table>
-          </div>
-        </div>
+    </div>
+    <div class="case">
+      <div class="title">
+        <h1>成功案例</h1>
+        <h2>SUCCESSFUI CASE</h2>
       </div>
-      <!-- 抵押贷 -->
-      <div class="mortgage-loan">
-        <div class="main-title">
-          <h1>抵押贷</h1>
-          <div class="more">
-            更多
-          </div>
-        </div>
-        <div class="content">
-          <div class="left">
-            <div class="title">
-              <!-- <img src="../assets/img/credit-loan.jpg" alt=""> -->
-            </div>
-            <el-tabs v-model="mortgageActiveName" >
-              <el-tab-pane label="房抵贷" name="first">
-                <el-table
-                 :data="payrollLoan"
-                 stripe
-                 :show-header="false">
-                 <el-table-column
-                   prop="date"
-                   width="100">
-                 </el-table-column>
-                 <el-table-column
-                   prop="name"
-                   min-width="400">
-                 </el-table-column>
-                 <el-table-column width="100">
-                   <template slot-scope="scope">
-                     <el-button  type="primary" size="small">查看</el-button>
-                   </template>
-                 </el-table-column>
-               </el-table>
-              </el-tab-pane>
-              <el-tab-pane label="车抵贷" name="second">车抵贷</el-tab-pane>
-            </el-tabs>
-          </div>
-          <!-- 最新放款动态 -->
-          <div class="right">
-            <div class="title">
-              最新放款动态
-            </div>
-            <div class="star">
-              <div class="row">
+      <div class="con">
+        <el-carousel :interval="10000" type="card" height="200px" width="820px">
+          <el-carousel-item v-for="item in 6" :key="item">
+            <div class="container">
+              <div class="l">
 
               </div>
-              <div class="row">
-
-              </div>
-              <div class="row">
-
+              <div class="r">
+                <div class="head">
+                  成功借款30万
+                </div>
+                <p>蒋先生大学毕业后在互联网公司上班，结婚后大部分积蓄都用来买房了，新房交付后装修资金缺口较大。蒋先生在网上找到助贷网并提交了贷款申请，助贷网的贷款顾问很快联系了他，详细了解蒋情况后，为蒋先生做了学历贷，成功贷款30万，家里房子的装修也由最初的简装方案更改为精装，装修后的新房非常漂亮，一家三口都感到非常满意。</p>
               </div>
             </div>
-          </div>
-        </div>
+          </el-carousel-item>
+        </el-carousel>
       </div>
-      <!-- 常见问题,新闻资讯,平台公告 -->
-      <div class="info-loan">
-        <div class="problem">
-          <div class="title">
-            <div class="name">常见问题</div>
-            <div class="more">更多</div>
-          </div>
-          <div class="main">
-            <ul>
-              <li>贷款的基本常识有哪些？</li>
-              <li>信用卡最大额度不够，该如何增加？怎样快速提高自己的信用值？</li>
-               <li>贷款的基本常识有哪些？</li>
-               <li>用卡最大额度不够，该如何增加？</li>
-            </ul>
-          </div>
-        </div>
-        <div class="news">
-          <div class="title">
-            <div class="name">新闻资讯</div>
-            <div class="more">更多</div>
-          </div>
-          <div class="main">
-            <ul>
-              <li>贷款的基本常识有哪些？</li>
-              <li>信用卡最大额度不够，<span>【2017-11-09】</span></li>
-               <li>贷款的基本常识有哪些？</li>
-               <li>用卡最大额度不够，该如何增加？</li>
-            </ul>
-          </div>
-        </div>
-        <div class="notice">
-          <div class="title">
-            <div class="name">平台公告</div>
-            <div class="more">更多</div>
-          </div>
-          <div class="main">
-            <ul>
-              <li><span>贷款的基本常识有哪些？</span>【2017-11-09】</li>
-              <li><span>信用卡最大额度不够</span><span>【2017-11-09】</span></li>
-               <li><span>贷款的基本常识有哪些？</span><span>【2017-11-09】</span></li>
-               <li>用卡最大额度不够?<span>【2017-11-09】</span></li>
-            </ul>
-          </div>
+    </div>
+    <div class="partner">
+      <div class="title">
+        <h1>合作伙伴</h1>
+        <h2>OUR PARTNER</h2>
+        <div class="content">
+          <div v-for="item in 15"></div>
         </div>
       </div>
     </div>
@@ -220,304 +143,244 @@
 </template>
 
 <script>
-
 export default {
-  name: 'Home',
   data () {
     return {
-      checked: true,
-      creditActiveName: 'first', // 信用贷
-      mortgageActiveName: 'first',
-      occupation: '',
-      occupationOptions: [{
-        value: '选项1',
-        label: '身份1'
-      }, {
-        value: '选项2',
-        label: '身份2'
-      }, {
-        value: '选项3',
-        label: '身份3'
-      }, {
-        value: '选项4',
-        label: '身份4'
-      }, {
-        value: '选项5',
-        label: '身份5'
-      }],
-      loanAmount: '',
-      loanAmountOptions: [{
-        value: '选项1',
-        label: '50000'
-      }, {
-        value: '选项2',
-        label: '100000'
-      }, {
-        value: '选项3',
-        label: '1000000'
-      }, {
-        value: '选项4',
-        label: '10000000'
-      }, {
-        value: '选项5',
-        label: '100000000'
-      }],
-      loanTimeLimit: '',
-      loanTimeLimitOptions: [{
-        value: '选项1',
-        label: '1年'
-      }, {
-        value: '选项2',
-        label: '2年'
-      }, {
-        value: '选项3',
-        label: '3年'
-      }, {
-        value: '选项4',
-        label: '4年'
-      }, {
-        value: '选项5',
-        label: '5年'
-      }],
-      payrollLoan: [{
-        date: '2016-05-02',
-        name: '平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘'
-      }, {
-        date: '2016-05-04',
-        name: '平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘'
-      }, {
-        date: '2016-05-01',
-        name: '平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘'
-      }, {
-        date: '2016-05-03',
-        name: '平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘'
-      }, {
-        date: '2016-05-03',
-        name: '平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘'
-      }],
-      loan: [{
-        date: '05-02',
-        name: '王小虎',
-        status: '成功放款',
-        money: '50000'
-      }, {
-        date: '05-04',
-        name: '王小虎',
-        status: '成功放款',
-        money: '50000'
-      }, {
-        date: '05-01',
-        name: '王小虎',
-        status: '成功放款',
-        money: '50000'
-      }, {
-        date: '05-03',
-        name: '王小虎',
-        status: '成功放款',
-        money: '50000'
-      }, {
-        date: '05-03',
-        name: '王小虎',
-        status: '成功放款',
-        money: '50000'
-      }]
+      loanTimeLimit: '12期',
+      loanAmount: 0,
+      rate: '0.0060'
+    }
+  },
+  computed: {
+    payment () {
+      return Math.round((this.balance * this.loanTimeLimit.slice(0, 2) * 100)) / 100
+    },
+    balance () {
+      return Math.round(((this.loanAmount / this.loanTimeLimit.slice(0, 2) + this.loanAmount * this.rate) * 10000) * 100) / 100
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style  lang="scss">
+<style lang="scss">
 @import '../assets/scss/common.scss';
-.home{
-  .approach{
-    height: 120px;
-    background: url(../assets/img/step.jpg);
-    background-repeat: no-repeat;
-    background-color: #fff;
-    background-position: center;
+.frontpage{
+  width: 1920px;
+  background-color: #ffffff;
+  .title{
+    padding-top: 70px;
+    text-align: center;
+    color: $main-color;
+    h1{
+      font-size: 38px;
+    }
+    h2{
+      font-size: 22px;
+    }
   }
-  .body{
-    background-color: $bg-color;
+  .banner{
+    height: 667px;
+    background: url(../assets/img/front-banner.jpg)
+  }
+  //公共的content
+  .content{
     width: 1000px;
     margin: 0 auto;
-    h1{
-      font-size: 20px;
-      color: $title-color;
-    }
-    /* 快速查找贷款 */
-    .find-loan{
-      margin-top: 70px;
-      font-size: 14px;
-      .title{
-        margin-bottom: 40px;
-      }
-      .content{
-        background-color: #fff;
-        padding: 40px 0;
-        span{
-          margin-left: 20px;
-        }
-        .find-btn{
-          margin-left: 10px;
-        }
-      }
-    }
-     /* 信用贷 抵押贷通用*/
-    .credit-loan, .mortgage-loan{
-      margin-top: 70px;
-      .main-title{
-        display: flex;
-        justify-content: space-between;
-        width: 640px;
-        .more{
-          line-height: 50px;
-          color: $title-color;
-          cursor: pointer;
-        }
-      }
-      .content{
-        display: flex;
-        justify-content: space-between;
-        .el-table__row{
-          height: 60px;
-        }
-        .left{
-          flex-grow: 1;
-          flex:0 0  640px;
-          position: relative;
-          margin-top: 22px;
-          .title{
-            position: absolute;
-            top: -24px;
-            left: 0px;
-            height: 76px;
-            width: 100%;
-            line-height: 76px;
-            color: #fff;
-            background: url(../assets/img/credit-loan.jpg);
-            background-size: 100%;
-          }
-          .el-tabs__item.is-active{
-            color: #fff;
-            font-size:16px;
-            font-weight: 800;
-          }
-          .el-tabs__active-bar{
-            visibility: hidden;
-          }
-          .el-tabs__nav-wrap::after{
-            position: static;
-          }
-          .el-tabs__item{
-            color: #ffdbcc;
-            font-size:16px;
-          }
-        }
-        .right{
-          flex:0 0 320px;
-          .title{
-            height: 76px;
-            line-height: 76px;
-            color: #fff;
-            padding-left: 20px;
-            background: url(../assets/img/loan.jpg)
-          }
-          .money{
-            color: $main-color;
-          }
-        }
-      }
-    }
-    .mortgage-loan{
-      .content{
-        .left{
-          .title{
-            background: url(../assets/img/mortgage-loan.jpg);
-            div{
-              float: left;
-              padding-left: 10px;
-            }
-          }
-        }
-        .right{
-          .title{
-            background: url(../assets/img/trends.jpg);
-          }
-          .star{
-            background-color: #fff;
-            .row{
-              height: 100px;
-              width: 100%;
-              border-bottom: 1px dashed #eaeaea;
-            }
-          }
-        }
-      }
-    }
-    /* 其他 */
-    .info-loan{
-      margin-top: 70px;
-      display: flex;
+    display: flex;
+  }
+  .commitment{
+    height: 622px;
+    .content{
       justify-content: space-between;
-      .title{
-        width: 322px;
-        color: $title-color;
-        display: flex;
-        .name{;
-          font-size: 20px;
-          padding-bottom: 25px;
-          border-bottom: 2px solid $main-color;
-        }
-        .more{
-          cursor: pointer;
-          flex-grow: 1;
-          text-align: right;
-          font-size: 16px;
-          line-height: 24px;
-          border-bottom: 2px solid $line-color;
-        }
-      }
-      .problem,.news,.notice{
-        width: 322px;
-        .main{
-          background-color: #fff;
-          height: 237px;
-          font-size: 14px;
-          color: $title-color;
-          ul{
-            margin-top: 0px;
-            height: 237px;
-            li{
-              padding-top: 30px;
-            }
-          }
-        }
-      }
-      .news,.notice{
-        ul{
-          li{
-            display: flex;
-            justify-content: space-between;
-          }
+      div{
+        height: 260px;
+        width: 310px;
+        position: relative;
+        span{
+          font-size: 28px;
+          color: $main-color;
+          width: 310px;
+          text-align: center;
+          display: inline-block;
+          position: absolute;
+          bottom: 56px;
+          left: 0px;
         }
       }
     }
   }
-  .el-carousel__item h3 {
-    color: #475669;
-    font-size: 14px;
-    opacity: 0.75;
-    line-height: 150px;
-    margin: 0;
+  .advantage{
+    height: 760px;
+    background-color: $bg-color;
+    .content{
+      .france,.amount{
+        display: inline-block;
+        height: 100%;
+        width: 155px;
+        margin-left: 170px;
+        font-size: 24px;
+        div{
+          padding-right: 30px;
+          text-align: right;
+        }
+        .sub-title{
+          color: $word-color;
+          padding-top: 36px;
+        }
+        .number{
+          margin-top: 14px;
+          color: #f3ab55;
+        }
+      }
+      .amount{
+        margin-left: 0px;
+        width: 230px;
+      }
+      .left{
+        width: 600px;
+        .bank{
+          height: 136px;
+          background: url('../assets/img/bank.png');
+          background-repeat:no-repeat;
+        }
+        .our{
+          height: 151px;
+          margin-top: 34px;
+          background: url('../assets/img/our.png');
+          background-repeat:no-repeat;
+          .number{
+            color:$main-color;
+          }
+        }
+        .petty{
+          height: 135px;
+          margin-top: 34px;
+          background: url('../assets/img/less.png');
+          background-repeat:no-repeat;
+        }
+      }
+      .right{
+        width: 400px;
+        .count{
+          height: 273px;
+          width: 361px;
+          margin: 0 auto;
+          background-color: #fff;
+          box-shadow: #666 0px 0px 10px;
+          .count-title{
+            height: 50px;
+            line-height: 50px;
+            margin-left: 40px;
+            font-size: 20px;
+            border-bottom: 2px solid $line-color;
+            span{
+              height: 50px;
+              display: inline-block;
+              border-bottom: 2px solid $main-color;
+            }
+          }
+          .count-content{
+            padding-left: 38px;
+            color:$title-color;
+            font-size: 20px;
+            span{
+              padding-top: 23px;
+              display: block;
+            }
+            .price{
+              font-size: 30px;
+              font-weight: bold;
+              color:$main-color;
+            }
+          }
+        }
+        .loan-amount, .loan-limit-time{
+          display: flex;
+          margin-top: 28px;
+          .t{
+            flex: 0 0 90px;
+            font-size: 18px;
+            line-height: 40px;
+          }
+          div{
+            flex-grow: 1;
+          }
+        }
+        .loan-limit-time{
+          div{
+            .radio-group{
+              padding-top: 6px;
+            }
+          }
+        }
+        .apply{
+          margin-top: 30px;
+          width: 100%;
+        }
+      }
+    }
   }
+  //成功案例
+  .case{
+    height: 577px;
+    .con{
+      width: 1000px;
+      margin: 0 auto;
+      .container{
+        padding: 20px 10px;
+        display: flex;
+        .l{
+          background-color: #fff;
+          width: 200px;
+          height: 150px;
+          flex: 0 0 200px;
+          margin-right: 20px;
+        }
+        .r{
+          color:$title-color;
+          .head{
+            font-size: 22px;
+          }
+          p{
+            font-size: 13px;
+          }
+        }
+      }
+      .el-carousel__item h3 {
+        color: #475669;
+        font-size: 14px;
+        opacity: 0.75;
+        line-height: 200px;
+        margin: 0;
+      }
 
-  .el-carousel__item:nth-child(2n) {
-     background-color: #99a9bf;
+      .el-carousel__item:nth-child(2n) {
+        background-color: #99a9bf;
+      }
+
+      .el-carousel__item:nth-child(2n+1) {
+        background-color: #d3dce6;
+      }
+    }
   }
+  .partner{
 
-  .el-carousel__item:nth-child(2n+1) {
-     background-color: #d3dce6;
+    padding-bottom: 50px;
+    .content{
+
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      div{
+        height: 70px;
+        width: 150px;
+        background-color: orange;
+        margin-top: 32px;
+        margin-left: 60px;
+      }
+      div:nth-child(5n+1){
+        margin-left: 0px;
+      }
+    }
   }
 }
 

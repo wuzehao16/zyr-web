@@ -27,5 +27,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   background-color: $bg-color;
   font-size: 14px;
+  width: 1920px;
 }
 </style>

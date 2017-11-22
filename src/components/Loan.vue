@@ -164,8 +164,11 @@
                 <div class="avatar">
 
                 </div>
-                <div class="">
-
+                <div class="details">
+                  <div class="name">
+                    王富贵
+                  </div>
+                  <p>让客户满意是我的追求，为客户服务是我的职责。</p>
                 </div>
               </div>
             </div>
@@ -459,6 +462,26 @@ export default {
               height: 100px;
               width: 100%;
               border-bottom: 1px dashed #eaeaea;
+              display: flex;
+              .ranking{
+                flex: 0 0 60px;
+                background: url(../assets/img/first.png) center no-repeat;
+
+              }
+              .avatar{
+                flex:0 0 80px;
+                background: url(../assets/img/avatar.jpg) center no-repeat;
+              }
+              .details{
+                padding:20px 10px 0 0;
+                .name{
+                  font-size: 16px;
+                }
+                p{
+                  font-size: 12px;
+                  color: $title-color;
+                }
+              }
             }
           }
         }

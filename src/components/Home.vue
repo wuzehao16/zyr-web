@@ -1,6 +1,9 @@
 <template lang="html">
   <div class="frontpage">
-    <div class="banner"></div>
+    <div class="banner">
+      <base-application>
+      </base-application>
+    </div>
     <div class="commitment">
       <div class="title">
         <h1>我们的承诺</h1>
@@ -143,7 +146,11 @@
 </template>
 
 <script>
+import BaseApplication from './common/BaseApplication.vue'
 export default {
+  components: {
+    BaseApplication
+  },
   data () {
     return {
       loanTimeLimit: '12期',
@@ -180,7 +187,13 @@ export default {
   }
   .banner{
     height: 667px;
-    background: url(../assets/img/front-banner.jpg)
+    position: relative;
+    background: url(../assets/img/front-banner.jpg);
+    .application{
+      position:absolute;
+      top: 75px;
+      right: 460px;
+    }
   }
   //公共的content
   .content{
@@ -244,8 +257,9 @@ export default {
           background-repeat:no-repeat;
         }
         .our{
-          height: 151px;
+          height: 181px;
           margin-top: 34px;
+          margin-left: -12px;
           background: url('../assets/img/our.png');
           background-repeat:no-repeat;
           .number{
@@ -254,7 +268,7 @@ export default {
         }
         .petty{
           height: 135px;
-          margin-top: 34px;
+          margin-top: 24px;
           background: url('../assets/img/less.png');
           background-repeat:no-repeat;
         }

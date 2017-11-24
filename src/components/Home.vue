@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="frontpage">
+  <div class="home">
     <div class="banner">
       <base-application>
       </base-application>
@@ -171,7 +171,7 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/common.scss';
-.frontpage{
+.home{
   width: 1920px;
   background-color: #ffffff;
   .title{

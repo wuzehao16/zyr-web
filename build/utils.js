@@ -29,7 +29,7 @@ exports.cssLoaders = function (options) {
   }
   // generate loader string to be used with extract text plugin
   function resolveResouce(name) {
-      return path.resolve(__dirname, '../src/scss/' + name);
+      return path.resolve(__dirname, '../src/assets/scss/' + name);
   }
   function generateSassResourceLoader() {
       var loaders = [
@@ -40,7 +40,7 @@ exports.cssLoaders = function (options) {
             loader: 'sass-resources-loader',
             options: {
               // it need a absolute path
-              resources: [resolveResouce('var.scss'), resolveResouce('mixins.scss')]
+              resources: [resolveResouce('common.scss'), resolveResouce('mixins.scss')]
             }
         }
       ];
@@ -83,10 +83,10 @@ exports.cssLoaders = function (options) {
     css: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less'),
-    sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
-    // sass: generateSassResourceLoader(),
-    // scss: generateSassResourceLoader(),
+    // sass: generateLoaders('sass', { indentedSyntax: true }),
+    // scss: generateLoaders('sass'),
+    sass: generateSassResourceLoader(),
+    scss: generateSassResourceLoader(),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   }

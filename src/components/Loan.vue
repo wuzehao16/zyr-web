@@ -1,9 +1,10 @@
 <template>
-  <div class="home">
+  <div class="loan">
     <el-carousel :interval="5000" arrow="always" class="carousel" height="500px">
       <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
       </el-carousel-item>
+      <base-application>
+      </base-application>
     </el-carousel>
     <div class="approach">
 
@@ -50,7 +51,7 @@
         <div class="main-title">
           <h1>信用贷</h1>
           <div class="more">
-            更多
+            <router-link to="/creditloan">更多</router-link>
           </div>
         </div>
         <div class="content">
@@ -119,7 +120,7 @@
         <div class="main-title">
           <h1>抵押贷</h1>
           <div class="more">
-            更多
+            <router-link to="/mortgageloan">更多</router-link>
           </div>
         </div>
         <div class="content">
@@ -231,9 +232,10 @@
 </template>
 
 <script>
-
+import BaseApplication from './common/BaseApplication.vue'
+import LoanService from '@/services/LoanService.js'
 export default {
-  name: 'Home',
+  name: 'loan',
   data () {
     return {
       checked: true,
@@ -290,49 +292,19 @@ export default {
         value: '选项5',
         label: '5年'
       }],
-      payrollLoan: [{
-        date: '2016-05-02',
-        name: '平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘'
-      }, {
-        date: '2016-05-04',
-        name: '平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘'
-      }, {
-        date: '2016-05-01',
-        name: '平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘'
-      }, {
-        date: '2016-05-03',
-        name: '平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘'
-      }, {
-        date: '2016-05-03',
-        name: '平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘'
-      }],
-      loan: [{
-        date: '05-02',
-        name: '王小虎',
-        status: '成功放款',
-        money: '50000'
-      }, {
-        date: '05-04',
-        name: '王小虎',
-        status: '成功放款',
-        money: '50000'
-      }, {
-        date: '05-01',
-        name: '王小虎',
-        status: '成功放款',
-        money: '50000'
-      }, {
-        date: '05-03',
-        name: '王小虎',
-        status: '成功放款',
-        money: '50000'
-      }, {
-        date: '05-03',
-        name: '王小虎',
-        status: '成功放款',
-        money: '50000'
-      }]
+      payrollLoan: [],
+      loan: []
     }
+  },
+  methods: {
+
+  },
+  async mounted () {
+    this.loan = (await LoanService.loan()).data
+    this.payrollLoan = (await LoanService.payrollLoan()).data
+  },
+  components: {
+    BaseApplication
   }
 }
 </script>
@@ -340,13 +312,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  lang="scss">
 @import '../assets/scss/common.scss';
-.home{
+.loan{
   .approach{
     height: 120px;
     background: url(../assets/img/step.jpg);
     background-repeat: no-repeat;
     background-color: #fff;
     background-position: center;
+  }
+  .application{
+    position:absolute;
+    top: 15px;
+    right: 460px;
+    z-index: 10;
   }
   .body{
     background-color: $bg-color;
@@ -383,9 +361,12 @@ export default {
         justify-content: space-between;
         width: 640px;
         .more{
-          line-height: 50px;
-          color: $title-color;
-          cursor: pointer;
+          a{
+            line-height: 50px;
+            color: $title-color;
+            cursor: pointer;
+            text-decoration: none;
+          }
         }
       }
       .content{

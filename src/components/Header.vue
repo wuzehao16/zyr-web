@@ -8,8 +8,8 @@
       <el-menu :default-active="activeIndex" class="el-menu" mode="horizontal" >
         <el-menu-item index="1"><router-link to="/">首页</router-link></el-menu-item>
         <el-menu-item index="2"><router-link to="/loan">我要贷款</router-link></el-menu-item>
-        <el-menu-item index="4">帮助中心</el-menu-item>
-        <el-menu-item index="5"><router-link to="/foo">关于我们</router-link></el-menu-item>
+        <el-menu-item index="4"><router-link to="/helpcenter">帮助中心</router-link></el-menu-item>
+        <el-menu-item index="5"><router-link to="/aboutus">关于我们</router-link></el-menu-item>
       </el-menu>
     </div>
   </div>
@@ -37,7 +37,6 @@ export default {
     background-color: #fff;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #e6e6e6;
     .logo{
       width: 60px;
       height: 60px;

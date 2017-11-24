@@ -26,16 +26,18 @@
 
       >
         <el-input type="captcha" v-model.number="applicationForm.captcha" auto-complete="off" placeholder="请输入验证码" class="captcha" size="medium"></el-input>
-        <el-button type="primary" @click="submitForm('applicationForm')" class="getCaptcha" >发送验证码</el-button>
+        <el-button type="primary"  class="getCaptcha" >发送验证码</el-button>
       </el-form-item>
       <div class="checkbox">
         <el-checkbox v-model="applicationForm.checked"></el-checkbox>
         <span class="text">本人已阅读并同意</span>
         <span class="agreement" @click="dialogVisible = true">《众易融平台服务协议》</span>
-        <el-button type="primary" @click="submitForm('applicationForm')" class="submit">立即申请</el-button>
+        <el-button type="primary" @click="submit('applicationForm')" class="submit" name="apply">立即申请</el-button>
       </div>
 
     </el-form>
+    <base-application-form-sucess :dialog-visible="sucessDialogVisible" @dialog-close="closeDiolog">
+    </base-application-form-sucess>
     <el-dialog
       title="众易融用户在线申请协议"
       center
@@ -149,8 +151,11 @@
 </template>
 
 <script>
+import BaseApplicationFormSucess from './BaseApplicationFormSucess'
+import LoanService from '@/services/LoanService.js'
 export default {
   data () {
+    //电话号码验证
     var validateTelephone = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('电话不能为空'))
@@ -158,9 +163,11 @@ export default {
       if (!(/^1[3|4|5|7|8]\d{9}$/.test(value))) {
         return callback(new Error('电话号码格式不正确'))
       }
+      callback()
     }
     return {
       dialogVisible: false,
+      sucessDialogVisible: false,
       applicationForm: {
         userName: '',
         telephone: '',
@@ -175,16 +182,39 @@ export default {
     }
   },
   methods: {
-    submitForm (formName) {
+    submit (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          this.apply(formName)
         } else {
           console.log('error submit!!')
           return false
         }
       })
+    },
+    /**
+     * 立即申请
+     * @return {Promise} [description]
+     */
+    async apply (formName) {
+        try {
+           await LoanService.apply({
+             userName: this.applicationForm.userName,
+             telephone: this.applicationForm.telephone
+           })
+          this.sucessDialogVisible = true
+          this.$refs[formName].resetFields();
+         } catch (error) {
+           // this.error = error.response.data.error
+           console.log(error)
+         }
+    },
+    closeDiolog(val){
+      this.sucessDialogVisible = val
     }
+  },
+  components: {
+    BaseApplicationFormSucess
   }
 }
 </script>

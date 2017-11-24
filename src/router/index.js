@@ -5,6 +5,7 @@ import Loan from '@/components/Loan'
 import MortgageLoan from '@/components/loan/MortgageLoan'
 import HelpCenter from '@/components/HelpCenter'
 import AboutUs from '@/components/AboutUs'
+import ApplyNow from '@/components/ApplyNow'
 Vue.use(Router)
 
 export default new Router({
@@ -33,6 +34,11 @@ export default new Router({
       path: '/mortgageloan',
       name: 'MortgageLoan',
       component: MortgageLoan
+    },
+    {
+      path: '/applynow',
+      name: 'ApplyNow',
+      component: ApplyNow
     }
   ]
 })

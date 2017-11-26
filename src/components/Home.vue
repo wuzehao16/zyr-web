@@ -172,7 +172,7 @@ export default {
 <style lang="scss">
 @import '../assets/scss/common.scss';
 .home{
-  min-width:1000px;
+  width:1000px;
   background-color: #ffffff;
   .title{
     padding-top: 70px;

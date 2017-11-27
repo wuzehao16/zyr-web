@@ -2,11 +2,11 @@
   <div class="footer">
     <div class="container">
       <div class="us">
-        <router-link to="/foo">联系我们</router-link>
-        <router-link to="/foo">关于我们</router-link>
-        <router-link to="/foo">意见反馈</router-link>
-        <router-link to="/foo">免责声明</router-link>
-        <router-link to="/foo">加入我们</router-link>
+        <router-link to="/contactus">联系我们</router-link>
+        <router-link to="/aboutus">关于我们</router-link>
+        <router-link to="/feedback">意见反馈</router-link>
+        <router-link to="/disclaimer">免责声明</router-link>
+        <router-link to="/joinus">加入我们</router-link>
       </div>
       <div class="info">
         <p>

@@ -6,6 +6,12 @@ import MortgageLoan from '@/components/loan/MortgageLoan'
 import HelpCenter from '@/components/HelpCenter'
 import AboutUs from '@/components/AboutUs'
 import ApplyNow from '@/components/ApplyNow'
+import PlatformAnnouncement from '@/components/PlatformAnnouncement'
+import JoinUs from '@/components/JoinUs'
+import ContactUs from '@/components/ContactUs'
+import FeedBack from '@/components/FeedBack'
+import Disclaimer from '@/components/Disclaimer'
+import News from '@/components/News'
 Vue.use(Router)
 
 export default new Router({
@@ -39,6 +45,36 @@ export default new Router({
       path: '/applynow',
       name: 'ApplyNow',
       component: ApplyNow
+    },
+    {
+      path: '/platformannouncement',
+      name: 'PlatformAnnouncement',
+      component: PlatformAnnouncement
+    },
+    {
+      path: '/joinus',
+      name: 'JoinUs',
+      component: JoinUs
+    },
+    {
+      path: '/contactus',
+      name: 'ContactUs',
+      component: ContactUs
+    },
+    {
+      path: '/feedback',
+      name: 'FeedBack',
+      component: FeedBack
+    },
+    {
+      path: '/disclaimer',
+      name: 'Disclaimer',
+      component: Disclaimer
+    },
+    {
+      path: '/news',
+      name: 'News',
+      component: News
     }
   ]
 })

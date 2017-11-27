@@ -30,6 +30,7 @@ export default {
 .header{
   width: 100%;
   background-color: #fff;
+  border-bottom: 1px solid #eaeaea;
   .center{
     width: 1000px;
     margin: 0 auto;

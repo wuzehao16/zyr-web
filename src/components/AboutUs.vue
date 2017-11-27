@@ -1,80 +1,83 @@
 <template lang="html">
   <div class="about-us">
-    <el-dialog
-      title="提示"
-      :visible.sync="dialogVisible"
-      width="30%"
-      :before-close="handleClose">
-      <span>windows系统想问你一个问题，卢大哥是不是很美？</span>
-      <span slot="footer" class="dialog-footer">
-        <div v-if="v">
-          <el-button class="no" v-if="v" @click="v=false">是</el-button>
-          <el-button type="primary" class="no" @click="p1">不是</el-button>
+      <top-bar />
+    <div class="body">
+      <div class="container">
+        <h2>公司简介</h2>
+        <div class="info">
+          <p>众易融是一家专业从事个人融资及企业融资服务的综合型互联网金融服务平台；通过线下专业团队协助客户制定融资计划并利用自身资本优化客户负债结构，从而降低客户融资成本。
+          </p>
+          <p>公司目前致力于实现信贷产品智能匹配，精攻房产抵押以及企业贷款；众易融以助力个人发展，助推中小企业发展为己任。</p>
         </div>
-        <div v-else>
-          <el-button type="primary" class="no" @click="p1" >不是</el-button>
-          <el-button   @click="v=true">是</el-button>
+        <div class="bg">
+          <img src="../assets/img/intro_1.jpg" alt="">
+          <div class="right">
+            <div class="">
+              <img src="../assets/img/intro_2.jpg" alt="">
+              <img src="../assets/img/intro_3.jpg" alt="" class="img2">
+            </div>
+            <div class="n2">
+              <img src="../assets/img/intro_4.jpg" alt="">
+              <img src="../assets/img/intro_5.jpg" alt="" class="img2">
+            </div>
+          </div>
         </div>
-      </span>
-    </el-dialog>
-    <el-dialog
-      title="提示"
-      :visible.sync="dialogVisible1"
-      width="30%"
-      :before-close="handleClose">
-      <span>那就是卢大哥她很丑咯？</span>
-      <span slot="footer" class="dialog-footer">
-        <div v-if="v">
-          <el-button class="no" v-if="v" @click="v=false">不是</el-button>
-          <el-button type="primary" class="no" @click="p2">是</el-button>
-        </div>
-        <div v-else>
-          <el-button type="primary" class="no" @click="p2" >是</el-button>
-          <el-button   @click="v=true">不是</el-button>
-        </div>
-      </span>
-    </el-dialog>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import TopBar from './common/BaseAboutUsTopBar.vue'
 export default {
-    data() {
-      return {
-        v:true,
-        dialogVisible: true,
-        dialogVisible1:false
-      };
-    },
-    methods: {
-      handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            // alert("怎么可以关了呢!");
-            // done();
-             this.$message.error('想关闭，没门');
-          })
-          .catch(_ => {});
-      },
-      p1 () {
-        this.dialogVisible = false
-        this.dialogVisible1= true
-      },
-      p2 () {
-        this.dialogVisible1= false
-        this.$alert("真是同道中人：我也认为卢大哥很丑，不仅我认为卢大哥很丑，ios系统也认为卢大哥很丑，还有linux,Android，他们都认为她很");
-      },
-      pp () {
-
-    }
-    }
-  };
+  components: {
+    TopBar
+  }
+}
 </script>
 
 <style lang="scss">
 .about-us{
-  .no:hover{
-    // transform: translateX(100px);
+  .body{
+    background: url(../assets/img/about_us_bg.jpg) no-repeat;
+    height: 907px;
+    .container{
+      background-color: #fff;
+      width: 940px;
+      height: 690px;
+      margin: 0 auto;
+      top: 100px;
+      position: relative;
+      box-shadow: #999 0px 0px 10px;
+      padding: 30px 48px;
+      h2{
+        font-size: 18px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid $line-color;
+      }
+      .info{
+        margin-top: 30px;
+        font-size: 16px;
+        text-indent: 33px;
+        p{
+          line-height: 30px;
+          margin: 0;
+        }
+      }
+      .bg{
+        margin-top: 80px;
+        display: flex;
+        .right{
+          margin-left: 20px;
+          .img2{
+            margin-left: 20px;
+          }
+          .n2{
+            margin-top: 20px;
+          }
+        }
+      }
+    }
   }
 }
 </style>

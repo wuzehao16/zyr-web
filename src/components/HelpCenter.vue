@@ -6,23 +6,39 @@
         <el-menu
           default-active="1"
           class="menu">
-          <el-menu-item  index="1">
+          <el-menu-item  index="1"  @click="index=0">
             <template slot="title">
               新手上路
             </template>
           </el-menu-item >
-          <el-menu-item index="2">
+          <el-menu-item index="2"  @click="index=1">
             <span slot="title">常见问题</span>
           </el-menu-item>
-          <el-menu-item index="3">
+          <el-menu-item index="3"  @click="index=2">
             <span slot="title">温馨提示</span>
           </el-menu-item>
         </el-menu>
       </el-col>
       <el-col :span="19">
-        <div class="content">
+        <div class="content" v-if="index==0">
           <div class="sub-title">
             新手上路
+          </div>
+          <ul class="list">
+            <li v-for="item in 6">安全保障：在众易融平台借款有什么保障措施？</li>
+          </ul>
+        </div>
+        <div class="content" v-if="index==1">
+          <div class="sub-title">
+            常见问题
+          </div>
+          <ul class="list">
+            <li v-for="item in 6">安全保障：在众易融平台借款有什么保障措施？</li>
+          </ul>
+        </div>
+        <div class="content" v-if="index==2">
+          <div class="sub-title">
+            温馨提示
           </div>
           <ul class="list">
             <li v-for="item in 6">安全保障：在众易融平台借款有什么保障措施？</li>
@@ -36,6 +52,11 @@
 
 <script>
 export default {
+  data () {
+    return {
+      index: 0
+    }
+  }
 }
 </script>
 

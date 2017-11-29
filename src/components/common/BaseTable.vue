@@ -25,7 +25,7 @@ export default {
   props: ['dfDf'],
   data () {
     return {
-      payrollLoan: [],
+      payrollLoan: []
     }
   },
   methods: {
@@ -35,7 +35,7 @@ export default {
   },
   async mounted () {
     this.payrollLoan = (await LoanService.payrollLoan()).data
-  },
+  }
 }
 </script>
 

@@ -83,8 +83,6 @@
               </el-tab-pane>
               <el-tab-pane label="经营贷" name="second">经营贷</el-tab-pane>
               <el-tab-pane label="保单贷" name="third">保单贷</el-tab-pane>
-              <el-tab-pane label="房贷" name="fourth">房贷</el-tab-pane>
-              <el-tab-pane label="车贷" name="five">车贷</el-tab-pane>
             </el-tabs>
           </div>
           <!-- 最新放款动态 -->

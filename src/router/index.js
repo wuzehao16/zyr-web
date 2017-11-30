@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Loan from '@/components/Loan'
+import CreditLoan from '@/components/CreditLoan'
 import MortgageLoan from '@/components/loan/MortgageLoan'
 import HelpCenter from '@/components/HelpCenter'
 import AboutUs from '@/components/AboutUs'
@@ -75,6 +76,11 @@ export default new Router({
       path: '/news',
       name: 'News',
       component: News
+    },
+    {
+      path: '/creditloan',
+      name: 'CreditLoan',
+      component: CreditLoan
     }
   ]
 })

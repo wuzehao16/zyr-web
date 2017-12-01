@@ -1,0 +1,305 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "loan": [
+    {
+      "date": "05-02",
+      "name": "王小虎",
+      "status": "成功放款",
+      "money": "50000"
+    },
+    {
+      "date": "05-02",
+      "name": "王小虎",
+      "status": "成功放款",
+      "money": "50000"
+    },
+    {
+      "date": "05-02",
+      "name": "王小虎",
+      "status": "成功放款",
+      "money": "50000"
+    },
+    {
+      "date": "05-02",
+      "name": "王小虎",
+      "status": "成功放款",
+      "money": "50000"
+    },
+    {
+      "date": "05-02",
+      "name": "王小虎",
+      "status": "成功放款",
+      "money": "50000"
+    }
+  ],
+  "payroll_loan": [
+    {
+      "date": "2016-05-02",
+      "name": "平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘"
+    },
+    {
+      "date": "2016-05-02",
+      "name": "平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘"
+    },
+    {
+      "date": "2016-05-02",
+      "name": "平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘"
+    },
+    {
+      "date": "2016-05-02",
+      "name": "平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘"
+    },
+    {
+      "date": "2016-05-02",
+      "name": "平安新一代车贷  信用贷款按揭,手续简单,利息低至7厘"
+    }
+  ],
+  "productList": {
+    "code": 0,
+    "msg": "成功",
+    "data": {
+      "totalCount": 15,
+      "pageSize": 5,
+      "pageNo": 1,
+      "list": [
+        {
+          "productId": 94,
+          "platId": null,
+          "productType": 1,
+          "platName": "中国光大银行",
+          "productName": "房抵贷",
+          "productAmtStart": 50,
+          "productAmtEnd": 1000,
+          "productCycleStart": 12,
+          "productCycleEnd": 360,
+          "monthRate": "0.5",
+          "lendingTimeStart": 7,
+          "lendingTimeEnd": 15,
+          "applyNum": null,
+          "productReview": "1",
+          "rereq": "<ol class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\"><li><p>身份证，户口本，结婚（离婚）证</p></li><li><p>社保/营业执照</p></li><li><p>对公/私银行流水</p></li><li><p>房产证</p></li></ol>",
+          "repayType": "1",
+          "applyRequirements": "<ol class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\"><li><p>只要亲属或个人名下有深圳物业（商品房，公寓，写字楼）</p></li><li><p>有公司或上班</p></li></ol>",
+          "crTime": "2017-10-22 14:45:46",
+          "updateTime": "2017-10-22 14:45:46",
+          "status": "1",
+          "custProfession": "1,2,3",
+          "productAmt": null,
+          "productCycle": null,
+          "productIds": null,
+          "zdPlat": {
+            "platId": 39,
+            "platName": "中国光大银行",
+            "platLog": "/u/cms/www/201707/12191759g04w.jpg",
+            "crTime": "2017-07-04 13:25:23",
+            "updateTime": "2017-07-12 19:18:11",
+            "remark": null
+          },
+          "beginMonthRate": null,
+          "endMonthRate": null
+        },
+        {
+          "productId": 91,
+          "platId": null,
+          "productType": 1,
+          "platName": "友金所",
+          "productName": "月供贷",
+          "productAmtStart": 5,
+          "productAmtEnd": 100,
+          "productCycleStart": 12,
+          "productCycleEnd": 36,
+          "monthRate": "1.15",
+          "lendingTimeStart": 2,
+          "lendingTimeEnd": 5,
+          "applyNum": null,
+          "productReview": "1",
+          "rereq": "<ol class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\"><li><p>身份证，社保卡，营业执照/公章</p></li><li><p>放款银行卡（4大行或招行，平安）</p></li></ol>",
+          "repayType": "1",
+          "applyRequirements": "<p>个人名下有全国房贷记录月供3个月以上。</p>",
+          "crTime": "2017-10-19 15:20:15",
+          "updateTime": "2017-10-19 15:20:58",
+          "status": "1",
+          "custProfession": "1,2,3",
+          "productAmt": null,
+          "productCycle": null,
+          "productIds": null,
+          "zdPlat": {
+            "platId": 67,
+            "platName": "友金所",
+            "platLog": "/u/cms/www/201707/1910343710l9.png",
+            "crTime": "2017-07-17 19:53:15",
+            "updateTime": "2017-07-19 10:34:56",
+            "remark": null
+          },
+          "beginMonthRate": null,
+          "endMonthRate": null
+        },
+        {
+          "productId": 90,
+          "platId": null,
+          "productType": 1,
+          "platName": "中国民生银行",
+          "productName": "房抵贷",
+          "productAmtStart": 50,
+          "productAmtEnd": 1000,
+          "productCycleStart": 1,
+          "productCycleEnd": 60,
+          "monthRate": "5.5",
+          "lendingTimeStart": 7,
+          "lendingTimeEnd": 15,
+          "applyNum": null,
+          "productReview": "1",
+          "rereq": "<ol class=\" list-paddingleft-2\"><li><p>身份证，结婚证（离婚证/协议书），户口本。</p></li><li><p>营业执照，公司章程/ 工作收入证明</p></li><li><p>房产证</p></li><li><p>公或私银行流水</p></li></ol><p></p>",
+          "repayType": "2",
+          "applyRequirements": "<p>只要深圳有商品房（公寓，商铺）按揭房或全款都可申请</p>",
+          "crTime": "2017-10-19 11:57:49",
+          "updateTime": "2017-10-19 11:57:49",
+          "status": "1",
+          "custProfession": "1,2,3",
+          "productAmt": null,
+          "productCycle": null,
+          "productIds": null,
+          "zdPlat": {
+            "platId": 13,
+            "platName": "中国民生银行",
+            "platLog": "/u/cms/www/201707/13093824hksv.jpg",
+            "crTime": "2017-07-03 16:02:31",
+            "updateTime": "2017-07-13 09:38:25",
+            "remark": null
+          },
+          "beginMonthRate": null,
+          "endMonthRate": null
+        },
+        {
+          "productId": 89,
+          "platId": null,
+          "productType": 1,
+          "platName": "招商银行",
+          "productName": "房抵贷",
+          "productAmtStart": 50,
+          "productAmtEnd": 3000,
+          "productCycleStart": 6,
+          "productCycleEnd": 360,
+          "monthRate": "0.5",
+          "lendingTimeStart": 5,
+          "lendingTimeEnd": 15,
+          "applyNum": null,
+          "productReview": "1",
+          "rereq": "<ol class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\"><li><p>身份证，结婚证（离婚证/协议书），户口本。</p></li><li><p>营业执照，公司章程/ 工作收入证明</p></li><li><p>房产证</p></li><li><p>公或私银行流水</p><p><br/></p></li></ol>",
+          "repayType": "1",
+          "applyRequirements": "<p>1.只要深圳有商品房（公寓，商铺）不管按揭或红本都可以。</p>",
+          "crTime": "2017-10-19 11:51:46",
+          "updateTime": "2017-10-19 11:51:46",
+          "status": "1",
+          "custProfession": "1,2,3",
+          "productAmt": null,
+          "productCycle": null,
+          "productIds": null,
+          "zdPlat": {
+            "platId": 6,
+            "platName": "招商银行",
+            "platLog": "/u/cms/www/201707/13094306rjbb.jpg",
+            "crTime": "2017-05-12 12 49:19",
+            "updateTime": "2017-07-13 09:43:08",
+            "remark": null
+          },
+          "beginMonthRate": null,
+          "endMonthRate": null
+        },
+        {
+          "productId": 87,
+          "platId": null,
+          "productType": 1,
+          "platName": "厦门农村商业银行",
+          "productName": "贷贷卡",
+          "productAmtStart": 5,
+          "productAmtEnd": 30,
+          "productCycleStart": 3,
+          "productCycleEnd": 36,
+          "monthRate": "1.5",
+          "lendingTimeStart": 15,
+          "lendingTimeEnd": 30,
+          "applyNum": null,
+          "productReview": "1",
+          "rereq": "<p>1，身份证</p><p>2，工作证明或者营业执照</p><p>3，收入证明</p><p>4，房产证明</p><p>5，其他辅助类材料</p>",
+          "repayType": "3",
+          "applyRequirements": "<p>1，公务员，优质单位类客群</p><p>2，烟草证客群</p><p>3，深房类客群</p>",
+          "crTime": "2017-10-17 17:27:54",
+          "updateTime": "2017-10-17 17:27:54",
+          "status": "1",
+          "custProfession": "1,2",
+          "productAmt": null,
+          "productCycle": null,
+          "productIds": null,
+          "zdPlat": {
+            "platId": 37,
+            "platName": "厦门农村商业银行",
+            "platLog": "/u/cms/www/201707/12191937y99e.jpg",
+            "crTime": "2017-07-04 13:19:49",
+            "updateTime": "2017-07-12 19:20:03",
+            "remark": null
+          },
+          "beginMonthRate": null,
+          "endMonthRate": null
+        }
+      ],
+      "firstResult": 0,
+      "lastPage": false,
+      "nextPage": 2,
+      "firstPage": true,
+      "totalPage": 3,
+      "prePage": 1
+    }
+  },
+  "sendSmsIndex": {
+    "code": 0,
+    "msg": "成功"
+  },
+  "saveCust": [
+    {
+      "custRelName": "wuzehao",
+      "custTel": 18312341234,
+      "id": 1
+    },
+    {
+      "custRelName": 18312341234,
+      "code": 1234,
+      "custTel": 18312341234,
+      "id": 2
+    },
+    {
+      "custRelName": 123,
+      "code": 1234,
+      "custTel": 18312341234,
+      "id": 3
+    },
+    {
+      "custRelName": 123,
+      "code": 123,
+      "custTel": 18312341234,
+      "id": 4
+    },
+    {
+      "custRelName": 121,
+      "code": 123,
+      "custTel": 18312341234,
+      "id": 5
+    }
+  ]
+}

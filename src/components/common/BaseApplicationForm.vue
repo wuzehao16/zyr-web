@@ -26,13 +26,16 @@
 
       >
         <el-input type="captcha" v-model.number="applicationForm.captcha" auto-complete="off" placeholder="请输入验证码" class="captcha" size="medium"></el-input>
-        <el-button type="primary"  class="getCaptcha" >发送验证码</el-button>
+        <el-button type="primary"  class="getCaptcha" @click="getCaptcha" :disabled="getCaptchaDisabled">
+          <span v-show="show">发送验证码</span>
+          <span v-show="!show">{{count}}秒后获取</span>
+        </el-button>
       </el-form-item>
       <div class="checkbox">
         <el-checkbox v-model="applicationForm.checked"></el-checkbox>
         <span class="text">本人已阅读并同意</span>
         <span class="agreement" @click="dialogVisible = true">《众易融平台服务协议》</span>
-        <el-button type="primary" @click="submit('applicationForm')" class="submit" name="apply">立即申请</el-button>
+        <el-button type="primary" @click="submit('applicationForm')" class="submit" name="apply" :disabled="!applicationForm.checked">立即申请</el-button>
       </div>
 
     </el-form>
@@ -168,6 +171,10 @@ export default {
     return {
       dialogVisible: false,
       sucessDialogVisible: false,
+      getCaptchaDisabled: false,
+      count: '',
+      show: true,
+      timer: null,
       applicationForm: {
         userName: '',
         telephone: '',
@@ -199,8 +206,9 @@ export default {
     async apply (formName) {
         try {
            await LoanService.apply({
-             userName: this.applicationForm.userName,
-             telephone: this.applicationForm.telephone
+             custRelName: this.applicationForm.userName,
+             code: this.applicationForm.captcha,
+             custTel: this.applicationForm.telephone
            })
           this.sucessDialogVisible = true
           this.$refs[formName].resetFields();
@@ -208,6 +216,34 @@ export default {
            // this.error = error.response.data.error
            console.log(error)
          }
+    },
+    async getCaptcha () {
+      try {
+        let TIME_COUNT = 60;
+        if (!this.timer) {
+          this.count = TIME_COUNT;
+          this.show = false;
+          this.getCaptchaDisabled = true;
+          this.timer = setInterval(() => {
+            if (this.count > 0 && this.count <= TIME_COUNT) {
+              this.count--;
+            } else {
+              this.show = true;
+              clearInterval(this.timer);
+              this.getCaptchaDisabled = false;
+              this.timer = null;
+            }
+          }, 1000)
+        }
+        console.log(this.applicationForm.telephone)
+        await LoanService.getCaptcha({
+          params:{
+            custTel: this.applicationForm.telephone
+          }
+        })
+      } catch (e) {
+        console.log(error)
+      }
     },
     closeDiolog(val){
       this.sucessDialogVisible = val
@@ -233,7 +269,7 @@ export default {
       bottom: 0;
       width: 80px;
       span{
-        margin-left: -10px;
+        margin-left: -5px;
       }
     }
     .checkbox{

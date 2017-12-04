@@ -13,7 +13,7 @@
           placeholder="请输入内容"
           v-model="textarea">
         </el-input>
-         <el-button class="submit" >提交</el-button>
+         <el-button class="submit" @click="submitFeedback" :disabled="!textarea">提交</el-button>
         </div>
       </div>
     </div>
@@ -22,10 +22,27 @@
 
 <script>
 import TopBar from './common/BaseAboutUsTopBar.vue'
+import LoanService from '@/services/LoanService'
 export default {
   data () {
     return {
       textarea: ''
+    }
+  },
+  methods: {
+    async submitFeedback () {
+      try {
+        await LoanService.feedback({
+          feedback: this.textarea
+        })
+        this.textarea = ""
+        this.$message({
+         message: '提交成功',
+         type: 'success'
+       });
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
   components: {

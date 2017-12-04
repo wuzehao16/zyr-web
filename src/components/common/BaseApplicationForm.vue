@@ -205,11 +205,16 @@ export default {
      */
     async apply (formName) {
         try {
-           await LoanService.apply({
-             custRelName: this.applicationForm.userName,
-             code: this.applicationForm.captcha,
-             custTel: this.applicationForm.telephone
-           })
+           const response = await LoanService.apply({
+                           custRelName: this.applicationForm.userName,
+                           code: this.applicationForm.captcha,
+                           custTel: this.applicationForm.telephone
+                         })
+          if (response.data.code !== 0) {
+            this.$message.error(response.data.msg)
+            this.applicationForm.captcha = ""
+            return
+          }
           this.sucessDialogVisible = true
           this.$refs[formName].resetFields();
          } catch (error) {
@@ -235,14 +240,13 @@ export default {
             }
           }, 1000)
         }
-        console.log(this.applicationForm.telephone)
         await LoanService.getCaptcha({
           params:{
             custTel: this.applicationForm.telephone
           }
         })
       } catch (e) {
-        console.log(error)
+        console.log(e)
       }
     },
     closeDiolog(val){

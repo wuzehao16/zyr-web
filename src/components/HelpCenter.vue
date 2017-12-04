@@ -4,17 +4,17 @@
       <el-col :span="5">
         <div class="title"></div>
         <el-menu
-          default-active="1"
+          :default-active="index"
           class="menu">
-          <el-menu-item  index="1"  @click="index=0">
+          <el-menu-item  index="0"  @click="index='0'">
             <template slot="title">
               新手上路
             </template>
           </el-menu-item >
-          <el-menu-item index="2"  @click="index=1">
+          <el-menu-item index="1"  @click="index='1'">
             <span slot="title">常见问题</span>
           </el-menu-item>
-          <el-menu-item index="3"  @click="index=2">
+          <el-menu-item index="2"  @click="index='2'">
             <span slot="title">温馨提示</span>
           </el-menu-item>
         </el-menu>
@@ -54,8 +54,11 @@
 export default {
   data () {
     return {
-      index: 0
+      index: '0'
     }
+  },
+  async mounted () {
+    this.index = this.$route.params.index || '0'
   }
 }
 </script>

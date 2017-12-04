@@ -4,9 +4,9 @@
     <div class="body">
       <div class="container">
         <h2>平台公告</h2>
-        <div class="info" v-for="item in 11">
-          <span>建设银行提现通道维护</span>
-          <span>[2017-11-21]</span>
+        <div class="info" v-for="item in list">
+          <span>{{item.title}}</span>
+          <span>{{item.releaseDate}}</span>
         </div>
         <el-pagination
         @size-change="handleSizeChange"
@@ -25,9 +25,22 @@
 
 <script>
 import TopBar from './common/BaseAboutUsTopBar.vue'
+import LoanService from '@/services/LoanService'
 export default {
+  data () {
+    return {
+      list:[]
+    }
+  },
   components: {
     TopBar
+  },
+  async mounted () {
+    this.list = (await LoanService.contentList({
+      params:{
+        channelIds:110
+      }
+    })).data
   }
 }
 </script>

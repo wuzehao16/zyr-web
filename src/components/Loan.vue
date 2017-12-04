@@ -103,7 +103,7 @@
                min-width="60">
              </el-table-column>
              <el-table-column
-               prop="status"
+                prop="status"
                min-width="60">
              </el-table-column>
              <el-table-column
@@ -157,7 +157,7 @@
               最新放款动态
             </div>
             <div class="star">
-              <div class="row" v-for="item in 3">
+              <div class="row" v-for="item in serviceStarList">
                 <div class="ranking">
 
                 </div>
@@ -166,9 +166,9 @@
                 </div>
                 <div class="details">
                   <div class="name">
-                    王富贵
+                    {{item.waiter}}
                   </div>
-                  <p>让客户满意是我的追求，为客户服务是我的职责。</p>
+                  <p>{{item.slogan}}</p>
                 </div>
               </div>
             </div>
@@ -180,7 +180,9 @@
         <div class="problem">
           <div class="title">
             <div class="name">常见问题</div>
-            <div class="more">更多<i class="iconfont icon-gengduo"></i></div>
+            <div class="more">
+              <router-link :to="{ name: 'HelpCenter', params: { index: 2 }}">更多<i class="iconfont icon-gengduo"></i></router-link>
+            </div>
           </div>
           <div class="main">
             <ul>
@@ -194,7 +196,9 @@
         <div class="news">
           <div class="title">
             <div class="name">新闻资讯</div>
-            <div class="more">更多<i class="iconfont icon-gengduo"></i></div>
+            <div class="more">
+              <router-link to="/news">更多<i class="iconfont icon-gengduo"></i></router-link>
+            </div>
           </div>
           <div class="main">
             <ul>
@@ -208,7 +212,9 @@
         <div class="notice">
           <div class="title">
             <div class="name">平台公告</div>
-            <div class="more">更多<i class="iconfont icon-gengduo"></i></div>
+            <div class="more">
+              <router-link to="/platformannouncement">更多<i class="iconfont icon-gengduo"></i></router-link>
+            </div>
           </div>
           <div class="main">
             <ul>
@@ -231,8 +237,8 @@
 </template>
 
 <script>
-import BaseApplication from './common/BaseApplication.vue'
-import LoanService from '@/services/LoanService.js'
+import BaseApplication from './common/BaseApplication'
+import LoanService from '@/services/LoanService'
 export default {
   name: 'loan',
   data () {
@@ -241,6 +247,7 @@ export default {
       creditActiveName: 'first', // 信用贷
       mortgageActiveName: 'first',
       occupation: '',
+      serviceStarList:"",
       occupationOptions: [{
         value: '选项1',
         label: '身份1'
@@ -299,8 +306,9 @@ export default {
 
   },
   async mounted () {
-    this.loan = (await LoanService.loan()).data
+    this.loan = (await LoanService.loan()).data.data.list
     this.payrollLoan = (await LoanService.payrollLoan()).data
+    this.serviceStarList = (await LoanService.serviceStarList()).data.data.list
   },
   components: {
     BaseApplication
@@ -488,9 +496,14 @@ export default {
           cursor: pointer;
           flex-grow: 1;
           text-align: right;
-          font-size: 16px;
-          line-height: 24px;
           border-bottom: 2px solid $line-color;
+          a{
+            font-size: 16px;
+            line-height: 24px;
+            color: $title-color;
+            cursor: pointer;
+            text-decoration: none;
+          }
           .icon-gengduo{
             margin-left: 10px;
           }

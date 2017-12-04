@@ -4,6 +4,11 @@
       "id": 1,
       "title": "json-server",
       "author": "typicode"
+    },
+    {
+      "id": 2,
+      "title": "json-server",
+      "author": "typicode"
     }
   ],
   "comments": [
@@ -16,38 +21,62 @@
   "profile": {
     "name": "typicode"
   },
-  "loan": [
-    {
-      "date": "05-02",
-      "name": "王小虎",
-      "status": "成功放款",
-      "money": "50000"
-    },
-    {
-      "date": "05-02",
-      "name": "王小虎",
-      "status": "成功放款",
-      "money": "50000"
-    },
-    {
-      "date": "05-02",
-      "name": "王小虎",
-      "status": "成功放款",
-      "money": "50000"
-    },
-    {
-      "date": "05-02",
-      "name": "王小虎",
-      "status": "成功放款",
-      "money": "50000"
-    },
-    {
-      "date": "05-02",
-      "name": "王小虎",
-      "status": "成功放款",
-      "money": "50000"
+  "lendingList": {
+    "code": 0,
+    "data": {
+      "list": [
+        {
+          "date": "05-02",
+          "name": "王小虎",
+          "status": "成功放款",
+          "money": "50000"
+        },
+        {
+          "date": "05-02",
+          "name": "王小虎",
+          "status": "成功放款",
+          "money": "50000"
+        },
+        {
+          "date": "05-02",
+          "name": "王小虎",
+          "status": "成功放款",
+          "money": "50000"
+        },
+        {
+          "date": "05-02",
+          "name": "王小虎",
+          "status": "成功放款",
+          "money": "50000"
+        },
+        {
+          "date": "05-02",
+          "name": "王小虎",
+          "status": "成功放款",
+          "money": "50000"
+        }
+      ]
     }
-  ],
+  },
+  "serviceStarList": {
+    "code": 0,
+    "data": {
+      "list": [
+        {
+          "waiter": "王小二",
+          "slogan": "图片地址"
+        },
+        {
+          "waiter": "王小二",
+          "slogan": "图片地址"
+        },
+        {
+          "waiter": "王小二",
+          "slogan": "图片地址"
+        }
+      ]
+    }
+  },
   "payroll_loan": [
     {
       "date": "2016-05-02",
@@ -300,6 +329,42 @@
       "code": 123,
       "custTel": 18312341234,
       "id": 5
+    },
+    {
+      "custRelName": 123,
+      "code": 123,
+      "custTel": 18373233872,
+      "id": 6
+    }
+  ],
+  "feedback": [
+    {
+      "feedback": "123",
+      "id": 1
+    },
+    {
+      "feedback": "456",
+      "id": 2
+    }
+  ],
+  "contentList":[
+    {
+    "id":110,
+    "data":{
+      "code":0,
+      "data":{
+        "list":{}
+        }
+      }
+    },
+    {
+      "id":98,
+      "data":{
+        "code":0,
+        "data":{
+          "list":{}
+          }
+        }
     }
   ]
 }

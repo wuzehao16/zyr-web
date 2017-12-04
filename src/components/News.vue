@@ -5,15 +5,14 @@
       <div class="container">
         <h2>新闻中心</h2>
         <div class="info">
-          <div class="item" v-for="item in 5">
+          <div class="item" v-for="item in list">
             <img src="../assets/img/news-img.jpg" alt="">
             <div class="content" >
-              <div class="title">建设银行提现通道维护</div>
+              <div class="title">{{item.title}}</div>
               <div class="time">
                 2017-11-21  16:31:12
               </div>
-              <p>11月15日，万盈金融在“安盈宝”产品中推出全新的银行承兑汇票质押项目，成为万盈金融合规进程中的又一里程碑。
-成为万盈金融合规进程中的又一里程碑。。。</p>
+              <p v-html=item.txt></p>
             </div>
           </div>
           <el-pagination
@@ -34,9 +33,23 @@
 
 <script>
 import TopBar from './common/BaseAboutUsTopBar.vue'
+import LoanService from '@/services/LoanService'
 export default {
+  data () {
+    return {
+      list: []
+    }
+  },
   components: {
     TopBar
+  },
+  async mounted () {
+    this.list = (await LoanService.contentList({
+      params:{
+        channelIds:98
+      }
+    })).data
+    this.list.splice(0,6)
   }
 }
 </script>
@@ -79,6 +92,12 @@ export default {
             }
             p{
               margin-top: 25px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              -o-text-overflow:ellipsis;
               color: $title-color;
             }
           }

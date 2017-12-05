@@ -224,6 +224,10 @@ export default {
     },
     async getCaptcha () {
       try {
+        if (!(/^1[3|4|5|7|8]\d{9}$/.test(this.applicationForm.telephone))) {
+           this.$message.error('请填入正确手机号码');
+          return
+        }
         let TIME_COUNT = 60;
         if (!this.timer) {
           this.count = TIME_COUNT;

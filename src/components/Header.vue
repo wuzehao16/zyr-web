@@ -2,7 +2,10 @@
 <div class="header">
   <div class="center">
     <div class="logo">
-
+      <img src="" alt="logo" height="60" width="60">
+    <div class="address">
+      {{city}}
+    </div>
     </div>
     <div class="nav">
       <el-menu :default-active="activeIndex" class="el-menu" mode="horizontal" >
@@ -17,11 +20,19 @@
 </template>
 
 <script>
+import LoanService from '@/services/LoanService'
 export default {
   data () {
     return {
-      activeIndex: '1'
+      activeIndex: '1',
+      province: '',
+      city: ''
     }
+  },
+  async mounted () {
+    // await(LoanService.getAddress())
+    this.province = remote_ip_info["province"]
+    this.city = remote_ip_info["city"]
   }
 }
 </script>

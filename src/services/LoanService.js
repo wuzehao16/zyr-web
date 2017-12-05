@@ -1,6 +1,9 @@
 import Api from '@/services/Api'
 
 export default {
+  getAddress () {
+    return Api().get('http://pv.sohu.com/cityjson?ie=utf-8')
+  },
   //立即申请
   apply (credentials) {
     return Api().post('saveCust', credentials)

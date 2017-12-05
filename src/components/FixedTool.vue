@@ -7,7 +7,7 @@
       <img src="../assets/img/wx_code.png" alt="" class="img">
       <i class="iconfont icon-erweima"></i>
     </div>
-    <div class="to-top" @click="toTop">
+    <div class="to-top" @click="toTop" :class="showToTop?'show':''">
       <i class="iconfont icon-iconzd1"></i>
     </div>
   </div>
@@ -15,10 +15,26 @@
 
 <script>
 export default {
+  data () {
+    return {
+      showToTop: false
+    }
+  },
   methods: {
     toTop () {
       window.scrollTo(0,0)
+    },
+    handleScroll () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      if (scrollTop > 1000) {
+        this.showToTop = true;
+      } else {
+        this.showToTop = false;
+      }
     }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.handleScroll)
   }
 }
 </script>
@@ -49,12 +65,17 @@ export default {
       top:-200px;
       display: none;
     }
-    .code:hover{
-      background-color: red;
+    &.code:hover{
       .img{
         display: block;
       }
     }
+  }
+  .to-top{
+    &.show{
+      display: block;
+    }
+    display: none;
   }
 }
 </style>

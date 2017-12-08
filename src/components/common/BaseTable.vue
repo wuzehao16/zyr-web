@@ -34,7 +34,7 @@ export default {
     }
   },
   async mounted () {
-    this.payrollLoan = (await LoanService.payrollLoan()).data
+    this.payrollLoan = (await LoanService.payrollLoan()).data.list
   }
 }
 </script>

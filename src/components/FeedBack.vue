@@ -33,7 +33,7 @@ export default {
     async submitFeedback () {
       try {
         await LoanService.feedback({
-          feedback: this.textarea
+          feedbackContent: this.textarea
         })
         this.textarea = ""
         this.$message({

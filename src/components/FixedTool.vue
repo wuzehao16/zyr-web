@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="fixedtool">
-    <div class="">
+    <div class="custom-service">
+      <a href="tencent://message/?Menu=yes&uin=1243935366" target="_blank"></a>
       <i class="iconfont icon-kefu"></i>
     </div>
     <div class="code">
@@ -53,6 +54,15 @@ export default {
     height: 60px;
     background-color: #fff;
     border: 1px solid $line-color;
+    &.custom-service{
+      position: relative;
+      a{
+        width: 100%;
+        height: 100%;
+        left: 0;
+        position: absolute;
+      }
+    }
     i{
       cursor: pointer;
       color: $title-color;

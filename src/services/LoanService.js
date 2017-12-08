@@ -29,7 +29,7 @@ export default {
   contentList (params) {
     return Api().get('contentList', params)
   },
-  payrollLoan () {
-    return Api().get('payroll_loan')
+  payrollLoan (params) {
+    return Api().get('productList', params)
   }
 }

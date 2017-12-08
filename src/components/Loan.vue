@@ -67,11 +67,11 @@
                  stripe
                  :show-header="false">
                  <el-table-column
-                   prop="date"
+                   prop="zdPlat.platLog"
                    width="100">
                  </el-table-column>
                  <el-table-column
-                   prop="name"
+                   prop="productName"
                    min-width="400">
                  </el-table-column>
                  <el-table-column width="100">
@@ -95,11 +95,11 @@
              :show-header="false"
              >
              <el-table-column
-               prop="date"
+               prop="lendedTime"
                min-width="50">
              </el-table-column>
              <el-table-column
-               prop="name"
+               prop="custRelName"
                min-width="60">
              </el-table-column>
              <el-table-column
@@ -107,7 +107,7 @@
                min-width="60">
              </el-table-column>
              <el-table-column
-               prop="money"
+               prop="loanAmt"
                min-width="80" class="money">
              </el-table-column>
            </el-table>
@@ -151,10 +151,10 @@
               <el-tab-pane label="车抵贷" name="second">车抵贷</el-tab-pane>
             </el-tabs>
           </div>
-          <!-- 最新放款动态 -->
+          <!-- 最佳服务之星 -->
           <div class="right">
             <div class="title">
-              最新放款动态
+              最佳服务之星
             </div>
             <div class="star">
               <div class="row" v-for="item in serviceStarList">
@@ -306,8 +306,12 @@ export default {
 
   },
   async mounted () {
-    this.loan = (await LoanService.loan()).data.data.list
-    this.payrollLoan = (await LoanService.payrollLoan()).data
+    this.loan = (await LoanService.loan()).data.data
+    this.payrollLoan = (await LoanService.payrollLoan({
+      params:{
+        productType: 5
+      }
+    })).data.data.list
     this.serviceStarList = (await LoanService.serviceStarList()).data.data.list
   },
   components: {

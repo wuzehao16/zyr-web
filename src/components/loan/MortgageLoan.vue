@@ -11,22 +11,13 @@
       <div class="left">
         <el-tabs v-model="activeName"  class="table">
           <el-tab-pane label="房抵贷" name="first">
-            <base-table  :type='1'></base-table>
+            <base-table  :type='1' :page-size="12"  :show='true'></base-table>
           </el-tab-pane>
           <el-tab-pane label="车抵贷" name="second">
-            <base-table  :type='1'></base-table>
+            <base-table  :type='6' :page-size="12" :show='true'></base-table>
           </el-tab-pane>
         </el-tabs>
-        <div class="pagination">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage4"
-            :page-size="100"
-            layout="total, prev, pager, next, jumper"
-            :total="400">
-          </el-pagination>
-        </div>
+
       </div>
       <div class="right">
         <base-quick-apply-and-noob>
@@ -44,6 +35,8 @@ export default {
     return {
       activeName: 'first',
     }
+  },
+  methods: {
   },
   components: {
     BaseTable,

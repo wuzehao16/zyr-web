@@ -62,27 +62,14 @@
             </div>
             <el-tabs v-model="creditActiveName" >
               <el-tab-pane label="工薪贷" name="first">
-                <el-table
-                 :data="payrollLoan"
-                 stripe
-                 :show-header="false">
-                 <el-table-column
-                   prop="zdPlat.platLog"
-                   width="100">
-                 </el-table-column>
-                 <el-table-column
-                   prop="productName"
-                   min-width="400">
-                 </el-table-column>
-                 <el-table-column width="100">
-                   <template slot-scope="scope">
-                     <el-button  type="primary" size="small">查看</el-button>
-                   </template>
-                 </el-table-column>
-               </el-table>
+                  <base-table  :type='5'></base-table>
               </el-tab-pane>
-              <el-tab-pane label="经营贷" name="second">经营贷</el-tab-pane>
-              <el-tab-pane label="保单贷" name="third">保单贷</el-tab-pane>
+              <el-tab-pane label="月供贷" name="second">
+                <base-table  :type='4'></base-table>
+              </el-tab-pane>
+              <el-tab-pane label="保单贷" name="third">
+                <base-table  :type='3'></base-table>
+              </el-tab-pane>
             </el-tabs>
           </div>
           <!-- 最新放款动态 -->
@@ -129,26 +116,11 @@
             </div>
             <el-tabs v-model="mortgageActiveName" >
               <el-tab-pane label="房抵贷" name="first">
-                <el-table
-                 :data="payrollLoan"
-                 stripe
-                 :show-header="false">
-                 <el-table-column
-                   prop="date"
-                   width="100">
-                 </el-table-column>
-                 <el-table-column
-                   prop="name"
-                   min-width="400">
-                 </el-table-column>
-                 <el-table-column width="100">
-                   <template slot-scope="scope">
-                     <el-button  type="primary" size="small">查看</el-button>
-                   </template>
-                 </el-table-column>
-               </el-table>
+                <base-table  :type='1'></base-table>
               </el-tab-pane>
-              <el-tab-pane label="车抵贷" name="second">车抵贷</el-tab-pane>
+              <el-tab-pane label="车抵贷" name="second">
+                <base-table  :type='6'></base-table>
+             </el-tab-pane>
             </el-tabs>
           </div>
           <!-- 最佳服务之星 -->
@@ -237,6 +209,7 @@
 </template>
 
 <script>
+import BaseTable from './common/BaseTable'
 import BaseApplication from './common/BaseApplication'
 import LoanService from '@/services/LoanService'
 export default {
@@ -298,7 +271,6 @@ export default {
         value: '选项5',
         label: '5年'
       }],
-      payrollLoan: [],
       loan: []
     }
   },
@@ -307,15 +279,11 @@ export default {
   },
   async mounted () {
     this.loan = (await LoanService.loan()).data.data
-    this.payrollLoan = (await LoanService.payrollLoan({
-      params:{
-        productType: 5
-      }
-    })).data.data.list
     this.serviceStarList = (await LoanService.serviceStarList()).data.data.list
   },
   components: {
-    BaseApplication
+    BaseApplication,
+    BaseTable
   }
 }
 </script>

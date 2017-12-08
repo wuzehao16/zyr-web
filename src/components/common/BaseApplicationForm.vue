@@ -206,9 +206,12 @@ export default {
     async apply (formName) {
         try {
            const response = await LoanService.apply({
-                           custRelName: this.applicationForm.userName,
+
                            code: this.applicationForm.captcha,
-                           custTel: this.applicationForm.telephone
+                           zdCust:{
+                             custRelName: this.applicationForm.userName,
+                             custTel: this.applicationForm.telephone                           
+                           }
                          })
           if (response.data.code !== 0) {
             this.$message.error(response.data.msg)
@@ -222,6 +225,10 @@ export default {
            console.log(error)
          }
     },
+    /**
+     * 获取验证码
+     * @return {Promise} [description]
+     */
     async getCaptcha () {
       try {
         if (!(/^1[3|4|5|7|8]\d{9}$/.test(this.applicationForm.telephone))) {
@@ -271,7 +278,7 @@ export default {
       width: 120px;
     }
     .getCaptcha{
-      font-size: 8px;
+      font-size: 12px;
       position: absolute;
       right: 0px;
       bottom: 0;

@@ -14,10 +14,10 @@
           <div class="product-img"></div>
           <div class="product-name">
             <div class="name">
-              【平安融e贷产品一】
+              【{{product.productName}}】
             </div>
             <div class="number">
-              成功申请<span>221</span>人
+              成功申请<span>{{product.applyNum||0}}</span>人
             </div>
           </div>
           <div class="product-rate">
@@ -35,32 +35,24 @@
           </div>
           <div class="product-detail">
             <ul>
-              <li>额度范围： 5～50万元</li>
-              <li>额度范围： 5～50万元</li>
-              <li>额度范围： 5～50万元</li>
-              <li>额度范围： 5～50万元</li>
+              <li>额度范围： {{product.productAmtStart}}～{{product.productAmtEnd}}万元</li>
+              <li>月利率： {{product.monthRate}}%</li>
+              <li>放款时间： {{product.lendingTimeStart}}～{{product.lendingTimeEnd}}万元</li>
+              <li>贷款期限： {{product.productCycleStart}}～{{product.productCycleEnd}}万元</li>
+              <li>还款方式： {{product.repayType ==1?"等额本息":product.repayType ==2?"先息后本":"随借随还"}}</li>
             </ul>
           </div>
           <div class="sub-title">
             <i class="iconfont icon-chanpinxiangqing"></i>
             申请条件
           </div>
-          <div class="condition-detail">
-            <ul>
-              <li>1、名下有按揭1年以上至结清半年以内的月供车；</li>
-              <li>1、名下有按揭1年以上至结清半年以内的月供车；</li>
-              <li>1、名下有按揭1年以上至结清半年以内的月供车；</li>
-            </ul>
+          <div class="condition-detail" v-html="product.applyRequirements">
           </div>
           <div class="sub-title">
             <i class="iconfont icon-chanpinxiangqing"></i>
             所需材料
           </div>
-          <div class="need">
-            <ul>
-              <li>1、身份证,</li>
-              <li>1、身份证,</li>
-            </ul>
+          <div class="need" v-html="product.rereq">
           </div>
         </div>
       </div>
@@ -85,39 +77,51 @@
       <div class="title">
         您的基本情况
       </div>
-      <el-form :model="form" class="detail-form">
+      <el-form :model="form" class="detail-form" ref="form">
         <el-form-item label="你的姓名" :label-width="formLabelWidth">
-          <el-input v-model="form.name" auto-complete="off" placeholder="请填写真实姓名">
+          <el-input v-model="form.custRelName" auto-complete="off" placeholder="请填写真实姓名">
           </el-input>
         </el-form-item>
         <el-form-item label="借款金额" :label-width="formLabelWidth">
-          <el-input v-model="form.sum" auto-complete="off" placeholder="请填写借款金额">
+          <el-input v-model.number="form.beginAmt" auto-complete="off" placeholder="请填写借款金额">
             <template slot="append">元</template>
           </el-input>
         </el-form-item>
         <el-form-item label="您的年龄" :label-width="formLabelWidth">
-          <el-input v-model="form.age" auto-complete="off" placeholder="请填写您的年龄">
+          <el-input v-model.number="form.custAge" auto-complete="off" placeholder="请填写您的年龄">
             <template slot="append">
               岁
             </template>
           </el-input>
         </el-form-item>
         <el-form-item label="有无房产" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择有无房产">
-            <el-option label="有" value="1"></el-option>
-            <el-option label="没有" value="0"></el-option>
+          <el-select v-model="form.hasHouse" placeholder="请选择有无房产">
+            <el-option
+              v-for="item in hasHouseOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="是否有车" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择是否有车">
-            <el-option label="有" value="1"></el-option>
-            <el-option label="没有" value="0"></el-option>
+          <el-select v-model.number="form.hasCar" placeholder="请选择是否有车">
+            <el-option
+              v-for="item in hasCarOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="职业状态" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择职业状态">
-            <el-option label="有" value="1"></el-option>
-            <el-option label="没有" value="0"></el-option>
+          <el-select v-model="form.custProfession" placeholder="请选择职业状态">
+            <el-option
+              v-for="item in custProfessionOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
           </el-select>
         </el-form-item>
         <div class="phone">
@@ -125,10 +129,10 @@
         </div>
         <el-form-item
           label="手机号码："
-          prop="telephone"
+          prop="custTel"
           :label-width="formLabelWidth"
         >
-          <el-input type="telephone" v-model.number="form.telephone" auto-complete="off" placeholder="请填写手机号码"></el-input>
+          <el-input type="custTel" v-model.number="form.custTel" auto-complete="off" placeholder="请填写手机号码"></el-input>
         </el-form-item>
         <el-form-item
           label="验证码："
@@ -141,13 +145,16 @@
 
         >
           <el-input type="captcha" v-model.number="form.captcha" auto-complete="off" placeholder="请输入验证码" class="captcha" size="medium"></el-input>
-          <el-button type="primary"  class="getCaptcha" >发送验证码</el-button>
+          <el-button type="primary"  class="getCaptcha" @click="getCaptcha" :disabled=getCaptchaDisabled>
+            <span v-show="show">发送验证码</span>
+            <span v-show="!show">{{count}}秒后获取</span>
+          </el-button>
         </el-form-item>
         <div class="checkbox">
           <el-checkbox v-model="form.checked"></el-checkbox>
           <span class="text">本人已阅读并同意</span>
           <span class="agreement" @click="dialogVisible = true">《众易融平台服务协议》</span>
-          <el-button type="primary" @click="submit('applicationForm')" class="submit" name="apply">立即申请</el-button>
+          <el-button type="primary" @click="submit('form')" class="submit" name="apply">立即申请</el-button>
         </div>
       </el-form>
 
@@ -268,23 +275,140 @@
 
 <script>
 import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob'
+import LoanService from '@/services/LoanService'
 export default {
   data () {
     return {
       rate: 3.6,
+      show: true,
+      product:{},
       dialogTableVisible: false,
       dialogVisible: false,
+      getCaptchaDisabled: false,
       dialogFormVisible: false,
+      hasHouseOptions: [{
+          value: 1,
+          label: '深房'
+        }, {
+          value: 2,
+          label: '非深房'
+        }, {
+          value: 3,
+          label: '没有'
+        }
+      ],
+      hasCarOptions: [{
+          value: 1,
+          label: '全款车'
+        }, {
+          value: 2,
+          label: '按揭车'
+        }, {
+          value: 3,
+          label: '无车'
+        }
+      ],
+      custProfessionOptions: [{
+          value: 1,
+          label: '工薪族'
+        }, {
+          value: 2,
+          label: '个体户/企业主'
+        }, {
+          value: 3,
+          label: '待业'
+        }
+      ],
       form: {
-        name: '',
-        sum: '',
-        age: ''
+        custTel: '',
+        custRelName: '',
+        hasHouse: '',
+        beginAmt: '',
+        custAge: '',
+        hasCar: '',
+        custProfession: '',
+        checked: true
       },
       formLabelWidth: '120px'
     }
   },
+  methods: {
+    submit (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.apply(formName)
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    /**
+     * 立即申请
+     * @return {Promise} [description]
+     */
+    async apply (formName) {
+        try {
+           const response = await LoanService.apply({
+                           code: this.form.captcha,
+                           zdCust:this.form
+                         })
+          if (response.data.code !== 0) {
+            this.$message.error(response.data.msg)
+            this.form.captcha = ""
+            return
+          }
+          this.sucessDialogVisible = true
+          this.$refs[formName].resetFields();
+         } catch (error) {
+           // this.error = error.response.data.error
+           console.log(error)
+         }
+    },
+    /**
+     * 获取验证码
+     * @return {Promise} [description]
+     */
+    async getCaptcha () {
+      try {
+        if (!(/^1[3|4|5|7|8]\d{9}$/.test(this.form.custTel))) {
+           this.$message.error('请填入正确手机号码');
+          return
+        }
+        let TIME_COUNT = 60;
+        if (!this.timer) {
+          this.count = TIME_COUNT;
+          this.show = false;
+          this.getCaptchaDisabled = true;
+          this.timer = setInterval(() => {
+            if (this.count > 0 && this.count <= TIME_COUNT) {
+              this.count--;
+            } else {
+              this.show = true;
+              clearInterval(this.timer);
+              this.getCaptchaDisabled = false;
+              this.timer = null;
+            }
+          }, 1000)
+        }
+        await LoanService.getCaptcha({
+          params:{
+            custTel: this.form.custTel
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    closeDiolog(val){
+      this.sucessDialogVisible = val
+    }
+  },
   components: {
     BaseQuickApplyAndNoob
+  },
+  mounted () {
+    this.product = this.$route.params.row
   }
 }
 </script>
@@ -366,8 +490,9 @@ $line-color: #eeeeee;
       .detail{
         margin-top: 20px;
         background-color: #fff;
-        height: 629px;
+        min-height: 619px;
         padding:  0 25px;
+        padding-bottom: 10px;
         .sub-title{
           padding: 17px 0;
           height: 44px;
@@ -393,11 +518,22 @@ $line-color: #eeeeee;
           }
         }
         .condition-detail{
-          @extend .product-detail;
-          height: 100px;
+          ul{
+            margin-top: 20px;
+            padding-left: 10px;
+            li{
+              color: $title-color;
+              list-style-type: none;
+              margin-top: 10px;
+            }
+          }
         }
         .need{
           @extend .condition-detail;
+          ol{
+            background-color: #fff;
+            padding-bottom: 10px;
+          }
         }
       }
     }
@@ -423,13 +559,13 @@ $line-color: #eeeeee;
       width: 180px;
     }
     .getCaptcha{
-      font-size: 8px;
+      font-size: 12px;
       position: absolute;
       right: 0px;
       bottom: 0;
       width: 80px;
       span{
-        margin-left: -10px;
+        margin-left: -5px;
       }
     }
     .checkbox{

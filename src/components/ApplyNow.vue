@@ -78,23 +78,23 @@
         您的基本情况
       </div>
       <el-form :model="form" class="detail-form" ref="form">
-        <el-form-item label="你的姓名" :label-width="formLabelWidth">
+        <el-form-item label="你的姓名" :label-width="formLabelWidth" prop="custRelName">
           <el-input v-model="form.custRelName" auto-complete="off" placeholder="请填写真实姓名">
           </el-input>
         </el-form-item>
-        <el-form-item label="借款金额" :label-width="formLabelWidth">
+        <el-form-item label="借款金额" :label-width="formLabelWidth" prop="beginAmt">
           <el-input v-model.number="form.beginAmt" auto-complete="off" placeholder="请填写借款金额">
             <template slot="append">元</template>
           </el-input>
         </el-form-item>
-        <el-form-item label="您的年龄" :label-width="formLabelWidth">
+        <el-form-item label="您的年龄" :label-width="formLabelWidth" prop="custAge">
           <el-input v-model.number="form.custAge" auto-complete="off" placeholder="请填写您的年龄">
             <template slot="append">
               岁
             </template>
           </el-input>
         </el-form-item>
-        <el-form-item label="有无房产" :label-width="formLabelWidth">
+        <el-form-item label="有无房产" :label-width="formLabelWidth" prop="hasHouse">
           <el-select v-model="form.hasHouse" placeholder="请选择有无房产">
             <el-option
               v-for="item in hasHouseOptions"
@@ -104,7 +104,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="是否有车" :label-width="formLabelWidth">
+        <el-form-item label="是否有车" :label-width="formLabelWidth" prop="hasCar">
           <el-select v-model.number="form.hasCar" placeholder="请选择是否有车">
             <el-option
               v-for="item in hasCarOptions"
@@ -114,7 +114,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="职业状态" :label-width="formLabelWidth">
+        <el-form-item label="职业状态" :label-width="formLabelWidth" prop="custProfession">
           <el-select v-model="form.custProfession" placeholder="请选择职业状态">
             <el-option
               v-for="item in custProfessionOptions"
@@ -157,7 +157,6 @@
           <el-button type="primary" @click="submit('form')" class="submit" name="apply">立即申请</el-button>
         </div>
       </el-form>
-
       <div slot="footer" >
       </div>
     </el-dialog>
@@ -270,10 +269,13 @@
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
+    <base-application-form-sucess :dialog-visible="sucessDialogVisible" @dialog-close="closeDiolog">
+    </base-application-form-sucess>
   </div>
 </template>
 
 <script>
+import BaseApplicationFormSucess from './common/BaseApplicationFormSucess'
 import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob'
 import LoanService from '@/services/LoanService'
 export default {
@@ -284,6 +286,7 @@ export default {
       product:{},
       dialogTableVisible: false,
       dialogVisible: false,
+      sucessDialogVisible: false,
       getCaptchaDisabled: false,
       dialogFormVisible: false,
       hasHouseOptions: [{
@@ -327,9 +330,13 @@ export default {
         custAge: '',
         hasCar: '',
         custProfession: '',
-        checked: true
+        checked: true,
+        custProvinceName: '',
+        custCityName: ''
       },
-      formLabelWidth: '120px'
+      formLabelWidth: '120px',
+      count: null,
+      productId: ''
     }
   },
   methods: {
@@ -351,14 +358,22 @@ export default {
         try {
            const response = await LoanService.apply({
                            code: this.form.captcha,
-                           zdCust:this.form
+                           zdCust:this.form,
+                           zdLoan:{
+                             loanAmt:this.form.beginAmt,
+                             "loan":this.product.monthRate
+                           },
+                           "zdProduct":{
+                          		"productId":this.product.productId
+                          	}
                          })
-          if (response.data.code !== 0) {
-            this.$message.error(response.data.msg)
-            this.form.captcha = ""
-            return
-          }
-          this.sucessDialogVisible = true
+          // if (response.data.code !== 0) {
+          //   this.$message.error(response.data.msg)
+          //   this.form.captcha = ""
+          //   return
+          // }
+          this.dialogFormVisible = false
+            this.sucessDialogVisible = true
           this.$refs[formName].resetFields();
          } catch (error) {
            // this.error = error.response.data.error
@@ -402,13 +417,31 @@ export default {
     },
     closeDiolog(val){
       this.sucessDialogVisible = val
+    },
+    /**
+     * 贷款表格
+     * @type {[1.房地贷 3保单贷 4月供带 5工薪贷 6车抵贷]}
+     */
+    async fetchList () {
+      const response = (await LoanService.payrollLoan({
+          params:{
+            productId: this.productId
+          }
+        })).data.data
+        console.log(response, 123)
+        this.product = response.list
     }
   },
   components: {
-    BaseQuickApplyAndNoob
+    BaseQuickApplyAndNoob,
+    BaseApplicationFormSucess
   },
   mounted () {
-    this.product = this.$route.params.row
+    this.productId = this.$route.query.productId
+    console.log(this.productId)
+    this.product = this.$route.params.row || this.fetchList()
+    this.form.custProvinceName = remote_ip_info["province"]
+    this.form.custCityName = remote_ip_info["city"]
   }
 }
 </script>

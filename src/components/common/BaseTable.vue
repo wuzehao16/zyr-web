@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     ToApplyNow (row) {
-      this.$router.push({name:'ApplyNow', params: { row }})
+      this.$router.push({name:'ApplyNow', params: { row }, query:{productId:row.productId}})
     },
     handleCurrentChange (val) {
       this.pageNo = val

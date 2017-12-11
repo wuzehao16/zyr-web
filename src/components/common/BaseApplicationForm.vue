@@ -210,7 +210,7 @@ export default {
                            code: this.applicationForm.captcha,
                            zdCust:{
                              custRelName: this.applicationForm.userName,
-                             custTel: this.applicationForm.telephone                           
+                             custTel: this.applicationForm.telephone
                            }
                          })
           if (response.data.code !== 0) {

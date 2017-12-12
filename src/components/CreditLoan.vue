@@ -59,7 +59,11 @@
   <div class="content">
     <div class="product-list">
       <div class="filter">
-        排序方式
+        <span>排序方式：</span>
+        <span :class="sortName =='' ? 'active' : 'no-active' " @click="sort()">默认排序</span>
+        <span :class="sortName =='productAmtEnd' ? 'active' : 'no-active' " @click="sort('productAmtEnd')">贷款金额<i class="iconfont icon-web-icon-"></i></span>
+        <span :class="sortName =='productCycleEnd' ? 'active' : 'no-active' " @click="sort('productCycleEnd')">贷款期限<i class="iconfont icon-web-icon-"></i></span>
+        <span :class="sortName =='monthRate' ? 'active' : 'no-active' " @click="sort('monthRate')">月均利息<i class="iconfont icon-web-icon-"></i></span>
       </div>
       <div class="product-detail" v-for="item in productList">
         <img :src="item.zdPlat.platLog" :alt="item.zdPlat.platName" height="100" width="100">
@@ -81,7 +85,7 @@
                 可贷款周期
               </div>
             </div>
-              <el-button class="apply" @click="ToApplyNow(scoped.row)">
+              <el-button class="apply" @click="ToApplyNow(item.productId)">
                 立即申请
               </el-button>
           </div>
@@ -118,7 +122,8 @@ export default {
       occupationalIdentity: '',
       productList: [],
       total: 0,
-      pageNo: ''
+      pageNo: '',
+      sortName : ''
     }
   },
   methods: {
@@ -126,54 +131,63 @@ export default {
      * 贷款表格
      * @type {[1.房地贷 3保单贷 4月供带 5工薪贷 6车抵贷]}
      */
-    async fetchList () {
-      const response = (await LoanService.payrollLoan({
-          params:{
+    async fetchList() {
+        const response = (await LoanService.payrollLoan({
+          params: {
             pageNo: this.pageNo,
             productAmt: this.loanAmount,
             productCycle: this.loanTimeLimit,
             productType: this.loanAmountOptions,
-            custProfession : this.occupationalIdentity,
+            custProfession: this.occupationalIdentity,
+            sortName: this.sortName
           }
         })).data.data
         this.productList = response.list
         this.total = response.totalCount
+      },
+      loanAmountFilter(val) {
+        this.loanAmount = val
+        this.fetchList()
+      },
+      loanTimeLimitFilter(val) {
+        this.loanTimeLimit = val
+        this.fetchList()
+      },
+      loanAmountOptionsFilter(val) {
+        this.loanAmountOptions = val
+        this.fetchList()
+      },
+      occupationalIdentityFilter(val) {
+        this.occupationalIdentity = val
+        this.fetchList()
+      },
+      PageChange(val) {
+        this.pageNo = val
+        this.fetchList()
+      },
+      ToApplyNow(productId) {
+        this.$router.push({
+          name: 'ApplyNow',
+          query: {
+            productId: productId
+          }
+        })
+      },
+      sort(val = '') {
+        this.sortName = val
+        this.fetchList()
+      }
     },
-    loanAmountFilter (val) {
-      this.loanAmount = val
-      this.fetchList()
-    },
-    loanTimeLimitFilter (val) {
-      this.loanTimeLimit = val
-      this.fetchList()
-    },
-    loanAmountOptionsFilter (val) {
-      this.loanAmountOptions = val
-      this.fetchList()
-    },
-    occupationalIdentityFilter (val) {
-      this.occupationalIdentity = val
-      this.fetchList()
-    },
-    PageChange (val) {
-      this.pageNo = val
-      this.fetchList()
-    },
-    ToApplyNow (row) {
-      this.$router.push({name:'ApplyNow', params: { row }, query:{productId:row.productId}})
-    },
-  },
-  mounted () {
-    console.log(this.$route.query)
-    this.occupationalIdentity = this.$route.query.custProfession || ""
-    this.loanAmount = this.$route.query.productAmt || ""
-    this.loanTimeLimit = this.$route.query.productCycle || ""
-    this.fetchList()
-  },
-  components: {
-    BaseQuickApplyAndNoob
-  }
-}
+    mounted() {
+        this.occupationalIdentity = this.$route.query.custProfession || ""
+        this.loanAmount = this.$route.query.productAmt || ""
+        this.loanTimeLimit = this.$route.query.productCycle || ""
+        this.fetchList()
+      },
+      components: {
+        BaseQuickApplyAndNoob
+      }
+    }
 </script>
 
 <style lang="scss">
@@ -216,6 +230,20 @@ export default {
       .filter{
         color: $word-color;
         margin-top: 10px;
+        span{
+          margin-left: 22px;
+          cursor: pointer;
+          &:first-child{
+            margin-left: 0;
+            cursor: default;
+          }
+        }
+        .no-active{
+          color: $title-color;
+        }
+        .active{
+          color: $main-color;
+        }
       }
       .product-detail{
         height: 100px;

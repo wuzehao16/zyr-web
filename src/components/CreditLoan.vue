@@ -165,9 +165,9 @@ export default {
   },
   mounted () {
     console.log(this.$route.query)
-    this.occupationalIdentity = this.$route.query.custProfession
-    this.loanAmount = this.$route.query.productAmt
-    this.loanTimeLimit = this.$route.query.productCycle
+    this.occupationalIdentity = this.$route.query.custProfession || ""
+    this.loanAmount = this.$route.query.productAmt || ""
+    this.loanTimeLimit = this.$route.query.productCycle || ""
     this.fetchList()
   },
   components: {

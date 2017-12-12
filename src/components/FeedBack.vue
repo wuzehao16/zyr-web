@@ -41,14 +41,14 @@ export default {
           type: 'success'
         });
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     }
   },
   components: {
     TopBar
   }
-}
+};
 </script>
 
 <style lang="scss">

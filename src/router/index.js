@@ -1,86 +1,87 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/components/Home'
-import Loan from '@/components/Loan'
-import CreditLoan from '@/components/CreditLoan'
-import MortgageLoan from '@/components/loan/MortgageLoan'
-import HelpCenter from '@/components/HelpCenter'
-import AboutUs from '@/components/AboutUs'
-import ApplyNow from '@/components/ApplyNow'
-import PlatformAnnouncement from '@/components/PlatformAnnouncement'
-import JoinUs from '@/components/JoinUs'
-import ContactUs from '@/components/ContactUs'
-import FeedBack from '@/components/FeedBack'
-import Disclaimer from '@/components/Disclaimer'
-import News from '@/components/News'
-Vue.use(Router)
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from '@/components/Home';
+import Loan from '@/components/Loan';
+import CreditLoan from '@/components/CreditLoan';
+import MortgageLoan from '@/components/loan/MortgageLoan';
+import HelpCenter from '@/components/HelpCenter';
+import AboutUs from '@/components/AboutUs';
+import ApplyNow from '@/components/ApplyNow';
+import PlatformAnnouncement from '@/components/PlatformAnnouncement';
+import JoinUs from '@/components/JoinUs';
+import ContactUs from '@/components/ContactUs';
+import FeedBack from '@/components/FeedBack';
+import Disclaimer from '@/components/Disclaimer';
+import News from '@/components/News';
+
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
       path: '/loan',
       name: 'Loan',
-      component: Loan
+      component: Loan,
     },
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
     },
     {
       path: '/helpcenter',
       name: 'HelpCenter',
-      component: HelpCenter
+      component: HelpCenter,
     },
     {
       path: '/aboutus',
       name: 'AboutUs',
-      component: AboutUs
+      component: AboutUs,
     },
     {
       path: '/mortgageloan',
       name: 'MortgageLoan',
-      component: MortgageLoan
+      component: MortgageLoan,
     },
     {
       path: '/applynow',
       name: 'ApplyNow',
-      component: ApplyNow
+      component: ApplyNow,
     },
     {
       path: '/platformannouncement',
       name: 'PlatformAnnouncement',
-      component: PlatformAnnouncement
+      component: PlatformAnnouncement,
     },
     {
       path: '/joinus',
       name: 'JoinUs',
-      component: JoinUs
+      component: JoinUs,
     },
     {
       path: '/contactus',
       name: 'ContactUs',
-      component: ContactUs
+      component: ContactUs,
     },
     {
       path: '/feedback',
       name: 'FeedBack',
-      component: FeedBack
+      component: FeedBack,
     },
     {
       path: '/disclaimer',
       name: 'Disclaimer',
-      component: Disclaimer
+      component: Disclaimer,
     },
     {
       path: '/news',
       name: 'News',
-      component: News
+      component: News,
     },
     {
       path: '/creditloan',
       name: 'CreditLoan',
-      component: CreditLoan
-    }
-  ]
-})
+      component: CreditLoan,
+    },
+  ],
+});

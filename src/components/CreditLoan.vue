@@ -62,7 +62,7 @@
         排序方式
       </div>
       <div class="product-detail" v-for="item in productList">
-        <img :src=item.zdPlat.platLog alt="" height="100" width="100">
+        <img :src="item.zdPlat.platLog" :alt="item.zdPlat.platName" height="100" width="100">
         <div class="details">
           <div class="product-name">
             <span>【{{item.productName}}】</span>

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="">
+  <div class="base-table">
   <el-table
    :data="Loan"
    stripe
@@ -9,13 +9,13 @@
      prop="zdPlat"
      >
      <template scope="scope">
-       {{scope.platLog}}
-       <img :src="scope.row.zdPlat.platLog" alt="" height="50" width="50">
+       <img :src="scope.row.zdPlat.platLog" :alt="scope.row.zdPlat.platName" class="product-img" height="46" width="46">
+         <!-- <img src="../../assets/img/test.jpg" alt=""  class="product-img" height="46" width="46"> -->
      </template>
    </el-table-column>
    <el-table-column
      prop="productIntroduct"
-     min-width="400">
+     width="440">
    </el-table-column>
    <el-table-column width="100">
      <template slot-scope="scope">
@@ -81,6 +81,13 @@ export default {
 </script>
 
 <style lang="scss">
+.base-table{
+  .product-img{
+    position:absolute;
+    left: 15px;
+    top: 6px;
+  }
+}
 .pagination{
   text-align: center;
 }

@@ -5,8 +5,13 @@
    stripe
    :show-header="false">
    <el-table-column
-     prop="date"
-     width="100">
+     width="100"
+     prop="zdPlat"
+     >
+     <template scope="scope">
+       {{scope.platLog}}
+       <img :src="scope.row.zdPlat.platLog" alt="" height="50" width="50">
+     </template>
    </el-table-column>
    <el-table-column
      prop="productIntroduct"
@@ -23,7 +28,7 @@
      @current-change="handleCurrentChange"
      :current-page="1"
      :page-size="12"
-     layout="total, prev, pager, next, jumper"
+     layout="total, prev, pager, next"
      :total="total">
    </el-pagination>
  </div>

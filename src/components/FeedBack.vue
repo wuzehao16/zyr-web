@@ -13,7 +13,7 @@
           placeholder="请输入内容"
           v-model="textarea">
         </el-input>
-         <el-button class="submit" @click="submitFeedback" :disabled="!textarea">提交</el-button>
+         <el-button class="submit" type="primary" @click="submitFeedback" :disabled="!textarea.trim()">提交</el-button>
         </div>
       </div>
     </div>
@@ -31,6 +31,7 @@ export default {
   },
   methods: {
     async submitFeedback () {
+      if (this.textarea)
       try {
         await LoanService.feedback({
           feedbackContent: this.textarea
@@ -81,7 +82,6 @@ export default {
           color: $title-color;
         }
         .submit{
-          background-color: $main-color;
           color:#fff;
           margin-top: 50px;
         }

@@ -11,45 +11,47 @@
     <ul>
       <li>
         <span class="select-title">贷款金额：</span>
-        <el-radio-group v-model="loanAmount" size="mini">
-          <el-radio-button label="不限"></el-radio-button>
-          <el-radio-button label="5万"></el-radio-button>
-          <el-radio-button label="10万"></el-radio-button>
-          <el-radio-button label="20万"></el-radio-button>
-          <el-radio-button label="30万"></el-radio-button>
-          <el-radio-button label="50万"></el-radio-button>
-          <el-radio-button label="100万"></el-radio-button>
-          <el-radio-button label="300万"></el-radio-button>
+        <el-radio-group v-model="loanAmount" size="mini" @change="loanAmountFilter">
+          <el-radio-button label="" >不限</el-radio-button>
+          <el-radio-button label="5"  >5万</el-radio-button>
+          <el-radio-button label="10" >10万</el-radio-button>
+          <el-radio-button label="20" >20万</el-radio-button>
+          <el-radio-button label="30" >30万</el-radio-button>
+          <el-radio-button label="50" >50万</el-radio-button>
+          <el-radio-button label="100" >100万</el-radio-button>
+          <el-radio-button label="300" >300万</el-radio-button>
         </el-radio-group>
       </li>
       <li>
         <span class="select-title">贷款期限：</span>
-        <el-radio-group v-model="loanTimeLimit" size="mini">
-          <el-radio-button label="不限"></el-radio-button>
-          <el-radio-button label="3个月"></el-radio-button>
-          <el-radio-button label="6个月"></el-radio-button>
-          <el-radio-button label="2年"></el-radio-button>
-          <el-radio-button label="3年"></el-radio-button>
-          <el-radio-button label="5年"></el-radio-button>
-          <el-radio-button label="10年"></el-radio-button>
+        <el-radio-group v-model="loanTimeLimit" size="mini" @change="loanTimeLimitFilter">
+          <el-radio-button label="">不限</el-radio-button>
+          <el-radio-button label="3">3个月</el-radio-button>
+          <el-radio-button label="6">6个月</el-radio-button>
+          <el-radio-button label="24">2年</el-radio-button>
+          <el-radio-button label="36">3年</el-radio-button>
+          <el-radio-button label="60">5年</el-radio-button>
+          <el-radio-button label="120">10年</el-radio-button>
         </el-radio-group>
       </li>
       <li>
         <span class="select-title">贷款类型：</span>
-        <el-radio-group v-model="loanAmountOptions" size="mini">
-          <el-radio-button label="不限"></el-radio-button>
-          <el-radio-button label="个人信用贷"></el-radio-button>
-          <el-radio-button label="广州"></el-radio-button>
-          <el-radio-button label="深圳"></el-radio-button>
+        <el-radio-group v-model="loanAmountOptions" size="mini" @change="loanAmountOptionsFilter">
+          <el-radio-button label="">不限</el-radio-button>
+          <el-radio-button label="1">房抵贷</el-radio-button>
+          <el-radio-button label="3">保单贷</el-radio-button>
+          <el-radio-button label="4">月供贷</el-radio-button>
+          <el-radio-button label="5">工薪贷</el-radio-button>
+          <el-radio-button label="6">车抵贷</el-radio-button>
         </el-radio-group>
       </li>
       <li>
         <span class="select-title">职业身份：</span>
-        <el-radio-group v-model="occupationalIdentity" size="mini">
-          <el-radio-button label="不限"></el-radio-button>
-          <el-radio-button label="上班族"></el-radio-button>
-          <el-radio-button label="个体户/企业户"></el-radio-button>
-          <el-radio-button label="自由职业"></el-radio-button>
+        <el-radio-group v-model="occupationalIdentity" size="mini" @change="occupationalIdentityFilter">
+          <el-radio-button label="">不限</el-radio-button>
+          <el-radio-button label="1">上班族</el-radio-button>
+          <el-radio-button label="2">个体户/企业户</el-radio-button>
+          <el-radio-button label="3">无业</el-radio-button>
         </el-radio-group>
       </li>
     </ul>
@@ -59,32 +61,41 @@
       <div class="filter">
         排序方式
       </div>
-      <div class="product-detail" v-for="item in 5">
-        <img src="../assets/img/product_img.jpg" alt="">
+      <div class="product-detail" v-for="item in productList">
+        <img :src=item.zdPlat.platLog alt="" height="100" width="100">
         <div class="details">
           <div class="product-name">
-            <span>【平安融e贷产品一】</span>
-            <span class="rate">贷款利息  0.96%</span>
+            <span>【{{item.productName}}】</span>
+            <span class="rate">贷款利息  {{item.monthRate}}%</span>
           </div>
           <div class="product-sum" >
             <div>
-              <strong>5-50</strong>万元
+              <strong>{{item.productCycleStart}}-{{item.productCycleEnd}}</strong>万元
               <div>
                 可贷款额度
               </div>
             </div>
             <div>
-              <strong>12-36</strong>个月
+              <strong>{{item.productCycleStart}}-{{item.productCycleEnd}}</strong>个月
               <div>
                 可贷款周期
               </div>
             </div>
-              <el-button class="apply">
+              <el-button class="apply" @click="ToApplyNow(scoped.row)">
                 立即申请
               </el-button>
           </div>
 
         </div>
+      </div>
+      <div class="pagination" >
+        <el-pagination
+          @current-change="PageChange"
+          :current-page="1"
+          :page-size="12"
+          layout="total, prev, pager, next"
+          :total="total">
+        </el-pagination>
       </div>
     </div>
     <div class="right">
@@ -97,14 +108,67 @@
 
 <script>
 import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob'
+import LoanService from '@/services/LoanService'
 export default {
   data () {
     return {
-      loanAmount: '不限',
-      loanTimeLimit: '不限',
-      loanAmountOptions: '不限',
-      occupationalIdentity: '不限'
+      loanAmount: '',
+      loanTimeLimit: '',
+      loanAmountOptions: '',
+      occupationalIdentity: '',
+      productList: [],
+      total: 0,
+      pageNo: ''
     }
+  },
+  methods: {
+    /**
+     * 贷款表格
+     * @type {[1.房地贷 3保单贷 4月供带 5工薪贷 6车抵贷]}
+     */
+    async fetchList () {
+      const response = (await LoanService.payrollLoan({
+          params:{
+            pageNo: this.pageNo,
+            productAmt: this.loanAmount,
+            productCycle: this.loanTimeLimit,
+            productType: this.loanAmountOptions,
+            custProfession : this.occupationalIdentity,
+          }
+        })).data.data
+        this.productList = response.list
+        this.total = response.totalCount
+    },
+    loanAmountFilter (val) {
+      this.loanAmount = val
+      this.fetchList()
+    },
+    loanTimeLimitFilter (val) {
+      this.loanTimeLimit = val
+      this.fetchList()
+    },
+    loanAmountOptionsFilter (val) {
+      this.loanAmountOptions = val
+      this.fetchList()
+    },
+    occupationalIdentityFilter (val) {
+      this.occupationalIdentity = val
+      this.fetchList()
+    },
+    PageChange (val) {
+      this.pageNo = val
+      this.fetchList()
+    },
+    ToApplyNow (row) {
+      this.$router.push({name:'ApplyNow', params: { row }, query:{productId:row.productId}})
+    },
+  },
+  mounted () {
+    console.log(this.$route.query)
+    this.occupationalIdentity = this.$route.query.custProfession
+    this.loanAmount = this.$route.query.productAmt
+    this.loanTimeLimit = this.$route.query.productCycle
+    this.fetchList()
   },
   components: {
     BaseQuickApplyAndNoob
@@ -194,6 +258,10 @@ export default {
         }
       }
     }
+  }
+  .pagination{
+    margin-top: 5px;
+    text-align: center;
   }
 }
 </style>

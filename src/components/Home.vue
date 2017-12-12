@@ -106,7 +106,7 @@
               </el-radio-group>
             </div>
           </div>
-          <el-button type="primary" class="apply" >立即申请</el-button>
+          <el-button type="primary" class="apply" @click="toTop">立即申请</el-button>
         </div>
       </div>
     </div>
@@ -164,6 +164,11 @@ export default {
     },
     balance () {
       return Math.round(((this.loanAmount / this.loanTimeLimit.slice(0, 2) + this.loanAmount * this.rate) * 10000) * 100) / 100
+    }
+  },
+  methods: {
+    toTop () {
+      window.scrollTo(0,0)
     }
   }
 }

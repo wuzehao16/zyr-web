@@ -428,8 +428,7 @@ export default {
             productId: this.productId
           }
         })).data.data
-        console.log(response, 123)
-        this.product = response.list
+        this.product = response.list[0]
     }
   },
   components: {

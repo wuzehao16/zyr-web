@@ -43,7 +43,7 @@
               :value="item.value">
             </el-option>
           </el-select>
-          <el-button type="primary" class="find-btn" size="small">搜索</el-button>
+          <el-button type="primary" class="find-btn" size="small" @click="search">搜索</el-button>
         </div>
       </div>
       <!-- 信用贷 -->
@@ -222,60 +222,75 @@ export default {
       occupation: '',
       serviceStarList:"",
       occupationOptions: [{
-        value: '选项1',
-        label: '身份1'
+        value: '1',
+        label: '上班族'
       }, {
-        value: '选项2',
-        label: '身份2'
+        value: '2',
+        label: '个体户/企业主'
       }, {
-        value: '选项3',
-        label: '身份3'
-      }, {
-        value: '选项4',
-        label: '身份4'
-      }, {
-        value: '选项5',
-        label: '身份5'
+        value: '3',
+        label: '无业'
       }],
       loanAmount: '',
       loanAmountOptions: [{
-        value: '选项1',
-        label: '50000'
+        value: '5',
+        label: '5万'
       }, {
-        value: '选项2',
-        label: '100000'
+        value: '10',
+        label: '10万'
       }, {
-        value: '选项3',
-        label: '1000000'
+        value: '20',
+        label: '20万'
       }, {
-        value: '选项4',
-        label: '10000000'
+        value: '30',
+        label: '30万'
       }, {
-        value: '选项5',
-        label: '100000000'
+        value: '50',
+        label: '50万'
+      },{
+        value: '100',
+        label: '100万'
+      }, {
+        value: '300',
+        label: '300万'
       }],
       loanTimeLimit: '',
       loanTimeLimitOptions: [{
-        value: '选项1',
-        label: '1年'
+        value: '3',
+        label: '3个月'
       }, {
-        value: '选项2',
+        value: '6',
+        label: '6个月'
+      }, {
+        value: '24',
         label: '2年'
       }, {
-        value: '选项3',
+        value: '36',
         label: '3年'
       }, {
-        value: '选项4',
-        label: '4年'
-      }, {
-        value: '选项5',
+        value: '60',
         label: '5年'
+      },{
+        value: '120',
+        label: '10年'
       }],
       loan: []
     }
   },
   methods: {
+    search () {
+      this.$router.push({
+        name:'CreditLoan',
+        params: {
 
+         },
+        query:{
+          custProfession: this.occupation,
+          productAmt: this.loanAmount,
+          productCycle: this.loanTimeLimit
+        }
+      })
+    }
   },
   async mounted () {
     this.loan = (await LoanService.loan()).data.data
@@ -334,6 +349,9 @@ export default {
     }
      /* 信用贷 抵押贷通用*/
     .credit-loan, .mortgage-loan{
+      .el-tabs__header{
+        padding-left: 30px;
+      }
       margin-top: 70px;
       .main-title{
         display: flex;

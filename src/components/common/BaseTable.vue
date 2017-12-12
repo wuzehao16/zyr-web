@@ -8,7 +8,7 @@
      width="100"
      prop="zdPlat"
      >
-     <template scope="scope">
+     <template slot-scope="scope">
        <img :src="scope.row.zdPlat.platLog" :alt="scope.row.zdPlat.platName" class="product-img" height="46" width="46">
          <!-- <img src="../../assets/img/test.jpg" alt=""  class="product-img" height="46" width="46"> -->
      </template>
@@ -38,8 +38,8 @@
 <script>
 import LoanService from '@/services/LoanService.js'
 export default {
-  props: ['type', 'pageSize', "show"],
-  data () {
+  props: ['type', 'pageSize', 'show'],
+  data() {
     return {
       Loan: [],
       total: 0,
@@ -48,10 +48,18 @@ export default {
     }
   },
   methods: {
-    ToApplyNow (row) {
-      this.$router.push({name:'ApplyNow', params: { row }, query:{productId:row.productId}})
+    ToApplyNow(row) {
+      this.$router.push({
+        name: 'ApplyNow',
+        params: {
+          row
+        },
+        query: {
+          productId: row.productId
+        }
+      })
     },
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.pageNo = val
       this.fetchList()
     },
@@ -59,23 +67,23 @@ export default {
      * 贷款表格
      * @type {[1.房地贷 3保单贷 4月供带 5工薪贷 6车抵贷]}
      */
-    async fetchList () {
+    async fetchList() {
       const response = (await LoanService.payrollLoan({
-          params:{
-            productType: this.type,
-            pageSize: this.pageSize,
-            pageNo: this.pageNo
-          }
-        })).data.data
-        this.Loan = response.list
-        this.total = response.totalCount
+        params: {
+          productType: this.type,
+          pageSize: this.pageSize,
+          pageNo: this.pageNo
+        }
+      })).data.data
+      this.Loan = response.list
+      this.total = response.totalCount
     }
   },
-   mounted () {
-     this.fetchList()
-      if (this.show) {
-        this.paShow = true
-      }
+  mounted() {
+    this.fetchList()
+    if (this.show) {
+      this.paShow = true
+    }
   }
 }
 </script>

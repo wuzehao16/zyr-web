@@ -16,16 +16,16 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       showToTop: false
     }
   },
   methods: {
-    toTop () {
-      window.scrollTo(0,0)
+    toTop() {
+      window.scrollTo(0, 0)
     },
-    handleScroll () {
+    handleScroll() {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       if (scrollTop > 1000) {
         this.showToTop = true;
@@ -34,7 +34,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     window.addEventListener('scroll', this.handleScroll)
   }
 }

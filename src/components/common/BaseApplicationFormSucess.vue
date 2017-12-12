@@ -13,10 +13,10 @@
 
 <script>
 export default {
-  props:['dialogVisible'],
+  props: ['dialogVisible'],
   methods: {
     handleClose () {
-      this.$emit('dialog-close',false)
+      this.$emit('dialog-close', false)
     }
   }
 }

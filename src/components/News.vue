@@ -12,7 +12,7 @@
               <div class="time">
                 2017-11-21  16:31:12
               </div>
-              <p v-html=item.txt></p>
+              <p v-html="item.txt"></p>
             </div>
           </div>
           <el-pagination
@@ -35,7 +35,7 @@
 import TopBar from './common/BaseAboutUsTopBar.vue'
 import LoanService from '@/services/LoanService'
 export default {
-  data () {
+  data() {
     return {
       list: []
     }
@@ -43,13 +43,13 @@ export default {
   components: {
     TopBar
   },
-  async mounted () {
+  async mounted() {
     this.list = (await LoanService.contentList({
-      params:{
-        channelIds:98
+      params: {
+        channelIds: 98
       }
     })).data
-    this.list.splice(0,6)
+    this.list.splice(0, 6)
   }
 }
 </script>

@@ -29,7 +29,7 @@ import LoanService from '@/services/LoanService'
 export default {
   data () {
     return {
-      list:[]
+      list: []
     }
   },
   components: {
@@ -37,8 +37,8 @@ export default {
   },
   async mounted () {
     this.list = (await LoanService.contentList({
-      params:{
-        channelIds:110
+      params: {
+        channelIds: 110
       }
     })).data
   }

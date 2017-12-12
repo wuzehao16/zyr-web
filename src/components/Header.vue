@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import LoanService from '@/services/LoanService'
 export default {
   data () {
     return {
@@ -30,9 +29,8 @@ export default {
     }
   },
   async mounted () {
-    // await(LoanService.getAddress())
-    this.province = remote_ip_info["province"]
-    this.city = remote_ip_info["city"]
+    // this.province = remote_ip_info["province"]
+    // this.city = remote_ip_info["city"]
   }
 }
 </script>

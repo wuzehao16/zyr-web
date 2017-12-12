@@ -33,7 +33,7 @@ import BaseTable from '../common/BaseTable'
 export default {
   data () {
     return {
-      activeName: 'first',
+      activeName: 'first'
     }
   },
   methods: {

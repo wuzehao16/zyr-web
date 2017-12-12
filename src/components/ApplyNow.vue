@@ -279,49 +279,46 @@ import BaseApplicationFormSucess from './common/BaseApplicationFormSucess'
 import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob'
 import LoanService from '@/services/LoanService'
 export default {
-  data () {
+  data() {
     return {
       rate: 3.6,
       show: true,
-      product:{},
+      product: {},
       dialogTableVisible: false,
       dialogVisible: false,
       sucessDialogVisible: false,
       getCaptchaDisabled: false,
       dialogFormVisible: false,
       hasHouseOptions: [{
-          value: 1,
-          label: '深房'
-        }, {
-          value: 2,
-          label: '非深房'
-        }, {
-          value: 3,
-          label: '没有'
-        }
-      ],
+        value: 1,
+        label: '深房'
+      }, {
+        value: 2,
+        label: '非深房'
+      }, {
+        value: 3,
+        label: '没有'
+      }],
       hasCarOptions: [{
-          value: 1,
-          label: '全款车'
-        }, {
-          value: 2,
-          label: '按揭车'
-        }, {
-          value: 3,
-          label: '无车'
-        }
-      ],
+        value: 1,
+        label: '全款车'
+      }, {
+        value: 2,
+        label: '按揭车'
+      }, {
+        value: 3,
+        label: '无车'
+      }],
       custProfessionOptions: [{
-          value: 1,
-          label: '工薪族'
-        }, {
-          value: 2,
-          label: '个体户/企业主'
-        }, {
-          value: 3,
-          label: '待业'
-        }
-      ],
+        value: 1,
+        label: '工薪族'
+      }, {
+        value: 2,
+        label: '个体户/企业主'
+      }, {
+        value: 3,
+        label: '待业'
+      }],
       form: {
         custTel: '',
         custRelName: '',
@@ -340,7 +337,7 @@ export default {
     }
   },
   methods: {
-    submit (formName) {
+    submit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.apply(formName)
@@ -354,40 +351,40 @@ export default {
      * 立即申请
      * @return {Promise} [description]
      */
-    async apply (formName) {
-        try {
-           const response = await LoanService.apply({
-                           code: this.form.captcha,
-                           zdCust:this.form,
-                           zdLoan:{
-                             loanAmt:this.form.beginAmt,
-                             "loan":this.product.monthRate
-                           },
-                           "zdProduct":{
-                          		"productId":this.product.productId
-                          	}
-                         })
-          // if (response.data.code !== 0) {
-          //   this.$message.error(response.data.msg)
-          //   this.form.captcha = ""
-          //   return
-          // }
-          this.dialogFormVisible = false
-            this.sucessDialogVisible = true
-          this.$refs[formName].resetFields();
-         } catch (error) {
-           // this.error = error.response.data.error
-           console.log(error)
-         }
+    async apply(formName) {
+      try {
+        const response = await LoanService.apply({
+          code: this.form.captcha,
+          zdCust: this.form,
+          zdLoan: {
+            loanAmt: this.form.beginAmt,
+            "loan": this.product.monthRate
+          },
+          "zdProduct": {
+            "productId": this.product.productId
+          }
+        })
+        // if (response.data.code !== 0) {
+        //   this.$message.error(response.data.msg)
+        //   this.form.captcha = ""
+        //   return
+        // }
+        this.dialogFormVisible = false
+        this.sucessDialogVisible = true
+        this.$refs[formName].resetFields();
+      } catch (error) {
+        // this.error = error.response.data.error
+        console.log(error)
+      }
     },
     /**
      * 获取验证码
      * @return {Promise} [description]
      */
-    async getCaptcha () {
+    async getCaptcha() {
       try {
         if (!(/^1[3|4|5|7|8]\d{9}$/.test(this.form.custTel))) {
-           this.$message.error('请填入正确手机号码');
+          this.$message.error('请填入正确手机号码');
           return
         }
         let TIME_COUNT = 60;
@@ -407,7 +404,7 @@ export default {
           }, 1000)
         }
         await LoanService.getCaptcha({
-          params:{
+          params: {
             custTel: this.form.custTel
           }
         })
@@ -415,27 +412,27 @@ export default {
         console.log(e)
       }
     },
-    closeDiolog(val){
+    closeDiolog(val) {
       this.sucessDialogVisible = val
     },
     /**
      * 贷款表格
      * @type {[1.房地贷 3保单贷 4月供带 5工薪贷 6车抵贷]}
      */
-    async fetchList () {
+    async fetchList() {
       const response = (await LoanService.payrollLoan({
-          params:{
-            productId: this.productId
-          }
-        })).data.data
-        this.product = response.list[0]
+        params: {
+          productId: this.productId
+        }
+      })).data.data
+      this.product = response.list[0]
     }
   },
   components: {
     BaseQuickApplyAndNoob,
     BaseApplicationFormSucess
   },
-  mounted () {
+  mounted() {
     this.productId = this.$route.query.productId
     console.log(this.productId)
     this.product = this.$route.params.row || this.fetchList()
@@ -444,7 +441,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss">
 $line-color: #eeeeee;
 .apply-now{

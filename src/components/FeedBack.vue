@@ -24,23 +24,22 @@
 import TopBar from './common/BaseAboutUsTopBar.vue'
 import LoanService from '@/services/LoanService'
 export default {
-  data () {
+  data() {
     return {
       textarea: ''
     }
   },
   methods: {
-    async submitFeedback () {
-      if (this.textarea)
+    async submitFeedback() {
       try {
         await LoanService.feedback({
           feedbackContent: this.textarea
         })
         this.textarea = ""
         this.$message({
-         message: '提交成功',
-         type: 'success'
-       });
+          message: '提交成功',
+          type: 'success'
+        });
       } catch (e) {
         console.log(e)
       }

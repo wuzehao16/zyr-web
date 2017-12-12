@@ -214,13 +214,13 @@ import BaseApplication from './common/BaseApplication'
 import LoanService from '@/services/LoanService'
 export default {
   name: 'loan',
-  data () {
+  data() {
     return {
       checked: true,
       creditActiveName: 'first', // 信用贷
       mortgageActiveName: 'first',
       occupation: '',
-      serviceStarList:"",
+      serviceStarList: "",
       occupationOptions: [{
         value: '1',
         label: '上班族'
@@ -247,7 +247,7 @@ export default {
       }, {
         value: '50',
         label: '50万'
-      },{
+      }, {
         value: '100',
         label: '100万'
       }, {
@@ -270,7 +270,7 @@ export default {
       }, {
         value: '60',
         label: '5年'
-      },{
+      }, {
         value: '120',
         label: '10年'
       }],
@@ -278,13 +278,13 @@ export default {
     }
   },
   methods: {
-    search () {
+    search() {
       this.$router.push({
-        name:'CreditLoan',
+        name: 'CreditLoan',
         params: {
 
-         },
-        query:{
+        },
+        query: {
           custProfession: this.occupation,
           productAmt: this.loanAmount,
           productCycle: this.loanTimeLimit
@@ -292,7 +292,7 @@ export default {
       })
     }
   },
-  async mounted () {
+  async mounted() {
     this.loan = (await LoanService.loan()).data.data
     this.serviceStarList = (await LoanService.serviceStarList()).data.data.list
   },

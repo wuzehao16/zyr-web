@@ -4,7 +4,7 @@
     <label>目前所在：</label>
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/loan' }">我要贷款</el-breadcrumb-item>
-      <el-breadcrumb-item>房抵贷</el-breadcrumb-item>
+      <el-breadcrumb-item>信用贷</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
   <div class="select">
@@ -57,7 +57,7 @@
     </ul>
   </div>
   <div class="content">
-    <div class="product-list">
+    <div class="product-list" v-if="productList && productList.length > 0">
       <div class="filter">
         <span>排序方式：</span>
         <span :class="sortName =='' ? 'active' : 'no-active' " @click="sort()">默认排序</span>
@@ -102,6 +102,9 @@
         </el-pagination>
       </div>
     </div>
+    <div class="no-product" v-if="!productList || productList.length < 1">
+        <p>您的条件也太苛刻了吧，还没有找到产品</p>
+    </div>
     <div class="right">
       <base-quick-apply-and-noob>
       </base-quick-apply-and-noob>
@@ -114,7 +117,7 @@
 import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob'
 import LoanService from '@/services/LoanService'
 export default {
-  data () {
+  data() {
     return {
       loanAmount: '',
       loanTimeLimit: '',
@@ -123,7 +126,7 @@ export default {
       productList: [],
       total: 0,
       pageNo: '',
-      sortName : ''
+      sortName: ''
     }
   },
   methods: {
@@ -132,62 +135,62 @@ export default {
      * @type {[1.房地贷 3保单贷 4月供带 5工薪贷 6车抵贷]}
      */
     async fetchList() {
-        const response = (await LoanService.payrollLoan({
-          params: {
-            pageNo: this.pageNo,
-            productAmt: this.loanAmount,
-            productCycle: this.loanTimeLimit,
-            productType: this.loanAmountOptions,
-            custProfession: this.occupationalIdentity,
-            sortName: this.sortName
-          }
-        })).data.data
-        this.productList = response.list
-        this.total = response.totalCount
-      },
-      loanAmountFilter(val) {
-        this.loanAmount = val
-        this.fetchList()
-      },
-      loanTimeLimitFilter(val) {
-        this.loanTimeLimit = val
-        this.fetchList()
-      },
-      loanAmountOptionsFilter(val) {
-        this.loanAmountOptions = val
-        this.fetchList()
-      },
-      occupationalIdentityFilter(val) {
-        this.occupationalIdentity = val
-        this.fetchList()
-      },
-      PageChange(val) {
-        this.pageNo = val
-        this.fetchList()
-      },
-      ToApplyNow(productId) {
-        this.$router.push({
-          name: 'ApplyNow',
-          query: {
-            productId: productId
-          }
-        })
-      },
-      sort(val = '') {
-        this.sortName = val
-        this.fetchList()
-      }
+      const response = (await LoanService.payrollLoan({
+        params: {
+          pageNo: this.pageNo,
+          productAmt: this.loanAmount,
+          productCycle: this.loanTimeLimit,
+          productType: this.loanAmountOptions,
+          custProfession: this.occupationalIdentity,
+          sortName: this.sortName
+        }
+      })).data.data
+      this.productList = response.list
+      this.total = response.totalCount
     },
-    mounted() {
-        this.occupationalIdentity = this.$route.query.custProfession || ""
-        this.loanAmount = this.$route.query.productAmt || ""
-        this.loanTimeLimit = this.$route.query.productCycle || ""
-        this.fetchList()
-      },
-      components: {
-        BaseQuickApplyAndNoob
-      }
+    loanAmountFilter(val) {
+      this.loanAmount = val
+      this.fetchList()
+    },
+    loanTimeLimitFilter(val) {
+      this.loanTimeLimit = val
+      this.fetchList()
+    },
+    loanAmountOptionsFilter(val) {
+      this.loanAmountOptions = val
+      this.fetchList()
+    },
+    occupationalIdentityFilter(val) {
+      this.occupationalIdentity = val
+      this.fetchList()
+    },
+    PageChange(val) {
+      this.pageNo = val
+      this.fetchList()
+    },
+    ToApplyNow(productId) {
+      this.$router.push({
+        name: 'ApplyNow',
+        query: {
+          productId: productId
+        }
+      })
+    },
+    sort(val = '') {
+      this.sortName = val
+      this.fetchList()
     }
+  },
+  mounted() {
+    this.occupationalIdentity = this.$route.query.custProfession || ""
+    this.loanAmount = this.$route.query.productAmt || ""
+    this.loanTimeLimit = this.$route.query.productCycle || ""
+    this.fetchList()
+  },
+  components: {
+    BaseQuickApplyAndNoob
+  }
+}
 </script>
 
 <style lang="scss">
@@ -284,6 +287,19 @@ export default {
             }
           }
         }
+      }
+    }
+    .no-product{
+      background-color: #fff;
+      padding: 0 50px 0 25px;
+      margin-top: 30px;
+      width: 585px;
+      height: 780px;
+      margin-bottom: 120px;
+      p{
+        color: $main-color;
+        text-align: center;
+        margin-top: 60px;
       }
     }
   }

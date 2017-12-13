@@ -179,6 +179,8 @@ export default {
       applicationForm: {
         userName: '',
         telephone: '',
+        custProvinceName: '',
+        custCityName: '',
         captcha: '',
         checked: true,
       },
@@ -195,7 +197,6 @@ export default {
         if (valid) {
           this.apply(formName);
         } else {
-          console.log('error submit!!');
           return false;
         }
       });
@@ -212,6 +213,8 @@ export default {
           zdCust: {
             custRelName: this.applicationForm.userName,
             custTel: this.applicationForm.telephone,
+            custProvinceName: this.applicationForm.custProvinceName,
+            custCityName: this.applicationForm.custCityName
           },
         });
         if (response.data.code !== 0) {
@@ -223,7 +226,7 @@ export default {
         this.$refs[formName].resetFields();
       } catch (error) {
         // this.error = error.response.data.error
-        console.log(error);
+        this.$message.error('申请失败');
       }
     },
     /**
@@ -243,7 +246,7 @@ export default {
           this.getCaptchaDisabled = true;
           this.timer = setInterval(() => {
             if (this.count > 0 && this.count <= TIME_COUNT) {
-              this.count--;
+              this.count -= 1;
             } else {
               this.show = true;
               clearInterval(this.timer);
@@ -258,7 +261,7 @@ export default {
           },
         });
       } catch (e) {
-        console.log(e);
+        this.$message.error('请填入正确手机号码');
       }
     },
     closeDiolog(val) {
@@ -268,6 +271,10 @@ export default {
   components: {
     BaseApplicationFormSucess,
   },
+  mounted() {
+    this.applicationForm.custProvinceName = remote_ip_info.province;
+    this.applicationForm.custCityName = remote_ip_info.city;
+  }
 };
 </script>
 

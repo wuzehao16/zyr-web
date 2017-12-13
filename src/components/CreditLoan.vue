@@ -95,8 +95,8 @@
       <div class="pagination" >
         <el-pagination
           @current-change="PageChange"
-          :current-page="1"
-          :page-size="12"
+          :current-page="currentPage"
+          :page-size="5"
           layout="total, prev, pager, next"
           :total="total">
         </el-pagination>
@@ -128,6 +128,7 @@ export default {
       total: 0,
       pageNo: '',
       sortName: '',
+      currentPage: 1,
     };
   },
   methods: {
@@ -151,6 +152,7 @@ export default {
     },
     loanAmountFilter(val) {
       this.loanAmount = val;
+      this.currentPage = 1;
       this.fetchList();
     },
     loanTimeLimitFilter(val) {
@@ -167,6 +169,7 @@ export default {
     },
     PageChange(val) {
       this.pageNo = val;
+      this.currentPage = val;
       this.fetchList();
     },
     ToApplyNow(productId) {

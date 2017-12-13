@@ -22,8 +22,8 @@
           </div>
           <div class="product-rate">
             <div class="rate">
-              <span class="star" v-for="(item,index) in 5" :class="Math.round(rate)>index+1?'on':'off'"></span>
-              <span class="star-number">{{rate}}</span>
+              <span class="star" v-for="(item,index) in 5" :class="Math.round(product.productReview)>=index+1?'on':'off'"></span>
+              <span class="star-number">{{product.productReview}}</span>
             </div>
             <el-button class="apply-immidiatly" size="medium" @click="dialogFormVisible = true">立即申请</el-button>
           </div>
@@ -343,7 +343,6 @@ export default {
         if (valid) {
           this.apply(formName);
         } else {
-          console.log('error submit!!');
           return false;
         }
       });
@@ -365,17 +364,17 @@ export default {
             productId: this.product.productId,
           },
         });
-        // if (response.data.code !== 0) {
-        //   this.$message.error(response.data.msg)
-        //   this.form.captcha = ""
-        //   return
-        // }
+        if (response.data.code !== 0) {
+          this.$message.error(response.data.msg);
+          this.form.captcha = '';
+          return;
+        }
         this.dialogFormVisible = false;
         this.sucessDialogVisible = true;
         this.$refs[formName].resetFields();
       } catch (error) {
         // this.error = error.response.data.error
-        console.log(error);
+        this.$message.error('申请失败');
       }
     },
     /**
@@ -395,7 +394,7 @@ export default {
           this.getCaptchaDisabled = true;
           this.timer = setInterval(() => {
             if (this.count > 0 && this.count <= TIME_COUNT) {
-              this.count--;
+              this.count -= 1;
             } else {
               this.show = true;
               clearInterval(this.timer);
@@ -410,7 +409,7 @@ export default {
           },
         });
       } catch (e) {
-        console.log(e);
+        this.$message.error('获取失败，请重新获取');
       }
     },
     closeDiolog(val) {
@@ -426,7 +425,8 @@ export default {
           productId: this.productId,
         },
       })).data.data;
-      this.product = response.list[0];
+      const product = response.list[0];
+      this.product = product;
     },
   },
   components: {
@@ -435,7 +435,6 @@ export default {
   },
   mounted() {
     this.productId = this.$route.query.productId;
-    console.log(this.productId);
     this.product = this.$route.params.row || this.fetchList();
     this.form.custProvinceName = remote_ip_info.province;
     this.form.custCityName = remote_ip_info.city;

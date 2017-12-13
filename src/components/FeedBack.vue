@@ -42,7 +42,7 @@ export default {
           type: 'success',
         });
       } catch (e) {
-        console.log(e);
+        this.$message.error('提交失败');
       }
     },
   },

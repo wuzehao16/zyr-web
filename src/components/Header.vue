@@ -1,8 +1,10 @@
 <template lang="html">
 <div class="header">
   <div class="center">
+    <div class="left">
     <div class="logo">
       <img src="" alt="logo" height="60" width="60">
+    </div>
     <div class="address">
       {{city}}
     </div>
@@ -30,7 +32,7 @@ export default {
   },
   async mounted() {
     // this.province = remote_ip_info["province"]
-    // this.city = remote_ip_info["city"]
+    this.city = remote_ip_info["city"];
   },
 };
 </script>
@@ -47,9 +49,15 @@ export default {
     background-color: #fff;
     display: flex;
     justify-content: space-between;
-    .logo{
-      width: 60px;
+    .left{
+      width: 150px;
       height: 60px;
+      display: flex;
+      .address{
+        display: inline-block;
+        line-height: 60px;
+        margin-left: 10px;
+      }
     }
     .el-menu{
       li{

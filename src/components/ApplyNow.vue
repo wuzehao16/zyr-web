@@ -275,9 +275,9 @@
 </template>
 
 <script>
+import LoanService from '@/services/LoanService';
 import BaseApplicationFormSucess from './common/BaseApplicationFormSucess';
 import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob';
-import LoanService from '@/services/LoanService';
 
 export default {
   data() {

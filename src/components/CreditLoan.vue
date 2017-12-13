@@ -114,8 +114,8 @@
 </template>
 
 <script>
-import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob';
 import LoanService from '@/services/LoanService';
+import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob';
 
 export default {
   data() {

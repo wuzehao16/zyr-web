@@ -209,9 +209,9 @@
 </template>
 
 <script>
+import LoanService from '@/services/LoanService';
 import BaseTable from './common/BaseTable';
 import BaseApplication from './common/BaseApplication';
-import LoanService from '@/services/LoanService';
 
 export default {
   name: 'loan',

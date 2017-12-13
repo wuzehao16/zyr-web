@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import TopBar from './common/BaseAboutUsTopBar';
+import TopBar from '@/components/common/BaseAboutUsTopBar';
 import LoanService from '@/services/LoanService';
 
 export default {

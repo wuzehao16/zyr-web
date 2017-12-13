@@ -154,8 +154,8 @@
 </template>
 
 <script>
+import LoanService from '@/services/LoanService';
 import BaseApplicationFormSucess from './BaseApplicationFormSucess';
-import LoanService from '@/services/LoanService.js';
 
 export default {
   data() {

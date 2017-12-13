@@ -31,5 +31,8 @@ export default {
   background-color: $bg-color;
   font-size: 14px;
   min-width:1000px;
+  a{
+    text-decoration: none;
+  }
 }
 </style>

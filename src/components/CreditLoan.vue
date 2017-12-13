@@ -74,7 +74,7 @@
           </div>
           <div class="product-sum" >
             <div>
-              <strong>{{item.productCycleStart}}-{{item.productCycleEnd}}</strong>万元
+              <strong>{{item.productAmtStart}}-{{item.productAmtEnd}}</strong>万元
               <div>
                 可贷款额度
               </div>

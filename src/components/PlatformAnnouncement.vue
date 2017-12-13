@@ -5,7 +5,7 @@
       <div class="container">
         <h2>平台公告</h2>
         <div class="info" v-for="item in list">
-          <span>{{item.title}}</span>
+          <a :href="item.url"><span>{{item.title}}</span></a>
           <span>{{item.releaseDate}}</span>
         </div>
         <el-pagination

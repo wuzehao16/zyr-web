@@ -138,7 +138,21 @@
         <h1>合作伙伴</h1>
         <h2>OUR PARTNER</h2>
         <div class="content">
-          <div v-for="item in 15"></div>
+          <div><img src="../assets/img/zgyh.png" alt=""></div>
+          <div><img src="../assets/img/payh.png" alt=""></div>
+          <div><img src="../assets/img/jsyh.png" alt=""></div>
+          <div><img src="../assets/img/gsyh.png" alt=""></div>
+          <div><img src="../assets/img/nyyh.png" alt=""></div>
+          <div><img src="../assets/img/jtyh.png" alt=""></div>
+          <div><img src="../assets/img/puyh.png" alt=""></div>
+          <div><img src="../assets/img/zsyh.png" alt=""></div>
+          <div><img src="../assets/img/zxyh.png" alt=""></div>
+          <div><img src="../assets/img/shyh.png" alt=""></div>
+          <div><img src="../assets/img/msyh.png" alt=""></div>
+          <div><img src="../assets/img/yzyh.png" alt=""></div>
+          <div><img src="../assets/img/hxyh.png" alt=""></div>
+          <div><img src="../assets/img/gfyh.png" alt=""></div>
+          <div><img src="../assets/img/cdyh.png" alt=""></div>
         </div>
       </div>
     </div>
@@ -383,8 +397,8 @@ export default {
     }
   }
   .partner{
-
-    padding-bottom: 50px;
+    background-color: #f4f4f7;
+    padding-bottom: 200px;
     .content{
 
       flex-wrap: wrap;

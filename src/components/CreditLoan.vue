@@ -126,7 +126,6 @@ export default {
       occupationalIdentity: '',
       productList: [],
       total: 0,
-      pageNo: '',
       sortName: '',
       currentPage: 1,
     };
@@ -139,7 +138,7 @@ export default {
     async fetchList() {
       const response = (await LoanService.payrollLoan({
         params: {
-          pageNo: this.pageNo,
+          pageNo: this.currentPage,
           productAmt: this.loanAmount,
           productCycle: this.loanTimeLimit,
           productType: this.loanAmountOptions,
@@ -157,18 +156,20 @@ export default {
     },
     loanTimeLimitFilter(val) {
       this.loanTimeLimit = val;
+      this.currentPage = 1;
       this.fetchList();
     },
     loanAmountOptionsFilter(val) {
       this.loanAmountOptions = val;
+      this.currentPage = 1;
       this.fetchList();
     },
     occupationalIdentityFilter(val) {
       this.occupationalIdentity = val;
+      this.currentPage = 1;
       this.fetchList();
     },
     PageChange(val) {
-      this.pageNo = val;
       this.currentPage = val;
       this.fetchList();
     },

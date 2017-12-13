@@ -84,7 +84,7 @@
         </el-form-item>
         <el-form-item label="借款金额" :label-width="formLabelWidth" prop="beginAmt">
           <el-input v-model.number="form.beginAmt" auto-complete="off" placeholder="请填写借款金额">
-            <template slot="append">元</template>
+            <template slot="append">万元</template>
           </el-input>
         </el-form-item>
         <el-form-item label="您的年龄" :label-width="formLabelWidth" prop="custAge">

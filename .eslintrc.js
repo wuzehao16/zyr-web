@@ -12,7 +12,7 @@ module.exports = {
   extends: 'airbnb',
   // required to lint *.vue files
   plugins: [
-    "vuefix",
+    // "vuefix",
     'html'
   ],
   // check if imports actually resolve
@@ -25,6 +25,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    // "vuefix/vuefix": [2, {"auto": true}],
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       js: 'never',

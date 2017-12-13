@@ -18,26 +18,28 @@
 export default {
   data() {
     return {
-      showToTop: false
-    }
+      showToTop: false,
+    };
   },
   methods: {
     toTop() {
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     },
     handleScroll() {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      const scrollTop = window.pageYOffset
+      || document.documentElement.scrollTop
+      || document.body.scrollTop;
       if (scrollTop > 1000) {
         this.showToTop = true;
       } else {
         this.showToTop = false;
       }
-    }
+    },
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll)
-  }
-}
+    window.addEventListener('scroll', this.handleScroll);
+  },
+};
 </script>
 
 <style lang="scss">

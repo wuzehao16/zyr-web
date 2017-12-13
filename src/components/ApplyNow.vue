@@ -275,9 +275,10 @@
 </template>
 
 <script>
-import BaseApplicationFormSucess from './common/BaseApplicationFormSucess'
-import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob'
-import LoanService from '@/services/LoanService'
+import BaseApplicationFormSucess from './common/BaseApplicationFormSucess';
+import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob';
+import LoanService from '@/services/LoanService';
+
 export default {
   data() {
     return {
@@ -291,33 +292,33 @@ export default {
       dialogFormVisible: false,
       hasHouseOptions: [{
         value: 1,
-        label: '深房'
+        label: '深房',
       }, {
         value: 2,
-        label: '非深房'
+        label: '非深房',
       }, {
         value: 3,
-        label: '没有'
+        label: '没有',
       }],
       hasCarOptions: [{
         value: 1,
-        label: '全款车'
+        label: '全款车',
       }, {
         value: 2,
-        label: '按揭车'
+        label: '按揭车',
       }, {
         value: 3,
-        label: '无车'
+        label: '无车',
       }],
       custProfessionOptions: [{
         value: 1,
-        label: '工薪族'
+        label: '工薪族',
       }, {
         value: 2,
-        label: '个体户/企业主'
+        label: '个体户/企业主',
       }, {
         value: 3,
-        label: '待业'
+        label: '待业',
       }],
       form: {
         custTel: '',
@@ -329,23 +330,23 @@ export default {
         custProfession: '',
         checked: true,
         custProvinceName: '',
-        custCityName: ''
+        custCityName: '',
       },
       formLabelWidth: '120px',
       count: null,
-      productId: ''
-    }
+      productId: '',
+    };
   },
   methods: {
     submit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.apply(formName)
+          this.apply(formName);
         } else {
-          console.log('error submit!!')
-          return false
+          console.log('error submit!!');
+          return false;
         }
-      })
+      });
     },
     /**
      * 立即申请
@@ -358,23 +359,23 @@ export default {
           zdCust: this.form,
           zdLoan: {
             loanAmt: this.form.beginAmt,
-            "loan": this.product.monthRate
+            loan: this.product.monthRate,
           },
-          "zdProduct": {
-            "productId": this.product.productId
-          }
-        })
+          zdProduct: {
+            productId: this.product.productId,
+          },
+        });
         // if (response.data.code !== 0) {
         //   this.$message.error(response.data.msg)
         //   this.form.captcha = ""
         //   return
         // }
-        this.dialogFormVisible = false
-        this.sucessDialogVisible = true
+        this.dialogFormVisible = false;
+        this.sucessDialogVisible = true;
         this.$refs[formName].resetFields();
       } catch (error) {
         // this.error = error.response.data.error
-        console.log(error)
+        console.log(error);
       }
     },
     /**
@@ -385,9 +386,9 @@ export default {
       try {
         if (!(/^1[3|4|5|7|8]\d{9}$/.test(this.form.custTel))) {
           this.$message.error('请填入正确手机号码');
-          return
+          return;
         }
-        let TIME_COUNT = 60;
+        const TIME_COUNT = 60;
         if (!this.timer) {
           this.count = TIME_COUNT;
           this.show = false;
@@ -401,19 +402,19 @@ export default {
               this.getCaptchaDisabled = false;
               this.timer = null;
             }
-          }, 1000)
+          }, 1000);
         }
         await LoanService.getCaptcha({
           params: {
-            custTel: this.form.custTel
-          }
-        })
+            custTel: this.form.custTel,
+          },
+        });
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     },
     closeDiolog(val) {
-      this.sucessDialogVisible = val
+      this.sucessDialogVisible = val;
     },
     /**
      * 贷款表格
@@ -422,235 +423,236 @@ export default {
     async fetchList() {
       const response = (await LoanService.payrollLoan({
         params: {
-          productId: this.productId
-        }
-      })).data.data
-      this.product = response.list[0]
-    }
+          productId: this.productId,
+        },
+      })).data.data;
+      this.product = response.list[0];
+    },
   },
   components: {
     BaseQuickApplyAndNoob,
-    BaseApplicationFormSucess
+    BaseApplicationFormSucess,
   },
   mounted() {
-    this.productId = this.$route.query.productId
-    console.log(this.productId)
-    this.product = this.$route.params.row || this.fetchList()
-    this.form.custProvinceName = remote_ip_info["province"]
-    this.form.custCityName = remote_ip_info["city"]
-  }
-}
+    this.productId = this.$route.query.productId;
+    console.log(this.productId);
+    this.product = this.$route.params.row || this.fetchList();
+    this.form.custProvinceName = remote_ip_info.province;
+    this.form.custCityName = remote_ip_info.city;
+  },
+};
+
 </script>
 <style lang="scss">
-$line-color: #eeeeee;
-.apply-now{
-  width: 1000px;
-  margin: 0 auto;
-  .sub-nav{
-    position: relative;
-    padding: 38px;
-    padding-left: 68px;
-    label{
-      position: absolute;
-      left: 0;
-      color: $title-color;
+  $line-color: #eeeeee;
+  .apply-now{
+    width: 1000px;
+    margin: 0 auto;
+    .sub-nav{
+      position: relative;
+      padding: 38px;
+      padding-left: 68px;
+      label{
+        position: absolute;
+        left: 0;
+        color: $title-color;
+      }
     }
-  }
-  .content{
-    height: 809px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 120px;
-    .left{
-      width: 660px;
-      .introduction{
-        height: 126px;
-        padding: 17px 25px;
-        background-color: #fff;
-        display: flex;
-        .product-img{
-          background: url(../assets/img/product_img.png) center no-repeat;
-          width: 126px;
+    .content{
+      height: 809px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 120px;
+      .left{
+        width: 660px;
+        .introduction{
           height: 126px;
-        }
-        .product-name{
-          width: 240px;
-          padding: 20px 30px;
-          .number{
-            margin-top: 54px;
-            margin-left: 10px;
-            span{
-              font-size: 18px;
+          padding: 17px 25px;
+          background-color: #fff;
+          display: flex;
+          .product-img{
+            background: url(../assets/img/product_img.png) center no-repeat;
+            width: 126px;
+            height: 126px;
+          }
+          .product-name{
+            width: 240px;
+            padding: 20px 30px;
+            .number{
+              margin-top: 54px;
+              margin-left: 10px;
+              span{
+                font-size: 18px;
+                color: $main-color;
+              }
+            }
+          }
+          .product-rate{
+            .star{
+              display: inline-block;
+              margin-left: 5px;
+              height: 19px;
+              width: 20px;
+              background: url(../assets/img/star_empty.png) no-repeat;
+              &.on{
+                background: url(../assets/img/star_full.png) no-repeat;
+              }
+              &.half{
+                background: url(../assets/img/star_half.png) no-repeat;
+              }
+              &.off{
+                background: url(../assets/img/star_empty.png) no-repeat;
+              }
+            }
+            .star-number{
+              font-size: 24px;
+              margin-left: 5px;
               color: $main-color;
             }
+            .apply-immidiatly{
+              margin-top: 30px;
+              margin-left: 70px;
+              color: $main-color;
+              border: 1px solid $main-color;
+            }
           }
         }
-        .product-rate{
-          .star{
-            display: inline-block;
-            margin-left: 5px;
-            height: 19px;
-            width: 20px;
-            background: url(../assets/img/star_empty.png) no-repeat;
-            &.on{
-              background: url(../assets/img/star_full.png) no-repeat;
-            }
-            &.half{
-              background: url(../assets/img/star_half.png) no-repeat;
-            }
-            &.off{
-              background: url(../assets/img/star_empty.png) no-repeat;
+        .detail{
+          margin-top: 20px;
+          background-color: #fff;
+          min-height: 619px;
+          padding:  0 25px;
+          padding-bottom: 10px;
+          .sub-title{
+            padding: 17px 0;
+            height: 44px;
+            line-height: 44px;
+            font-size: 16px;
+            border-bottom: 1px solid $line-color;
+            i{
+              color: $main-color;
+              font-size: 22px;
+              margin-right: 5px;
             }
           }
-          .star-number{
-            font-size: 24px;
-            margin-left: 5px;
-            color: $main-color;
+          .product-detail,{
+            height: 150px;
+            ul{
+              margin-top: 20px;
+              padding-left: 10px;
+              li{
+                color: $title-color;
+                list-style-type: none;
+                margin-top: 10px;
+              }
+            }
           }
-          .apply-immidiatly{
-            margin-top: 30px;
-            margin-left: 70px;
-            color: $main-color;
-            border: 1px solid $main-color;
+          .condition-detail{
+            ul{
+              margin-top: 20px;
+              padding-left: 10px;
+              li{
+                color: $title-color;
+                list-style-type: none;
+                margin-top: 10px;
+              }
+            }
+          }
+          .need{
+            @extend .condition-detail;
+            ol{
+              background-color: #fff;
+              padding-bottom: 10px;
+            }
           }
         }
       }
-      .detail{
-        margin-top: 20px;
-        background-color: #fff;
-        min-height: 619px;
-        padding:  0 25px;
-        padding-bottom: 10px;
+      .right{
+        width: 321px;
+      }
+    }
+    .detail-dialog{
+      .detail-form{
+        width: 390px;
+        margin: 0 auto;
+      }
+      .title{
+        width: 86px;
+        margin:0 auto 40px auto;
+        border-bottom: 1px solid $main-color;
+      }
+      .phone{
+        @extend .title;
+        width: 70px;
+      }
+      .captcha{
+        width: 180px;
+      }
+      .getCaptcha{
+        font-size: 12px;
+        position: absolute;
+        right: 0px;
+        bottom: 0;
+        width: 80px;
+        span{
+          margin-left: -5px;
+        }
+      }
+      .checkbox{
+        text-align: center;
+        .text{
+          color: $title-color;
+          font-size: 12px;
+        }
+        .agreement{
+          cursor: pointer;
+          color: #0785d1;
+        }
+        .submit{
+          margin-top: 10px;
+          width: 202px;
+        }
+      }
+      .el-dialog__footer{
+        height: 6px;
+        padding: 0;
+        background: url(../assets/img/apply_dialog_footer.jpg);
+      }
+      .el-dialog__header{
+        height: 100px;
+        background: url(../assets/img/apply_dialog_header.jpg);
+        padding: 1px;
         .sub-title{
-          padding: 17px 0;
-          height: 44px;
-          line-height: 44px;
-          font-size: 16px;
-          border-bottom: 1px solid $line-color;
-          i{
-            color: $main-color;
-            font-size: 22px;
-            margin-right: 5px;
-          }
+          width: 126px;
+          font-size: 20px;
+          color: $main-color;
+          margin: 26px 0 0 356px  ;
         }
-        .product-detail,{
-          height: 150px;
-          ul{
-            margin-top: 20px;
-            padding-left: 10px;
-            li{
-              color: $title-color;
-              list-style-type: none;
-              margin-top: 10px;
-            }
-          }
-        }
-        .condition-detail{
-          ul{
-            margin-top: 20px;
-            padding-left: 10px;
-            li{
-              color: $title-color;
-              list-style-type: none;
-              margin-top: 10px;
-            }
-          }
-        }
-        .need{
-          @extend .condition-detail;
-          ol{
-            background-color: #fff;
-            padding-bottom: 10px;
+        ul{
+          margin-top: 5px;
+          padding-left: 210px;
+          color: $title-color;
+          font-size: 12px;
+          li{
+            padding-top: 5px;
+            list-style-type: none;
           }
         }
       }
     }
-    .right{
-      width: 321px;
-    }
-  }
-  .detail-dialog{
-    .detail-form{
-      width: 390px;
-      margin: 0 auto;
-    }
-    .title{
-      width: 86px;
-      margin:0 auto 40px auto;
-      border-bottom: 1px solid $main-color;
-    }
-    .phone{
-      @extend .title;
-      width: 70px;
-    }
-    .captcha{
-      width: 180px;
-    }
-    .getCaptcha{
-      font-size: 12px;
-      position: absolute;
-      right: 0px;
-      bottom: 0;
-      width: 80px;
-      span{
-        margin-left: -5px;
-      }
-    }
-    .checkbox{
-      text-align: center;
-      .text{
-        color: $title-color;
+    .main{
+      height: 700px;
+      overflow: auto;
+      .t{
+        color:$title-color;
+        line-height: 22px;
         font-size: 12px;
       }
-      .agreement{
-        cursor: pointer;
-        color: #0785d1;
-      }
-      .submit{
-        margin-top: 10px;
-        width: 202px;
-      }
-    }
-    .el-dialog__footer{
-      height: 6px;
-      padding: 0;
-      background: url(../assets/img/apply_dialog_footer.jpg);
-    }
-    .el-dialog__header{
-      height: 100px;
-      background: url(../assets/img/apply_dialog_header.jpg);
-      padding: 1px;
-      .sub-title{
-        width: 126px;
-        font-size: 20px;
-        color: $main-color;
-        margin: 26px 0 0 356px  ;
-      }
-      ul{
-        margin-top: 5px;
-        padding-left: 210px;
-        color: $title-color;
+      p{
+        margin: 0;
+        line-height: 22px;
         font-size: 12px;
-        li{
-          padding-top: 5px;
-          list-style-type: none;
-        }
       }
     }
   }
-  .main{
-    height: 700px;
-    overflow: auto;
-    .t{
-      color:$title-color;
-      line-height: 22px;
-      font-size: 12px;
-    }
-    p{
-      margin: 0;
-      line-height: 22px;
-      font-size: 12px;
-    }
-  }
-}
 </style>

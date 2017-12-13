@@ -154,20 +154,21 @@
 </template>
 
 <script>
-import BaseApplicationFormSucess from './BaseApplicationFormSucess'
-import LoanService from '@/services/LoanService.js'
+import BaseApplicationFormSucess from './BaseApplicationFormSucess';
+import LoanService from '@/services/LoanService.js';
+
 export default {
-  data () {
-    //电话号码验证
-    var validateTelephone = (rule, value, callback) => {
+  data() {
+    // 电话号码验证
+    const validateTelephone = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('电话不能为空'))
+        return callback(new Error('电话不能为空'));
       }
       if (!(/^1[3|4|5|7|8]\d{9}$/.test(value))) {
-        return callback(new Error('电话号码格式不正确'))
+        return callback(new Error('电话号码格式不正确'));
       }
-      callback()
-    }
+      callback();
+    };
     return {
       dialogVisible: false,
       sucessDialogVisible: false,
@@ -179,63 +180,63 @@ export default {
         userName: '',
         telephone: '',
         captcha: '',
-        checked: true
+        checked: true,
       },
       rule: {
         telephone: [
-          { validator: validateTelephone, trigger: 'blur' }
-        ]
-      }
-    }
+          { validator: validateTelephone, trigger: 'blur' },
+        ],
+      },
+    };
   },
   methods: {
-    submit (formName) {
+    submit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.apply(formName)
+          this.apply(formName);
         } else {
-          console.log('error submit!!')
-          return false
+          console.log('error submit!!');
+          return false;
         }
-      })
+      });
     },
     /**
      * 立即申请
      * @return {Promise} [description]
      */
-    async apply (formName) {
-        try {
-           const response = await LoanService.apply({
+    async apply(formName) {
+      try {
+        const response = await LoanService.apply({
 
-                           code: this.applicationForm.captcha,
-                           zdCust:{
-                             custRelName: this.applicationForm.userName,
-                             custTel: this.applicationForm.telephone
-                           }
-                         })
-          if (response.data.code !== 0) {
-            this.$message.error(response.data.msg)
-            this.applicationForm.captcha = ""
-            return
-          }
-          this.sucessDialogVisible = true
-          this.$refs[formName].resetFields();
-         } catch (error) {
-           // this.error = error.response.data.error
-           console.log(error)
-         }
+          code: this.applicationForm.captcha,
+          zdCust: {
+            custRelName: this.applicationForm.userName,
+            custTel: this.applicationForm.telephone,
+          },
+        });
+        if (response.data.code !== 0) {
+          this.$message.error(response.data.msg);
+          this.applicationForm.captcha = '';
+          return;
+        }
+        this.sucessDialogVisible = true;
+        this.$refs[formName].resetFields();
+      } catch (error) {
+        // this.error = error.response.data.error
+        console.log(error);
+      }
     },
     /**
      * 获取验证码
      * @return {Promise} [description]
      */
-    async getCaptcha () {
+    async getCaptcha() {
       try {
         if (!(/^1[3|4|5|7|8]\d{9}$/.test(this.applicationForm.telephone))) {
-           this.$message.error('请填入正确手机号码');
-          return
+          this.$message.error('请填入正确手机号码');
+          return;
         }
-        let TIME_COUNT = 60;
+        const TIME_COUNT = 60;
         if (!this.timer) {
           this.count = TIME_COUNT;
           this.show = false;
@@ -249,25 +250,25 @@ export default {
               this.getCaptchaDisabled = false;
               this.timer = null;
             }
-          }, 1000)
+          }, 1000);
         }
         await LoanService.getCaptcha({
-          params:{
-            custTel: this.applicationForm.telephone
-          }
-        })
+          params: {
+            custTel: this.applicationForm.telephone,
+          },
+        });
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     },
-    closeDiolog(val){
-      this.sucessDialogVisible = val
-    }
+    closeDiolog(val) {
+      this.sucessDialogVisible = val;
+    },
   },
   components: {
-    BaseApplicationFormSucess
-  }
-}
+    BaseApplicationFormSucess,
+  },
+};
 </script>
 
 <style lang="scss">

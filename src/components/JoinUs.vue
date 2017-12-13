@@ -24,17 +24,18 @@
 </template>
 
 <script>
-import TopBar from './common/BaseAboutUsTopBar.vue'
+import TopBar from './common/BaseAboutUsTopBar';
+
 export default {
-  data () {
+  data() {
     return {
-      index: 0
-    }
+      index: 0,
+    };
   },
   components: {
-    TopBar
-  }
-}
+    TopBar,
+  },
+};
 </script>
 
 <style lang="scss">

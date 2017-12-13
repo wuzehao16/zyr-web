@@ -21,18 +21,18 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       activeIndex: '1',
       province: '',
-      city: ''
-    }
+      city: '',
+    };
   },
-  async mounted () {
+  async mounted() {
     // this.province = remote_ip_info["province"]
     // this.city = remote_ip_info["city"]
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>

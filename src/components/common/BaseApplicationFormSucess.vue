@@ -15,11 +15,11 @@
 export default {
   props: ['dialogVisible'],
   methods: {
-    handleClose () {
-      this.$emit('dialog-close', false)
-    }
-  }
-}
+    handleClose() {
+      this.$emit('dialog-close', false);
+    },
+  },
+};
 </script>
 
 <style lang="scss">

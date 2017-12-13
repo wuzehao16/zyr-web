@@ -21,33 +21,34 @@
 </template>
 
 <script>
-import TopBar from './common/BaseAboutUsTopBar.vue'
-import LoanService from '@/services/LoanService'
+import TopBar from './common/BaseAboutUsTopBar';
+import LoanService from '@/services/LoanService';
+
 export default {
   data() {
     return {
-      textarea: ''
-    }
+      textarea: '',
+    };
   },
   methods: {
     async submitFeedback() {
       try {
         await LoanService.feedback({
-          feedbackContent: this.textarea
-        })
-        this.textarea = ""
+          feedbackContent: this.textarea,
+        });
+        this.textarea = '';
         this.$message({
           message: '提交成功',
-          type: 'success'
+          type: 'success',
         });
       } catch (e) {
         console.log(e);
       }
-    }
+    },
   },
   components: {
-    TopBar
-  }
+    TopBar,
+  },
 };
 </script>
 

@@ -8,17 +8,18 @@
 </template>
 
 <script>
-import PageHeader from '@/components/Header'
-import PageFooter from '@/components/Footer'
-import FixedTool from '@/components/FixedTool'
+import PageHeader from '@/components/Header';
+import PageFooter from '@/components/Footer';
+import FixedTool from '@/components/FixedTool';
+
 export default {
   name: 'app',
   components: {
-    PageFooter: PageFooter,
-    PageHeader: PageHeader,
-    FixedTool
-  }
-}
+    PageFooter,
+    PageHeader,
+    FixedTool,
+  },
+};
 </script>
 
 <style lang="scss">

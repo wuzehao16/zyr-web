@@ -160,32 +160,34 @@
 </template>
 
 <script>
-import BaseApplication from './common/BaseApplication.vue'
+import BaseApplication from './common/BaseApplication';
+
 export default {
   components: {
-    BaseApplication
+    BaseApplication,
   },
-  data () {
+  data() {
     return {
       loanTimeLimit: '12期',
       loanAmount: 0,
-      rate: '0.0060'
-    }
+      rate: '0.0060',
+    };
   },
   computed: {
-    payment () {
-      return Math.round((this.balance * this.loanTimeLimit.slice(0, 2) * 100)) / 100
+    payment() {
+      return Math.round((this.balance * this.loanTimeLimit.slice(0, 2) * 100)) / 100;
     },
-    balance () {
-      return Math.round(((this.loanAmount / this.loanTimeLimit.slice(0, 2) + this.loanAmount * this.rate) * 10000) * 100) / 100
-    }
+    balance() {
+      return Math.round((((this.loanAmount / this.loanTimeLimit.slice(0, 2))
+      + (this.loanAmount * this.rate)) * 10000) * 100) / 100;
+    },
   },
   methods: {
-    toTop () {
-      window.scrollTo(0, 0)
-    }
-  }
-}
+    toTop() {
+      window.scrollTo(0, 0);
+    },
+  },
+};
 </script>
 
 <style lang="scss">

@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import LoanService from '@/services/LoanService.js'
+import LoanService from '@/services/LoanService';
+
 export default {
   props: ['type', 'pageSize', 'show'],
   data() {
@@ -44,24 +45,24 @@ export default {
       Loan: [],
       total: 0,
       paShow: false,
-      pageNo: 1
-    }
+      pageNo: 1,
+    };
   },
   methods: {
     ToApplyNow(row) {
       this.$router.push({
         name: 'ApplyNow',
         params: {
-          row
+          row,
         },
         query: {
-          productId: row.productId
-        }
-      })
+          productId: row.productId,
+        },
+      });
     },
     handleCurrentChange(val) {
-      this.pageNo = val
-      this.fetchList()
+      this.pageNo = val;
+      this.fetchList();
     },
     /**
      * 贷款表格
@@ -72,20 +73,20 @@ export default {
         params: {
           productType: this.type,
           pageSize: this.pageSize,
-          pageNo: this.pageNo
-        }
-      })).data.data
-      this.Loan = response.list
-      this.total = response.totalCount
-    }
+          pageNo: this.pageNo,
+        },
+      })).data.data;
+      this.Loan = response.list;
+      this.total = response.totalCount;
+    },
   },
   mounted() {
-    this.fetchList()
+    this.fetchList();
     if (this.show) {
-      this.paShow = true
+      this.paShow = true;
     }
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">

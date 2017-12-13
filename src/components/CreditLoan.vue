@@ -114,8 +114,9 @@
 </template>
 
 <script>
-import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob'
-import LoanService from '@/services/LoanService'
+import BaseQuickApplyAndNoob from './common/BaseQuickApplyAndNoob';
+import LoanService from '@/services/LoanService';
+
 export default {
   data() {
     return {
@@ -126,8 +127,8 @@ export default {
       productList: [],
       total: 0,
       pageNo: '',
-      sortName: ''
-    }
+      sortName: '',
+    };
   },
   methods: {
     /**
@@ -142,55 +143,55 @@ export default {
           productCycle: this.loanTimeLimit,
           productType: this.loanAmountOptions,
           custProfession: this.occupationalIdentity,
-          sortName: this.sortName
-        }
-      })).data.data
-      this.productList = response.list
-      this.total = response.totalCount
+          sortName: this.sortName,
+        },
+      })).data.data;
+      this.productList = response.list;
+      this.total = response.totalCount;
     },
     loanAmountFilter(val) {
-      this.loanAmount = val
-      this.fetchList()
+      this.loanAmount = val;
+      this.fetchList();
     },
     loanTimeLimitFilter(val) {
-      this.loanTimeLimit = val
-      this.fetchList()
+      this.loanTimeLimit = val;
+      this.fetchList();
     },
     loanAmountOptionsFilter(val) {
-      this.loanAmountOptions = val
-      this.fetchList()
+      this.loanAmountOptions = val;
+      this.fetchList();
     },
     occupationalIdentityFilter(val) {
-      this.occupationalIdentity = val
-      this.fetchList()
+      this.occupationalIdentity = val;
+      this.fetchList();
     },
     PageChange(val) {
-      this.pageNo = val
-      this.fetchList()
+      this.pageNo = val;
+      this.fetchList();
     },
     ToApplyNow(productId) {
       this.$router.push({
         name: 'ApplyNow',
         query: {
-          productId: productId
-        }
-      })
+          productId,
+        },
+      });
     },
     sort(val = '') {
-      this.sortName = val
-      this.fetchList()
-    }
+      this.sortName = val;
+      this.fetchList();
+    },
   },
   mounted() {
-    this.occupationalIdentity = this.$route.query.custProfession || ""
-    this.loanAmount = this.$route.query.productAmt || ""
-    this.loanTimeLimit = this.$route.query.productCycle || ""
-    this.fetchList()
+    this.occupationalIdentity = this.$route.query.custProfession || '';
+    this.loanAmount = this.$route.query.productAmt || '';
+    this.loanTimeLimit = this.$route.query.productCycle || '';
+    this.fetchList();
   },
   components: {
-    BaseQuickApplyAndNoob
-  }
-}
+    BaseQuickApplyAndNoob,
+  },
+};
 </script>
 
 <style lang="scss">

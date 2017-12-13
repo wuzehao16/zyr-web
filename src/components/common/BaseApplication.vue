@@ -6,12 +6,13 @@
 </template>
 
 <script>
-import BaseApplicationForm from '@/components/common/BaseApplicationForm'
+import BaseApplicationForm from '@/components/common/BaseApplicationForm';
+
 export default {
   components: {
-    BaseApplicationForm
-  }
-}
+    BaseApplicationForm,
+  },
+};
 </script>
 
 <style lang="scss">

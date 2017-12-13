@@ -52,15 +52,15 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      index: '0'
-    }
+      index: '0',
+    };
   },
-  async mounted () {
-    this.index = this.$route.params.index || '0'
-  }
-}
+  async mounted() {
+    this.index = this.$route.params.index || '0';
+  },
+};
 </script>
 
 <style lang="scss">

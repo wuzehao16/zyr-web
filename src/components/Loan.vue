@@ -209,9 +209,10 @@
 </template>
 
 <script>
-import BaseTable from './common/BaseTable'
-import BaseApplication from './common/BaseApplication'
-import LoanService from '@/services/LoanService'
+import BaseTable from './common/BaseTable';
+import BaseApplication from './common/BaseApplication';
+import LoanService from '@/services/LoanService';
+
 export default {
   name: 'loan',
   data() {
@@ -220,62 +221,62 @@ export default {
       creditActiveName: 'first', // 信用贷
       mortgageActiveName: 'first',
       occupation: '',
-      serviceStarList: "",
+      serviceStarList: '',
       occupationOptions: [{
         value: '1',
-        label: '上班族'
+        label: '上班族',
       }, {
         value: '2',
-        label: '个体户/企业主'
+        label: '个体户/企业主',
       }, {
         value: '3',
-        label: '无业'
+        label: '无业',
       }],
       loanAmount: '',
       loanAmountOptions: [{
         value: '5',
-        label: '5万'
+        label: '5万',
       }, {
         value: '10',
-        label: '10万'
+        label: '10万',
       }, {
         value: '20',
-        label: '20万'
+        label: '20万',
       }, {
         value: '30',
-        label: '30万'
+        label: '30万',
       }, {
         value: '50',
-        label: '50万'
+        label: '50万',
       }, {
         value: '100',
-        label: '100万'
+        label: '100万',
       }, {
         value: '300',
-        label: '300万'
+        label: '300万',
       }],
       loanTimeLimit: '',
       loanTimeLimitOptions: [{
         value: '3',
-        label: '3个月'
+        label: '3个月',
       }, {
         value: '6',
-        label: '6个月'
+        label: '6个月',
       }, {
         value: '24',
-        label: '2年'
+        label: '2年',
       }, {
         value: '36',
-        label: '3年'
+        label: '3年',
       }, {
         value: '60',
-        label: '5年'
+        label: '5年',
       }, {
         value: '120',
-        label: '10年'
+        label: '10年',
       }],
-      loan: []
-    }
+      loan: [],
+    };
   },
   methods: {
     search() {
@@ -287,20 +288,20 @@ export default {
         query: {
           custProfession: this.occupation,
           productAmt: this.loanAmount,
-          productCycle: this.loanTimeLimit
-        }
-      })
-    }
+          productCycle: this.loanTimeLimit,
+        },
+      });
+    },
   },
   async mounted() {
-    this.loan = (await LoanService.loan()).data.data
-    this.serviceStarList = (await LoanService.serviceStarList()).data.data.list
+    this.loan = (await LoanService.loan()).data.data;
+    this.serviceStarList = (await LoanService.serviceStarList()).data.data.list;
   },
   components: {
     BaseApplication,
-    BaseTable
-  }
-}
+    BaseTable,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

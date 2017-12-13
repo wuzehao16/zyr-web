@@ -28,21 +28,22 @@
 </template>
 
 <script>
-import BaseQuickApplyAndNoob from '../common/BaseQuickApplyAndNoob'
-import BaseTable from '../common/BaseTable'
+import BaseQuickApplyAndNoob from '../common/BaseQuickApplyAndNoob';
+import BaseTable from '../common/BaseTable';
+
 export default {
-  data () {
+  data() {
     return {
-      activeName: 'first'
-    }
+      activeName: 'first',
+    };
   },
   methods: {
   },
   components: {
     BaseTable,
-    BaseQuickApplyAndNoob
-  }
-}
+    BaseQuickApplyAndNoob,
+  },
+};
 </script>
 
 <style lang="scss">

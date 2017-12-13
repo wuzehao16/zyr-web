@@ -24,25 +24,26 @@
 </template>
 
 <script>
-import TopBar from './common/BaseAboutUsTopBar.vue'
-import LoanService from '@/services/LoanService'
+import TopBar from './common/BaseAboutUsTopBar';
+import LoanService from '@/services/LoanService';
+
 export default {
-  data () {
+  data() {
     return {
-      list: []
-    }
+      list: [],
+    };
   },
   components: {
-    TopBar
+    TopBar,
   },
-  async mounted () {
+  async mounted() {
     this.list = (await LoanService.contentList({
       params: {
-        channelIds: 110
-      }
-    })).data
-  }
-}
+        channelIds: 110,
+      },
+    })).data;
+  },
+};
 </script>
 
 <style lang="scss">

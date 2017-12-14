@@ -167,7 +167,7 @@ export default {
       if (!(/^1[3|4|5|7|8]\d{9}$/.test(value))) {
         return callback(new Error('电话号码格式不正确'));
       }
-      callback();
+      return callback();
     };
     return {
       dialogVisible: false,
@@ -196,9 +196,8 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.apply(formName);
-        } else {
-          return false;
         }
+        return false;
       });
     },
     /**
@@ -214,7 +213,7 @@ export default {
             custRelName: this.applicationForm.userName,
             custTel: this.applicationForm.telephone,
             custProvinceName: this.applicationForm.custProvinceName,
-            custCityName: this.applicationForm.custCityName
+            custCityName: this.applicationForm.custCityName,
           },
         });
         if (response.data.code !== 0) {
@@ -272,8 +271,10 @@ export default {
     BaseApplicationFormSucess,
   },
   mounted() {
+    /* eslint-disable */
     this.applicationForm.custProvinceName = remote_ip_info.province;
     this.applicationForm.custCityName = remote_ip_info.city;
+    /* eslint-disable */
   }
 };
 </script>

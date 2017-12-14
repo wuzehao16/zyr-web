@@ -342,9 +342,8 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.apply(formName);
-        } else {
-          return false;
         }
+        return false;
       });
     },
     /**
@@ -436,8 +435,10 @@ export default {
   mounted() {
     this.productId = this.$route.query.productId;
     this.product = this.$route.params.row || this.fetchList();
+    /* eslint-disable no-undef */
     this.form.custProvinceName = remote_ip_info.province;
     this.form.custCityName = remote_ip_info.city;
+    /* eslint-disable no-undef */
   },
 };
 

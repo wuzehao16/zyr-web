@@ -83,15 +83,20 @@
              >
              <el-table-column
                prop="lendedTime"
-               min-width="50">
+               min-width="50"
+               :formatter="dateFormat"
+               >
              </el-table-column>
              <el-table-column
                prop="custRelName"
                min-width="60">
              </el-table-column>
              <el-table-column
-                prop="status"
-               min-width="60">
+               min-width="60"
+               >
+                <template slot-scope="scope">
+                 成功
+               </template>
              </el-table-column>
              <el-table-column
                prop="loanAmt"
@@ -130,17 +135,17 @@
             </div>
             <div class="star">
               <div class="row" v-for="item in serviceStarList">
-                <div class="ranking">
+                <div :class="item.baseStarRank==1?'ranking first':item.baseStarRank==2?'ranking second':'ranking third'">
 
                 </div>
                 <div class="avatar">
-
+                  <img src="../assets/img/mayun.jpg" :alt="item.baseStarName" height="80" width="80">
                 </div>
                 <div class="details">
                   <div class="name">
-                    {{item.waiter}}
+                    {{item.baseStarName}}
                   </div>
-                  <p>{{item.slogan}}</p>
+                  <p>{{item.baseStarAna}}</p>
                 </div>
               </div>
             </div>
@@ -293,6 +298,14 @@ export default {
     };
   },
   methods: {
+    // 时间格式化
+    dateFormat(row, column) {
+      const date = row[column.property];
+      if (date === undefined) {
+        return '';
+      }
+      return `[${date.slice(date.length - 5, date.length)}]`;
+    },
     search() {
       this.$router.push({
         name: 'CreditLoan',
@@ -309,7 +322,7 @@ export default {
   },
   async mounted() {
     this.loan = (await LoanService.loan()).data.data;
-    this.serviceStarList = (await LoanService.serviceStarList()).data.data.list;
+    this.serviceStarList = (await LoanService.serviceStarList()).data.data;
   },
   components: {
     BaseApplication,
@@ -461,15 +474,27 @@ export default {
               display: flex;
               .ranking{
                 flex: 0 0 60px;
-                background: url(../assets/img/first.png) center no-repeat;
-
+                &.first{
+                  background: url(../assets/img/first.png) center no-repeat;
+                }
+                &.second{
+                  background: url(../assets/img/second.png) center no-repeat;
+                }
+                &.third{
+                  background: url(../assets/img/third.png) center no-repeat;
+                }
               }
               .avatar{
-                flex:0 0 80px;
-                background: url(../assets/img/avatar.jpg) center no-repeat;
+                flex:0 0 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img{
+                  border-radius: 50%;
+                }
               }
               .details{
-                padding:20px 10px 0 0;
+                padding:20px 10px 0 20px;
                 .name{
                   font-size: 16px;
                 }

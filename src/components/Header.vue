@@ -32,7 +32,9 @@ export default {
   },
   async mounted() {
     // this.province = remote_ip_info["province"]
+    /* eslint-disable */
     this.city = remote_ip_info["city"];
+    /* eslint-disable */
   },
 };
 </script>

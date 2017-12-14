@@ -1,7 +1,7 @@
 <template>
   <div class="loan">
   <el-carousel :interval="5000" arrow="always" class="carousel" height="500px">
-    <el-carousel-item v-for="item in 4" :key="item">
+    <el-carousel-item v-for="item in banner" :key="item.logo" :style="{background:'url(' + item.logo + ')'}">
     </el-carousel-item>
     <base-application>
     </base-application>
@@ -277,6 +277,7 @@ export default {
         label: '10年',
       }],
       loan: [],
+      banner: [],
     };
   },
   methods: {
@@ -304,6 +305,11 @@ export default {
   },
   async mounted() {
     this.loan = (await LoanService.loan()).data.data;
+    this.banner = (await LoanService.getBanner({
+      params: {
+        ctgId: 7,
+      },
+    })).data.data;
     this.serviceStarList = (await LoanService.serviceStarList()).data.data;
   },
   components: {

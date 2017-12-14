@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="home">
-    <div class="banner">
+    <div class="banner" :style="{background:'url('+ banner +')'}">
       <base-application>
       </base-application>
     </div>
@@ -160,6 +160,7 @@
 </template>
 
 <script>
+import LoanService from '@/services/LoanService';
 import BaseApplication from './common/BaseApplication';
 
 export default {
@@ -171,6 +172,7 @@ export default {
       loanTimeLimit: '12期',
       loanAmount: 0,
       rate: '0.0060',
+      banner: '',
     };
   },
   computed: {
@@ -186,6 +188,14 @@ export default {
     toTop() {
       window.scrollTo(0, 0);
     },
+  },
+  async mounted() {
+    const response = (await LoanService.getBanner({
+      params: {
+        ctgId: 6,
+      },
+    })).data.data;
+    this.banner = response[0].logo;
   },
 };
 </script>
@@ -209,7 +219,6 @@ export default {
   .banner{
     height: 667px;
     position: relative;
-    background: url(../assets/img/front-banner.jpg);
     .application{
       position:absolute;
       top: 75px;

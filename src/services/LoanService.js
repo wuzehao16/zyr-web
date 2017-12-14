@@ -32,4 +32,8 @@ export default {
   payrollLoan(params) {
     return Api().get('productList', params);
   },
+  // banner 首页头图
+  getBanner(params) {
+    return Api().get('banner', params);
+  },
 };

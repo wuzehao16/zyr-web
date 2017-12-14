@@ -3,7 +3,7 @@
   <div class="center">
     <div class="left">
     <div class="logo">
-      <img src="" alt="logo" height="60" width="60">
+      <img src="../assets/img/logo.png" alt="logo" height="50" width="140">
     </div>
     <div class="address">
       {{city}}
@@ -52,9 +52,13 @@ export default {
     display: flex;
     justify-content: space-between;
     .left{
-      width: 150px;
+      width: 200px;
       height: 60px;
       display: flex;
+      .logo{
+        display: flex;
+        align-items: center;
+      }
       .address{
         display: inline-block;
         line-height: 60px;

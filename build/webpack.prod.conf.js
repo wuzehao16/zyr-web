@@ -116,8 +116,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
-  ]
+    ]),
+  ],
 })
 
 if (config.build.productionGzip) {

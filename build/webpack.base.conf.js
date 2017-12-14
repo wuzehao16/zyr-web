@@ -11,7 +11,7 @@ function resolve (dir) {
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.js',
   },
   output: {
     path: config.build.assetsRoot,
@@ -19,6 +19,13 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
+  },
+  externals : {
+    "element-ui" : {
+      commonjs: "element-ui",
+      amd: "element-ui",
+      root: "_" // indicates global variable
+    }
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],

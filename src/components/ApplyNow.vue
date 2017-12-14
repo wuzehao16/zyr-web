@@ -5,7 +5,7 @@
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/loan' }">我要贷款</el-breadcrumb-item>
         <el-breadcrumb-item :to="{ path: '/loan' }">信用贷</el-breadcrumb-item>
-        <el-breadcrumb-item>房抵贷</el-breadcrumb-item>
+        <el-breadcrumb-item>{{productType==1?'房地贷':productType==3?'保单贷':productType==4?'月供带':productType==5?'工薪贷':'车抵贷'}}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="content">
@@ -335,6 +335,7 @@ export default {
       formLabelWidth: '120px',
       count: null,
       productId: '',
+      productType: '',
     };
   },
   methods: {
@@ -434,6 +435,7 @@ export default {
   },
   mounted() {
     this.productId = this.$route.query.productId;
+    this.productType = this.$route.query.productType;
     this.product = this.$route.params.row || this.fetchList();
     /* eslint-disable no-undef */
     this.form.custProvinceName = remote_ip_info.province;

@@ -36,7 +36,7 @@
       </li>
       <li>
         <span class="select-title">贷款类型：</span>
-        <el-radio-group v-model="loanAmountOptions" size="mini" @change="loanAmountOptionsFilter">
+        <el-radio-group v-model="loanType" size="mini" @change="loanAmountOptionsFilter">
           <el-radio-button label="">不限</el-radio-button>
           <el-radio-button label="1">房抵贷</el-radio-button>
           <el-radio-button label="3">保单贷</el-radio-button>
@@ -122,7 +122,7 @@ export default {
     return {
       loanAmount: '',
       loanTimeLimit: '',
-      loanAmountOptions: '',
+      loanType: '',
       occupationalIdentity: '',
       productList: [],
       total: 0,
@@ -141,7 +141,7 @@ export default {
           pageNo: this.currentPage,
           productAmt: this.loanAmount,
           productCycle: this.loanTimeLimit,
-          productType: this.loanAmountOptions,
+          productType: this.loanType,
           custProfession: this.occupationalIdentity,
           sortName: this.sortName,
         },
@@ -160,7 +160,7 @@ export default {
       this.fetchList();
     },
     loanAmountOptionsFilter(val) {
-      this.loanAmountOptions = val;
+      this.loanType = val;
       this.currentPage = 1;
       this.fetchList();
     },
@@ -189,6 +189,7 @@ export default {
   mounted() {
     this.occupationalIdentity = this.$route.query.custProfession || '';
     this.loanAmount = this.$route.query.productAmt || '';
+    this.loanType = this.$route.query.loanType || '';
     this.loanTimeLimit = this.$route.query.productCycle || '';
     this.fetchList();
   },

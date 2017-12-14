@@ -1,230 +1,212 @@
 <template>
   <div class="loan">
-    <el-carousel :interval="5000" arrow="always" class="carousel" height="500px">
-      <el-carousel-item v-for="item in 4" :key="item">
-      </el-carousel-item>
-      <base-application>
-      </base-application>
-    </el-carousel>
-    <div class="approach">
+  <el-carousel :interval="5000" arrow="always" class="carousel" height="500px">
+    <el-carousel-item v-for="item in 4" :key="item">
+    </el-carousel-item>
+    <base-application>
+    </base-application>
+  </el-carousel>
+  <div class="approach">
 
+  </div>
+  <div class="body">
+    <!-- 快速查找贷款 -->
+    <div class="find-loan">
+      <div class="title">
+        <h1>快速查找贷款</h1>
+      </div>
+      <div class="content">
+        <label>职业身份：</label>
+        <el-select v-model="occupation" placeholder="请选择">
+          <el-option v-for="item in occupationOptions" :key="item.value" :label="item.label" :value="item.value">
+          </el-option>
+        </el-select>
+        <label>贷款金额：</label>
+        <el-select v-model="loanAmount" placeholder="请选择">
+          <el-option v-for="item in loanAmountOptions" :key="item.value" :label="item.label" :value="item.value">
+          </el-option>
+        </el-select>
+        <label>贷款期限：</label>
+        <el-select v-model="loanTimeLimit" placeholder="请选择">
+          <el-option v-for="item in loanTimeLimitOptions" :key="item.value" :label="item.label" :value="item.value">
+          </el-option>
+        </el-select>
+        <el-button type="primary" class="find-btn" size="small" @click="search">搜索</el-button>
+      </div>
     </div>
-    <div class="body">
-      <!-- 快速查找贷款 -->
-      <div class="find-loan">
-        <div class="title">
-          <h1>快速查找贷款</h1>
-        </div>
-        <div class="content">
-          <label>职业身份：</label>
-          <el-select v-model="occupation" placeholder="请选择">
-            <el-option
-              v-for="item in occupationOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          <label>贷款金额：</label>
-          <el-select v-model="loanAmount" placeholder="请选择">
-            <el-option
-              v-for="item in loanAmountOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          <label>贷款期限：</label>
-          <el-select v-model="loanTimeLimit" placeholder="请选择">
-            <el-option
-              v-for="item in loanTimeLimitOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-          <el-button type="primary" class="find-btn" size="small" @click="search">搜索</el-button>
+    <!-- 信用贷 -->
+    <div class="credit-loan">
+      <div class="main-title">
+        <h1>信用贷</h1>
+        <div class="more">
+          <router-link :to="{name:'CreditLoan',
+                query:{loanType:this.creditActiveName}}">
+                更多
+                <i class="iconfont icon-gengduo"></i>
+          </router-link>
         </div>
       </div>
-      <!-- 信用贷 -->
-      <div class="credit-loan">
-        <div class="main-title">
-          <h1>信用贷</h1>
-          <div class="more">
-
-            <router-link to="/creditloan">更多<i class="iconfont icon-gengduo"></i></router-link>
+      <div class="content">
+        <div class="left">
+          <div class="title">
+            <!-- <img src="../assets/img/credit-loan.jpg" alt=""> -->
           </div>
+          <el-tabs v-model="creditActiveName">
+            <el-tab-pane label="工薪贷" name="5">
+              <base-table :type='5'></base-table>
+            </el-tab-pane>
+            <el-tab-pane label="月供贷" name="4">
+              <base-table :type='4'></base-table>
+            </el-tab-pane>
+            <el-tab-pane label="保单贷" name="3">
+              <base-table :type='3'></base-table>
+            </el-tab-pane>
+          </el-tabs>
         </div>
-        <div class="content">
-          <div class="left">
-            <div class="title">
-              <!-- <img src="../assets/img/credit-loan.jpg" alt=""> -->
-            </div>
-            <el-tabs v-model="creditActiveName" >
-              <el-tab-pane label="工薪贷" name="first">
-                  <base-table  :type='5'></base-table>
-              </el-tab-pane>
-              <el-tab-pane label="月供贷" name="second">
-                <base-table  :type='4'></base-table>
-              </el-tab-pane>
-              <el-tab-pane label="保单贷" name="third">
-                <base-table  :type='3'></base-table>
-              </el-tab-pane>
-            </el-tabs>
+        <!-- 最新放款动态 -->
+        <div class="right">
+          <div class="title">
+            最新放款动态
           </div>
-          <!-- 最新放款动态 -->
-          <div class="right">
-            <div class="title">
-              最新放款动态
-            </div>
-            <el-table
-             :data="loan"
-             :show-header="false"
-             >
-             <el-table-column
-               prop="lendedTime"
-               min-width="50"
-               :formatter="dateFormat"
-               >
-             </el-table-column>
-             <el-table-column
-               prop="custRelName"
-               min-width="60">
-             </el-table-column>
-             <el-table-column
-               min-width="60"
-               >
-                <template slot-scope="scope">
+          <el-table :data="loan" :show-header="false">
+            <el-table-column prop="lendedTime" min-width="50" :formatter="dateFormat">
+            </el-table-column>
+            <el-table-column prop="custRelName" min-width="60">
+            </el-table-column>
+            <el-table-column min-width="60">
+              <template slot-scope="scope">
                  成功
                </template>
-             </el-table-column>
-             <el-table-column
-               prop="loanAmt"
-               min-width="80" class="money">
-             </el-table-column>
-           </el-table>
-          </div>
+            </el-table-column>
+            <el-table-column prop="loanAmt" min-width="80" class="money">
+            </el-table-column>
+          </el-table>
         </div>
       </div>
-      <!-- 抵押贷 -->
-      <div class="mortgage-loan">
-        <div class="main-title">
-          <h1>抵押贷</h1>
-          <div class="more">
-            <router-link to="/mortgageloan">更多<i class="iconfont icon-gengduo"></i></router-link>
-          </div>
+    </div>
+    <!-- 抵押贷 -->
+    <div class="mortgage-loan">
+      <div class="main-title">
+        <h1>抵押贷</h1>
+        <div class="more">
+          <router-link :to="{name:'MortgageLoan',
+                query:{loanType:this.mortgageActiveName}}">
+            更多
+            <i class="iconfont icon-gengduo"></i>
+          </router-link>
         </div>
-        <div class="content">
-          <div class="left">
-            <div class="title">
-              <!-- <img src="../assets/img/credit-loan.jpg" alt=""> -->
-            </div>
-            <el-tabs v-model="mortgageActiveName" >
-              <el-tab-pane label="房抵贷" name="first">
-                <base-table  :type='1'></base-table>
-              </el-tab-pane>
-              <el-tab-pane label="车抵贷" name="second">
-                <base-table  :type='6'></base-table>
-             </el-tab-pane>
-            </el-tabs>
+      </div>
+      <div class="content">
+        <div class="left">
+          <div class="title">
+            <!-- <img src="../assets/img/credit-loan.jpg" alt=""> -->
           </div>
-          <!-- 最佳服务之星 -->
-          <div class="right">
-            <div class="title">
-              最佳服务之星
-            </div>
-            <div class="star">
-              <div class="row" v-for="item in serviceStarList">
-                <div :class="item.baseStarRank==1?'ranking first':item.baseStarRank==2?'ranking second':'ranking third'">
+          <el-tabs v-model="mortgageActiveName">
+            <el-tab-pane label="房抵贷" name="1">
+              <base-table :type='1'></base-table>
+            </el-tab-pane>
+            <el-tab-pane label="车抵贷" name="6">
+              <base-table :type='6'></base-table>
+            </el-tab-pane>
+          </el-tabs>
+        </div>
+        <!-- 最佳服务之星 -->
+        <div class="right">
+          <div class="title">
+            最佳服务之星
+          </div>
+          <div class="star">
+            <div class="row" v-for="item in serviceStarList">
+              <div :class="item.baseStarRank==1?'ranking first':item.baseStarRank==2?'ranking second':'ranking third'">
 
+              </div>
+              <div class="avatar">
+                <img src="../assets/img/mayun.jpg" :alt="item.baseStarName" height="80" width="80">
+              </div>
+              <div class="details">
+                <div class="name">
+                  {{item.baseStarName}}
                 </div>
-                <div class="avatar">
-                  <img src="../assets/img/mayun.jpg" :alt="item.baseStarName" height="80" width="80">
-                </div>
-                <div class="details">
-                  <div class="name">
-                    {{item.baseStarName}}
-                  </div>
-                  <p>{{item.baseStarAna}}</p>
-                </div>
+                <p>{{item.baseStarAna}}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- 常见问题,新闻资讯,平台公告 -->
-      <div class="info-loan">
-        <div class="problem">
-          <div class="title">
-            <div class="name">常见问题</div>
-            <div class="more">
-              <router-link :to="{ name: 'HelpCenter', params: { index: 2 }}">更多<i class="iconfont icon-gengduo"></i></router-link>
-            </div>
-          </div>
-          <div class="main">
-            <ul>
-              <li>贷款的基本常识有哪些？</li>
-              <li>信用卡最大额度不够，该如何增加？怎样快速提高自己的信用值？</li>
-               <li>贷款的基本常识有哪些？</li>
-               <li>用卡最大额度不够，该如何增加？</li>
-            </ul>
+    </div>
+    <!-- 常见问题,新闻资讯,平台公告 -->
+    <div class="info-loan">
+      <div class="problem">
+        <div class="title">
+          <div class="name">常见问题</div>
+          <div class="more">
+            <router-link :to="{ name: 'HelpCenter', params: { index: 2 }}">更多<i class="iconfont icon-gengduo"></i></router-link>
           </div>
         </div>
-        <div class="news">
-          <div class="title">
-            <div class="name">新闻资讯</div>
-            <div class="more">
-              <router-link to="/news">更多<i class="iconfont icon-gengduo"></i></router-link>
-            </div>
-          </div>
-          <div class="main">
-            <ul>
-              <li>贷款的基本常识有哪些？</li>
-              <li>信用卡最大额度不够，<span>【2017-11-09】</span></li>
-               <li>贷款的基本常识有哪些？</li>
-               <li>用卡最大额度不够，该如何增加？</li>
-            </ul>
-          </div>
-        </div>
-        <div class="notice">
-          <div class="title">
-            <div class="name">平台公告</div>
-            <div class="more">
-              <router-link to="/platformannouncement">更多<i class="iconfont icon-gengduo"></i></router-link>
-            </div>
-          </div>
-          <div class="main">
-            <ul>
-              <li><span>贷款的基本常识有哪些？</span>【2017-11-09】</li>
-              <li><span>信用卡最大额度不够</span><span>【2017-11-09】</span></li>
-               <li><span>贷款的基本常识有哪些？</span><span>【2017-11-09】</span></li>
-               <li>用卡最大额度不够?<span>【2017-11-09】</span></li>
-            </ul>
-          </div>
+        <div class="main">
+          <ul>
+            <li>贷款的基本常识有哪些？</li>
+            <li>信用卡最大额度不够，该如何增加？怎样快速提高自己的信用值？</li>
+            <li>贷款的基本常识有哪些？</li>
+            <li>用卡最大额度不够，该如何增加？</li>
+          </ul>
         </div>
       </div>
-      <div class="partner">
-        <h1>合作伙伴</h1>
-        <div class="content">
-          <div><img src="../assets/img/zgyh.png" alt=""></div>
-          <div><img src="../assets/img/payh.png" alt=""></div>
-          <div><img src="../assets/img/jsyh.png" alt=""></div>
-          <div><img src="../assets/img/gsyh.png" alt=""></div>
-          <div><img src="../assets/img/nyyh.png" alt=""></div>
-          <div><img src="../assets/img/jtyh.png" alt=""></div>
-          <div><img src="../assets/img/puyh.png" alt=""></div>
-          <div><img src="../assets/img/zsyh.png" alt=""></div>
-          <div><img src="../assets/img/zxyh.png" alt=""></div>
-          <div><img src="../assets/img/shyh.png" alt=""></div>
-          <div><img src="../assets/img/msyh.png" alt=""></div>
-          <div><img src="../assets/img/yzyh.png" alt=""></div>
-          <div><img src="../assets/img/hxyh.png" alt=""></div>
-          <div><img src="../assets/img/gfyh.png" alt=""></div>
-          <div><img src="../assets/img/cdyh.png" alt=""></div>
+      <div class="news">
+        <div class="title">
+          <div class="name">新闻资讯</div>
+          <div class="more">
+            <router-link to="/news">更多<i class="iconfont icon-gengduo"></i></router-link>
+          </div>
+        </div>
+        <div class="main">
+          <ul>
+            <li>贷款的基本常识有哪些？</li>
+            <li>信用卡最大额度不够，<span>【2017-11-09】</span></li>
+            <li>贷款的基本常识有哪些？</li>
+            <li>用卡最大额度不够，该如何增加？</li>
+          </ul>
+        </div>
+      </div>
+      <div class="notice">
+        <div class="title">
+          <div class="name">平台公告</div>
+          <div class="more">
+            <router-link to="/platformannouncement">更多<i class="iconfont icon-gengduo"></i></router-link>
+          </div>
+        </div>
+        <div class="main">
+          <ul>
+            <li><span>贷款的基本常识有哪些？</span>【2017-11-09】</li>
+            <li><span>信用卡最大额度不够</span><span>【2017-11-09】</span></li>
+            <li><span>贷款的基本常识有哪些？</span><span>【2017-11-09】</span></li>
+            <li>用卡最大额度不够?<span>【2017-11-09】</span></li>
+          </ul>
         </div>
       </div>
     </div>
+    <div class="partner">
+      <h1>合作伙伴</h1>
+      <div class="content">
+        <div><img src="../assets/img/zgyh.png" alt=""></div>
+        <div><img src="../assets/img/payh.png" alt=""></div>
+        <div><img src="../assets/img/jsyh.png" alt=""></div>
+        <div><img src="../assets/img/gsyh.png" alt=""></div>
+        <div><img src="../assets/img/nyyh.png" alt=""></div>
+        <div><img src="../assets/img/jtyh.png" alt=""></div>
+        <div><img src="../assets/img/puyh.png" alt=""></div>
+        <div><img src="../assets/img/zsyh.png" alt=""></div>
+        <div><img src="../assets/img/zxyh.png" alt=""></div>
+        <div><img src="../assets/img/shyh.png" alt=""></div>
+        <div><img src="../assets/img/msyh.png" alt=""></div>
+        <div><img src="../assets/img/yzyh.png" alt=""></div>
+        <div><img src="../assets/img/hxyh.png" alt=""></div>
+        <div><img src="../assets/img/gfyh.png" alt=""></div>
+        <div><img src="../assets/img/cdyh.png" alt=""></div>
+      </div>
+    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -237,8 +219,8 @@ export default {
   data() {
     return {
       checked: true,
-      creditActiveName: 'first', // 信用贷
-      mortgageActiveName: 'first',
+      creditActiveName: '5', // 信用贷
+      mortgageActiveName: '1',
       occupation: '',
       serviceStarList: '',
       occupationOptions: [{

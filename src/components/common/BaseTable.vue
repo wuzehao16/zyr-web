@@ -57,6 +57,7 @@ export default {
         },
         query: {
           productId: row.productId,
+          productType: row.productType,
         },
       });
     },

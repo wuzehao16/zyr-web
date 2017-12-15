@@ -21,11 +21,9 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   externals : {
-    "element-ui" : {
-      commonjs: "element-ui",
-      amd: "element-ui",
-      root: "_" // indicates global variable
-    }
+    "element-ui":"ELEMENT",
+    "vue":"Vue",
+    "vue-router":"VueRouter"
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],

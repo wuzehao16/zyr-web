@@ -36,4 +36,8 @@ export default {
   getBanner(params) {
     return Api().get('banner', params);
   },
+  // 加入我们
+  joinUs() {
+    return Api().get('joinOur');
+  },
 };

@@ -352,6 +352,7 @@ export default {
     .carousel-img{
       background-repeat: no-repeat;
       background-position: center;
+      background-size: 100% 100%;
     }
     .center{
       width: 1000px;
@@ -361,7 +362,7 @@ export default {
       .application{
         position:absolute;
         top: 15px;
-        right: 10px;
+        right: 0px;
         z-index: 4;
       }
     }

@@ -45,7 +45,7 @@ export default {
 <style lang="scss">
 .fixedtool{
   position: fixed;
-  top: 575px;
+  top: 70%;
   display: block;
   width: 60px;
   z-index: 4;

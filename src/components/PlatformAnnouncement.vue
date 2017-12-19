@@ -39,14 +39,14 @@ export default {
   },
   methods: {
     handleCurrentChange(val) {
-      this.first = 5 * (val - 1) - 1;
+      this.first = 10 * (val - 1);
       this.fetchNews();
     },
     async fetchList() {
       this.list = (await LoanService.contentList({
         params: {
           channelIds: 110,
-          count: 6,
+          count: 10,
           first: this.first,
         },
       })).data;

@@ -204,11 +204,6 @@
         <div><img src="../assets/img/zsyh.png" alt=""></div>
         <div><img src="../assets/img/zxyh.png" alt=""></div>
         <div><img src="../assets/img/shyh.png" alt=""></div>
-        <div><img src="../assets/img/msyh.png" alt=""></div>
-        <div><img src="../assets/img/yzyh.png" alt=""></div>
-        <div><img src="../assets/img/hxyh.png" alt=""></div>
-        <div><img src="../assets/img/gfyh.png" alt=""></div>
-        <div><img src="../assets/img/cdyh.png" alt=""></div>
       </div>
     </div>
   </div>

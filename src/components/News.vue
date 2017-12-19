@@ -6,7 +6,9 @@
         <h2>新闻中心</h2>
         <div class="info">
           <div class="item" v-for="item in list">
-            <img :src="item.typeImg" alt="" height="100" width="171">
+            <div class="image">
+              <img :src="item.typeImg" alt="" height="100" width="171">
+            </div>
             <div class="content" >
               <div class="title"><a :href="item.url" target="_blank">{{item.title}}</a></div>
               <div class="time">
@@ -94,6 +96,9 @@ export default {
           padding: 15px;
           border-bottom: 1px dashed $line-color;
           display: flex;
+          .image{
+            width: 171px;
+          }
           .content{
             margin-left: 22px;
             .title{

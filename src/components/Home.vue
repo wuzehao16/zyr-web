@@ -1,8 +1,10 @@
 <template lang="html">
   <div class="home">
-    <div class="banner" :style="{background:'url('+ banner +')'}">
-      <base-application>
-      </base-application>
+    <div class="banner" :style="{backgroundImage:'url('+ banner +')'}">
+      <div class="center">
+        <base-application>
+        </base-application>
+      </div>
     </div>
     <div class="commitment">
       <div class="title">
@@ -150,11 +152,6 @@
           <div><img src="../assets/img/zsyh.png" alt=""></div>
           <div><img src="../assets/img/zxyh.png" alt=""></div>
           <div><img src="../assets/img/shyh.png" alt=""></div>
-          <div><img src="../assets/img/msyh.png" alt=""></div>
-          <div><img src="../assets/img/yzyh.png" alt=""></div>
-          <div><img src="../assets/img/hxyh.png" alt=""></div>
-          <div><img src="../assets/img/gfyh.png" alt=""></div>
-          <div><img src="../assets/img/cdyh.png" alt=""></div>
         </div>
       </div>
     </div>
@@ -230,12 +227,20 @@ export default {
   }
   .banner{
     height: 667px;
+    background: no-repeat center;
     position: relative;
-    .application{
-      position:absolute;
-      top: 75px;
-      right: 22%;
+    .center{
+      height: 667px;
+      width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      .application{
+        position:absolute;
+        top: 75px;
+        right: 10px;
+      }
     }
+
   }
   //公共的content
   .content{
@@ -408,19 +413,22 @@ export default {
         line-height: 200px;
         margin: 0;
       }
-
+      .el-carousel__item{
+        border: 1px solid $line-color;
+        background-color: #ffffff;
+      }
       .el-carousel__item:nth-child(2n) {
-        background-color: #99a9bf;
+        background-color: #ffffff;
       }
 
       .el-carousel__item:nth-child(2n+1) {
-        background-color: #d3dce6;
+        background-color: #ffffff;
       }
     }
   }
   .partner{
     background-color: #f4f4f7;
-    padding-bottom: 200px;
+    padding-bottom: 80px;
     .content{
 
       flex-wrap: wrap;

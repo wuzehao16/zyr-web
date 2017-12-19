@@ -268,8 +268,7 @@ export default {
           this.$message.error(response.msg);
         }
       } catch (e) {
-        console.log(e)
-        this.$message.error('获取验证码失败');
+        // this.$message.error('获取验证码失败');
       }
     },
     closeDiolog(val) {

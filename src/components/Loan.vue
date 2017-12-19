@@ -1,10 +1,12 @@
 <template>
   <div class="loan">
   <el-carousel :interval="5000" arrow="always" class="carousel" height="500px">
-    <el-carousel-item v-for="item in banner" :key="item.logo" :style="{background:'url(' + item.logo + ')'}">
+    <el-carousel-item class="carousel-img" v-for="item in banner" :key="item.logo" :style="{backgroundImage:'url(' + item.logo + ')'}">
     </el-carousel-item>
-    <base-application>
-    </base-application>
+    <div class="center">
+      <base-application>
+      </base-application>
+    </div>
   </el-carousel>
   <div class="approach">
 
@@ -351,11 +353,23 @@ export default {
     background-color: #fff;
     background-position: center;
   }
-  .application{
-    position:absolute;
-    top: 15px;
-    right: 22%;
-    z-index: 10;
+  .carousel {
+    .carousel-img{
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .center{
+      width: 1000px;
+      height: 500px;
+      margin: 0 auto;
+      position: relative;
+      .application{
+        position:absolute;
+        top: 15px;
+        right: 10px;
+        z-index: 10;
+      }
+    }
   }
   .body{
     background-color: $bg-color;

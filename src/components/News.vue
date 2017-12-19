@@ -6,7 +6,7 @@
         <h2>新闻中心</h2>
         <div class="info">
           <div class="item" v-for="item in list">
-            <img :src="typeImg" alt="" height="100" width="171">
+            <img :src="item.typeImg" alt="" height="100" width="171">
             <div class="content" >
               <div class="title"><a :href="item.url" target="_blank">{{item.title}}</a></div>
               <div class="time">

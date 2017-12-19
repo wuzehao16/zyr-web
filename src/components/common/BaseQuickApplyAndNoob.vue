@@ -13,7 +13,11 @@
   </div>
   <div class="noob">
     <ul>
-      <li v-for="item in list">贷款的基本常识有哪些？</li>
+      <li v-for="item in list">
+        <a :href="item.url">
+          {{item.txt}}
+        </a>
+      </li>
     </ul>
   </div>
   </div>
@@ -85,6 +89,9 @@ export default {
         li{
           padding-top: 25px;
           color: $title-color;
+          a{
+            color: $title-color;
+          }
         }
       }
     }

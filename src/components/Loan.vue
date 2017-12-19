@@ -145,10 +145,9 @@
         </div>
         <div class="main">
           <ul>
-            <li>贷款的基本常识有哪些？</li>
-            <li>信用卡最大额度不够，该如何增加？怎样快速提高自己的信用值？</li>
-            <li>贷款的基本常识有哪些？</li>
-            <li>用卡最大额度不够，该如何增加？</li>
+            <li v-for="item in problemList">
+              <a :href="item.url">{{item.title}}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -161,10 +160,9 @@
         </div>
         <div class="main">
           <ul>
-            <li>贷款的基本常识有哪些？</li>
-            <li>信用卡最大额度不够，<span>【2017-11-09】</span></li>
-            <li>贷款的基本常识有哪些？</li>
-            <li>用卡最大额度不够，该如何增加？</li>
+            <li v-for="item in newsList">
+              <a :href="item.url">{{item.title}}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -177,10 +175,14 @@
         </div>
         <div class="main">
           <ul>
-            <li><span>贷款的基本常识有哪些？</span>【2017-11-09】</li>
-            <li><span>信用卡最大额度不够</span><span>【2017-11-09】</span></li>
-            <li><span>贷款的基本常识有哪些？</span><span>【2017-11-09】</span></li>
-            <li>用卡最大额度不够?<span>【2017-11-09】</span></li>
+            <li v-for="item in noticeList">
+              <span class="notice-title">
+                <a :href="item.url">
+                  {{item.title}}
+                </a>
+              </span>
+              【{{item.releaseDate.slice(0,10)}}】
+            </li>
           </ul>
         </div>
       </div>
@@ -278,6 +280,9 @@ export default {
       }],
       loan: [],
       banner: [],
+      problemList: [],
+      newsList: [],
+      noticeList: [],
     };
   },
   methods: {
@@ -302,6 +307,17 @@ export default {
         },
       });
     },
+    async fetchList(id) {
+      let list = (await LoanService.contentList({
+        params: {
+          channelIds: id,
+          count: 4,
+          first: this.first,
+        },
+      })).data;
+      list = list.slice(1);
+      return list
+    },
   },
   async mounted() {
     this.loan = (await LoanService.loan()).data.data;
@@ -311,6 +327,9 @@ export default {
       },
     })).data.data;
     this.serviceStarList = (await LoanService.serviceStarList()).data.data;
+    this.problemList = await this.fetchList(109);
+    this.newsList = await this.fetchList(98);
+    this.noticeList = await this.fetchList(110);
   },
   components: {
     BaseApplication,
@@ -539,6 +558,20 @@ export default {
             height: 237px;
             li{
               padding-top: 30px;
+              list-style-type: disc;
+              .notice-title{
+                a{
+                  white-space:nowrap;
+                  display: block;
+                  width: 170px;
+                  height: 18px;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                }
+              }
+              a{
+                color: $title-color;
+              }
             }
           }
         }

@@ -176,12 +176,14 @@
         <div class="main">
           <ul>
             <li v-for="item in noticeList">
+              <a :href="item.url">
               <span class="notice-title">
-                <a :href="item.url">
+
                   {{item.title}}
-                </a>
+
               </span>
-              【{{item.releaseDate.slice(0,10)}}】
+              <span>【{{item.releaseDate.slice(0,10)}}】</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -558,32 +560,31 @@ export default {
             height: 237px;
             li{
               padding-top: 30px;
-              list-style-type: disc;
-              .notice-title{
-                a{
-                  white-space:nowrap;
-                  display: block;
-                  width: 170px;
-                  height: 18px;
-                  text-overflow: ellipsis;
-                  overflow: hidden;
-                }
-              }
               a{
                 color: $title-color;
+                .notice-title{
+                  // float: left;
+                  white-space:nowrap;
+                  display: inline-block;
+                  width: 170px;
+                  height: 16px;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  line-height: 18px;
+                }
               }
             }
           }
         }
       }
-      .news,.notice{
-        ul{
-          li{
-            display: flex;
-            justify-content: space-between;
-          }
-        }
-      }
+      // .notice{
+      //   ul{
+      //     li{
+      //       display: flex;
+      //       justify-content: space-between;
+      //     }
+      //   }
+      // }
     }
     .partner{
       margin-top: 70px;

@@ -20,7 +20,6 @@
           <el-pagination
           @current-change="handleCurrentChange"
           :current-page="currentPage4"
-          :page-sizes="[100, 200, 300, 400]"
           :page-size="5"
           layout="total, prev, pager, next, jumper"
           :total="total"
@@ -62,7 +61,13 @@ export default {
       })).data;
       this.total = this.list[0].count;
       this.list = this.list.slice(1);
-    }
+      this.handleTxt();
+    },
+    handleTxt() {
+      for(let item of this.list) {
+        item.txt.replace(/_([^"]*)_/g, "");
+        }
+    },
   },
   mounted() {
     this.fetchNews();

@@ -362,7 +362,7 @@ export default {
         position:absolute;
         top: 15px;
         right: 10px;
-        z-index: 10;
+        z-index: 4;
       }
     }
   }

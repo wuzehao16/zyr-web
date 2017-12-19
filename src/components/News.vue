@@ -8,7 +8,7 @@
           <div class="item" v-for="item in list">
             <img src="../assets/img/news-img.jpg" alt="">
             <div class="content" >
-              <div class="title">{{item.title}}</div>
+              <div class="title"><a :href="item.url">{{item.title}}</a></div>
               <div class="time">
                 2017-11-21  16:31:12
               </div>
@@ -16,13 +16,12 @@
             </div>
           </div>
           <el-pagination
-          @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage4"
           :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
+          :page-size="5"
           layout="total, prev, pager, next, jumper"
-          :total="400"
+          :total="total"
           class="pagination">
         </el-pagination>
         </div>
@@ -39,18 +38,32 @@ export default {
   data() {
     return {
       list: [],
+      total: '',
+      first: 0,
     };
   },
   components: {
     TopBar,
   },
-  async mounted() {
-    this.list = (await LoanService.contentList({
-      params: {
-        channelIds: 98,
-      },
-    })).data;
-    this.list.splice(0, 6);
+  methods: {
+    handleCurrentChange(val) {
+      this.first = 5 * (val - 1) - 1;
+      this.fetchNews();
+    },
+    async fetchNews() {
+      this.list = (await LoanService.contentList({
+        params: {
+          channelIds: 98,
+          count: 6,
+          first: this.first,
+        },
+      })).data;
+      this.total = this.list[0].count;
+      this.list = this.list.slice(1);
+    }
+  },
+  mounted() {
+    this.fetchNews();
   },
 };
 </script>
@@ -89,6 +102,9 @@ export default {
             .time{
               font-size: 10px;
               margin-top: 10px;
+              color: $title-color;
+            }
+            a{
               color: $title-color;
             }
             p{

@@ -15,7 +15,7 @@
         :page-sizes="[100, 200, 300, 400]"
         :page-size="100"
         layout="total, prev, pager, next, jumper"
-        :total="400"
+        :total="1"
         class="pagination">
       </el-pagination>
       </div>
@@ -31,17 +31,31 @@ export default {
   data() {
     return {
       list: [],
+      total: 0,
     };
   },
   components: {
     TopBar,
   },
+  methods: {
+    handleCurrentChange(val) {
+      this.first = 5 * (val - 1) - 1;
+      this.fetchNews();
+    },
+    async fetchList() {
+      this.list = (await LoanService.contentList({
+        params: {
+          channelIds: 110,
+          count: 6,
+          first: this.first,
+        },
+      })).data;
+      this.total = this.list[0].count;
+      this.list = this.list.slice(1);
+    },
+  },
   async mounted() {
-    this.list = (await LoanService.contentList({
-      params: {
-        channelIds: 110,
-      },
-    })).data;
+    this.fetchList();
   },
 };
 </script>

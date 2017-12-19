@@ -25,7 +25,7 @@
         ]"
 
       >
-        <el-input type="captcha" v-model.number="applicationForm.captcha" auto-complete="off" placeholder="请输入验证码" class="captcha" size="medium"></el-input>
+        <el-input type="captcha" v-model.number="applicationForm.captcha" auto-complete="off" placeholder="请输入验证码" class="captcha" size="medium" ></el-input>
         <el-button type="primary"  class="getCaptcha" @click="getCaptcha" :disabled="getCaptchaDisabled">
           <span v-show="show">发送验证码</span>
           <span v-show="!show">{{count}}秒后获取</span>
@@ -254,12 +254,17 @@ export default {
             }
           }, 1000);
         }
-        await LoanService.getCaptcha({
+        const response = await LoanService.getCaptcha({
           params: {
             custTel: this.applicationForm.telephone,
           },
         });
+        if (response.code !== 0) {
+          this.timer = null;
+          this.$message.error(response.msg);
+        }
       } catch (e) {
+        console.log(e)
         this.$message.error('请填入正确手机号码');
       }
     },

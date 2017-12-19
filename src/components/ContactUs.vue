@@ -13,7 +13,7 @@
               <p>企业邮箱：service@zyrbanking.com</p>
             </div>
             <div class="code">
-              <img src="../assets/img/code.png" alt="">
+              <img src="../assets/img/code.jpg" alt="" height="80" width="80">
               <span>微信公众号</span>
             </div>
           </div>
@@ -76,7 +76,6 @@ export default {
             position:relative;
             span{
               position: absolute;
-              margin-left: -3px;
             }
           }
         }

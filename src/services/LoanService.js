@@ -25,7 +25,7 @@ export default {
     return Api().post('feedback', feedback);
   },
   // index/contentList?channelIds=107
-  // 98(行业新闻);107(贷款资讯);109(常识讲堂);110(平台公告)
+  // channelIds:98(行业新闻);107(贷款资讯);109(常识讲堂);110(平台公告);113(成功案例);114(新手上路);115(温馨提示)
   contentList(params) {
     return Api().get('contentList', params);
   },

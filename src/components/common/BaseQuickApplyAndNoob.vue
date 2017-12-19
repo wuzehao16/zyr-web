@@ -13,18 +13,33 @@
   </div>
   <div class="noob">
     <ul>
-      <li v-for="item in 6">贷款的基本常识有哪些？</li>
+      <li v-for="item in list">贷款的基本常识有哪些？</li>
     </ul>
   </div>
   </div>
 </template>
 
 <script>
+import LoanService from '@/services/LoanService'
 import BaseApplicationForm from '@/components/common/BaseApplicationForm';
 
 export default {
+  data() {
+    return {
+      list: [],
+    };
+  },
   components: {
     BaseApplicationForm,
+  },
+  async mounted() {
+    const response = (await LoanService.contentList({
+      params: {
+        channelIds: 114,
+        count: 6,
+      },
+    })).data;
+    this.list = response.slice(1);
   },
 };
 </script>

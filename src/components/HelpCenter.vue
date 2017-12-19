@@ -25,7 +25,9 @@
             新手上路
           </div>
           <ul class="list">
-            <li v-for="item in 6">安全保障：在众易融平台借款有什么保障措施？</li>
+            <li v-for="item in freshmanList">
+              <a :href="item.url">{{item.title}}</a>
+            </li>
           </ul>
         </div>
         <div class="content" v-if="index==1">
@@ -33,7 +35,9 @@
             常见问题
           </div>
           <ul class="list">
-            <li v-for="item in 6">安全保障：在众易融平台借款有什么保障措施？</li>
+            <li v-for="item in problemList">
+              <a :href="item.url">{{item.title}}</a>
+            </li>
           </ul>
         </div>
         <div class="content" v-if="index==2">
@@ -41,7 +45,9 @@
             温馨提示
           </div>
           <ul class="list">
-            <li v-for="item in 6">安全保障：在众易融平台借款有什么保障措施？</li>
+            <li v-for="item in hintList">
+              <a :href="item.url">{{item.title}}</a>
+            </li>
           </ul>
         </div>
       </el-col>
@@ -51,14 +57,35 @@
 </template>
 
 <script>
+import LoanService from '@/services/LoanService';
+
 export default {
   data() {
     return {
       index: '0',
+      freshmanList: [],
+      problemList: [],
+      hintList: [],
     };
+  },
+  methods: {
+    async fetchList(id) {
+      let list = (await LoanService.contentList({
+        params: {
+          channelIds: id,
+          count: 10,
+          first: this.first,
+        },
+      })).data;
+      list = list.slice(1);
+      return list
+    }
   },
   async mounted() {
     this.index = this.$route.params.index || '0';
+    this.freshmanList = await this.fetchList(114);
+    this.problemList = await this.fetchList(109);
+    this.hintList = await this.fetchList(115);
   },
 };
 </script>
@@ -107,6 +134,9 @@ export default {
         padding-top: 32px;
         font-size: 16px;
         color: $title-color;
+        a{
+          color: $title-color;
+        }
       }
     }
   }

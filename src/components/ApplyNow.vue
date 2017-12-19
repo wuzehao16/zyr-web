@@ -11,7 +11,7 @@
     <div class="content">
       <div class="left">
         <div class="introduction">
-          <div class="product-img" :style="{background:'url('+ product.zdPlat.platLog + ')'}"></div>
+          <div class="product-img" :style="{background:'url('+ product.zdPlat.platLog + ') center;background-size:100%;'}"></div>
           <div class="product-name">
             <div class="name">
               【{{product.productName}}】

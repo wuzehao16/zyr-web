@@ -117,16 +117,18 @@
       </div>
       <div class="con">
         <el-carousel :interval="10000" type="card" height="200px" width="820px">
-          <el-carousel-item v-for="item in 6" :key="item">
+          <el-carousel-item v-for="item in successfunCase" :key="item">
             <div class="container">
               <div class="l">
-
+                <img :src="item.typeImg" alt="" height="150" width="200">
               </div>
               <div class="r">
                 <div class="head">
-                  成功借款30万
+                  {{item.title}}
                 </div>
-                <p>蒋先生大学毕业后在互联网公司上班，结婚后大部分积蓄都用来买房了，新房交付后装修资金缺口较大。蒋先生在网上找到助贷网并提交了贷款申请，助贷网的贷款顾问很快联系了他，详细了解蒋情况后，为蒋先生做了学历贷，成功贷款30万，家里房子的装修也由最初的简装方案更改为精装，装修后的新房非常漂亮，一家三口都感到非常满意。</p>
+                <p>
+                  {{item.txt}}
+                </p>
               </div>
             </div>
           </el-carousel-item>
@@ -173,6 +175,7 @@ export default {
       loanAmount: 0,
       rate: '0.0060',
       banner: '',
+      successfunCase: [],
     };
   },
   computed: {
@@ -197,6 +200,14 @@ export default {
       },
     })).data.data;
     this.banner = response[0].logo;
+    const list = (await LoanService.contentList({
+            params: {
+              channelIds: 113,
+              count: 6,
+            },
+          })).data;
+    this.successfunCase = list.slice(1);
+    console.log(this.successfunCase)
   },
 };
 </script>
@@ -375,7 +386,6 @@ export default {
         padding: 20px 10px;
         display: flex;
         .l{
-          background-color: #fff;
           width: 200px;
           height: 150px;
           flex: 0 0 200px;

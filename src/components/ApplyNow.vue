@@ -11,7 +11,7 @@
     <div class="content">
       <div class="left">
         <div class="introduction">
-          <div class="product-img"></div>
+          <div class="product-img" :style="{background:'url('+ product.zdPlat.platLog + ')'}"></div>
           <div class="product-name">
             <div class="name">
               【{{product.productName}}】
@@ -473,7 +473,7 @@ export default {
           background-color: #fff;
           display: flex;
           .product-img{
-            background: url(../assets/img/product_img.png) center no-repeat;
+            // background: url(../assets/img/product_img.png) center no-repeat;
             width: 126px;
             height: 126px;
           }

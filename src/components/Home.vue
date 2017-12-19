@@ -186,6 +186,7 @@ export default {
   },
   methods: {
     toTop() {
+      this.loanAmount = 0;
       window.scrollTo(0, 0);
     },
   },
@@ -222,7 +223,7 @@ export default {
     .application{
       position:absolute;
       top: 75px;
-      right: 460px;
+      right: 22%;
     }
   }
   //公共的content

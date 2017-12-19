@@ -8,11 +8,11 @@
           <div class="item" v-for="item in list">
             <img :src="typeImg" alt="" height="100" width="171">
             <div class="content" >
-              <div class="title"><a :href="item.url">{{item.title}}</a></div>
+              <div class="title"><a :href="item.url" target="_blank">{{item.title}}</a></div>
               <div class="time">
                 2017-11-21  16:31:12
               </div>
-              <p v-html="item.txt"></p>
+              <p class="txt" v-html="item.txt"></p>
             </div>
           </div>
           <el-pagination
@@ -107,7 +107,8 @@ export default {
             a{
               color: $title-color;
             }
-            p{
+            .txt{
+              height: 33px;
               margin-top: 25px;
               overflow: hidden;
               text-overflow: ellipsis;

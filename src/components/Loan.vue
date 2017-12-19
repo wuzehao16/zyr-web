@@ -121,7 +121,7 @@
 
               </div>
               <div class="avatar">
-                <img src="../assets/img/mayun.jpg" :alt="item.baseStarName" height="80" width="80">
+                <img :src="item.baseStarPicture" :alt="item.baseStarName" height="80" width="80">
               </div>
               <div class="details">
                 <div class="name">
@@ -146,7 +146,7 @@
         <div class="main">
           <ul>
             <li v-for="item in problemList">
-              <a :href="item.url">{{item.title}}</a>
+              <a :href="item.url" target="_blank">{{item.title}}</a>
             </li>
           </ul>
         </div>
@@ -161,7 +161,7 @@
         <div class="main">
           <ul>
             <li v-for="item in newsList">
-              <a :href="item.url">{{item.title}}</a>
+              <a :href="item.url" target="_blank">{{item.title}}</a>
             </li>
           </ul>
         </div>
@@ -176,7 +176,7 @@
         <div class="main">
           <ul>
             <li v-for="item in noticeList">
-              <a :href="item.url">
+              <a :href="item.url" target="_blank">
               <span class="notice-title">
 
                   {{item.title}}
@@ -354,7 +354,7 @@ export default {
   .application{
     position:absolute;
     top: 15px;
-    right: 460px;
+    right: 22%;
     z-index: 10;
   }
   .body{

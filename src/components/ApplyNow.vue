@@ -384,7 +384,11 @@ export default {
     async getCaptcha() {
       try {
         if (!(/^1[3|4|5|7|8]\d{9}$/.test(this.form.custTel))) {
-          this.$message.error('请填入正确手机号码');
+          this.$message({
+            showClose: true,
+            message: '请填入正确手机号码',
+            type: 'error'
+          });
           return;
         }
         const TIME_COUNT = 60;

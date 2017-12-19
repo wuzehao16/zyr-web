@@ -26,7 +26,7 @@
           </div>
           <ul class="list">
             <li v-for="item in freshmanList">
-              <a :href="item.url">{{item.title}}</a>
+              <a :href="item.url" target="_blank">{{item.title}}</a>
             </li>
           </ul>
         </div>
@@ -36,7 +36,7 @@
           </div>
           <ul class="list">
             <li v-for="item in problemList">
-              <a :href="item.url">{{item.title}}</a>
+              <a :href="item.url" target="_blank">{{item.title}}</a>
             </li>
           </ul>
         </div>
@@ -46,7 +46,7 @@
           </div>
           <ul class="list">
             <li v-for="item in hintList">
-              <a :href="item.url">{{item.title}}</a>
+              <a :href="item.url" target="_blank">{{item.title}}</a>
             </li>
           </ul>
         </div>

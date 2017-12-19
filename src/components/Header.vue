@@ -3,10 +3,7 @@
   <div class="center">
     <div class="left">
     <div class="logo">
-      <img src="../assets/img/logo.png" alt="logo" height="50" width="140">
-    </div>
-    <div class="address">
-      {{city}}
+      <a href="/"><img src="../assets/img/logo.png" alt="logo" height="50" width="140"></a>
     </div>
     </div>
     <div class="nav">
@@ -27,14 +24,7 @@ export default {
     return {
       activeIndex: '1',
       province: '',
-      city: '',
     };
-  },
-  async mounted() {
-    // this.province = remote_ip_info["province"]
-    /* eslint-disable */
-    this.city = remote_ip_info["city"];
-    /* eslint-disable */
   },
 };
 </script>

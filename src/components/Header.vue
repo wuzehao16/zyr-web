@@ -3,7 +3,7 @@
   <div class="center">
     <div class="left">
     <div class="logo">
-      <a href="/"><img src="../assets/img/logo.png" alt="logo" height="50" width="140"></a>
+      <a href="/"><img src="../assets/img/logo.png" alt="logo" height="42" width="300"></a>
     </div>
     </div>
     <div class="nav">
@@ -26,9 +26,6 @@ export default {
       province: '',
     };
   },
-  methods: {
-
-  }
 };
 </script>
 

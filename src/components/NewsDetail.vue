@@ -1,7 +1,8 @@
 <template lang="html">
   <div class="news-detail">
-    <iframe :src="url" width="1000" scrolling="no" id="frame"></iframe>
+    <iframe :src="url" width="1000" scrolling="no" id="frame" ref="abc"></iframe>
   </div>
+
 </template>
 
 <script>
@@ -14,18 +15,21 @@ export default {
   methods: {
     setIframeHeight(iframe) {
       if (iframe) {
-        var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+        const iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
         if (iframeWin.document.body) {
-          iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+          setTimeout(() => {
+            iframe.height = iframeWin.document.documentElement.scrollHeight
+                            || iframeWin.document.body.scrollHeight;
+          }, 200)
         }
       }
     },
   },
   mounted() {
     this.setIframeHeight(document.getElementById('frame'))
-    this.url = 'http://47.104.27.184' + this.$route.query.url
+    this.url = this.$route.query.url
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -33,8 +37,8 @@ export default {
   width: 1000px;
   margin: 0 auto;
   #frame{
-    min-height: 800px;
     border: none;
+    // height: 3000px;
   }
 }
 </style>

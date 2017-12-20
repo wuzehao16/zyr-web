@@ -33,7 +33,7 @@ export default {};
     width: 1000px;
     margin: 0 auto;
     .us{
-      padding-top: 50px;
+      padding-top: 70px;
       padding-left: 180px;
       height: 20px;
       a{
@@ -48,7 +48,7 @@ export default {};
       }
     }
     .info{
-      margin-top: 36px;
+      margin-top: 20px;
       .address{
         margin-left: 45px;
       }

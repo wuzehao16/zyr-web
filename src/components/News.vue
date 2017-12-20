@@ -67,7 +67,7 @@ export default {
       this.handleTxt();
     },
     handleTxt() {
-      this.list.forEach(function (item) {
+      this.list.forEach((item) => {
         item.txt = item.txt.replace(/_([^]*)_/g, '');
       });
     },

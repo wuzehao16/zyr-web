@@ -64,9 +64,12 @@ export default {
       this.handleTxt();
     },
     handleTxt() {
-      for (const item of this.list) {
+      this.list.forEach(function (item) {
+        console.log(item.txt)
         item.txt.replace(/_([^"]*)_/g, '');
-      }
+        console.log(item.txt)
+      });
+      console.log(this.list)
     },
   },
   mounted() {

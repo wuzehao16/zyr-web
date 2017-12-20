@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="fixedtool">
     <div class="custom-service">
-      <a href="tencent://message/?Menu=yes&uin=1243935366" target="_blank"></a>
+      <a href="tencent://message/?Menu=yes&uin=2298479347" target="_blank"></a>
       <i class="iconfont icon-kefu"></i>
     </div>
     <div class="code">

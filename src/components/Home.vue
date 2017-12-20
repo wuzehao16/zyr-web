@@ -227,7 +227,6 @@ export default {
   .banner{
     height: 667px;
     background: no-repeat center;
-    background-size: 100% 100%;
     position: relative;
     .center{
       height: 667px;

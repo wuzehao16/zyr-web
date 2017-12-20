@@ -28,13 +28,13 @@ export default {};
   height: 200px;
   background-color: #4e3932;
   color: #fff;
-  font-size: 16px;
+  font-size: 15px;
   .container{
     width: 1000px;
     margin: 0 auto;
     .us{
       padding-top: 70px;
-      padding-left: 180px;
+      padding-left: 195px;
       height: 20px;
       a{
         color: #fff;

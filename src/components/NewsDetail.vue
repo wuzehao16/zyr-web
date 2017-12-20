@@ -10,24 +10,25 @@ export default {
   data() {
     return {
       url: '',
-    }
+    };
   },
   methods: {
     setIframeHeight(iframe) {
       if (iframe) {
-        const iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+        const iframeWin = iframe.contentWindow
+                          || iframe.contentDocument.parentWindow;
         if (iframeWin.document.body) {
           setTimeout(() => {
             iframe.height = iframeWin.document.documentElement.scrollHeight
                             || iframeWin.document.body.scrollHeight;
-          }, 200)
+          }, 200);
         }
       }
     },
   },
   mounted() {
-    this.setIframeHeight(document.getElementById('frame'))
-    this.url = this.$route.query.url
+    this.setIframeHeight(document.getElementById('frame'));
+    this.url = this.$route.query.url;
   },
 };
 </script>

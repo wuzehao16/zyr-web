@@ -13,7 +13,7 @@ import ContactUs from '@/components/ContactUs';
 import FeedBack from '@/components/FeedBack';
 import Disclaimer from '@/components/Disclaimer';
 import News from '@/components/News';
-import NewsDetail from '@/components/NewsDetail'
+import NewsDetail from '@/components/NewsDetail';
 
 Vue.use(Router);
 

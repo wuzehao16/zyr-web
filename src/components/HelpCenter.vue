@@ -78,8 +78,8 @@ export default {
         },
       })).data;
       list = list.slice(1);
-      return list
-    }
+      return list;
+    },
   },
   async mounted() {
     this.index = this.$route.params.index || '0';

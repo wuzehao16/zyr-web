@@ -238,7 +238,7 @@ export default {
           this.$message({
             showClose: true,
             message: '请填入正确手机号码',
-            type: 'error'
+            type: 'error',
           });
           return;
         }

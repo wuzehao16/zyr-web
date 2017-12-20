@@ -64,9 +64,9 @@ export default {
       this.handleTxt();
     },
     handleTxt() {
-      for(let item of this.list) {
-        item.txt.replace(/_([^"]*)_/g, "");
-        }
+      for (const item of this.list) {
+        item.txt.replace(/_([^"]*)_/g, '');
+      }
     },
   },
   mounted() {

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import LoanService from '@/services/LoanService'
+import LoanService from '@/services/LoanService';
 import BaseApplicationForm from '@/components/common/BaseApplicationForm';
 
 export default {

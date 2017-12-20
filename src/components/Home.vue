@@ -180,8 +180,8 @@ export default {
       return Math.round((this.balance * this.loanTimeLimit.slice(0, 2) * 100)) / 100;
     },
     balance() {
-      return Math.round((((this.loanAmount / this.loanTimeLimit.slice(0, 2))
-      + (this.loanAmount * this.rate)) * 10000) * 100) / 100;
+      return Math.round((((this.loanAmount / this.loanTimeLimit.slice(0, 2)) +
+        (this.loanAmount * this.rate)) * 10000) * 100) / 100;
     },
   },
   methods: {
@@ -198,13 +198,12 @@ export default {
     })).data.data;
     this.banner = response[0].logo;
     const list = (await LoanService.contentList({
-            params: {
-              channelIds: 113,
-              count: 6,
-            },
-          })).data;
+      params: {
+        channelIds: 113,
+        count: 6,
+      },
+    })).data;
     this.successfunCase = list.slice(1);
-    console.log(this.successfunCase)
   },
 };
 </script>

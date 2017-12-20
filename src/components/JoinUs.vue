@@ -45,7 +45,7 @@ export default {
   },
   async mounted() {
     const response = (await LoanService.joinUs()).data.data;
-    this.list = response
+    this.list = response;
   },
 };
 </script>

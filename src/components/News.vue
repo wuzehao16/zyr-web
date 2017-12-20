@@ -12,7 +12,7 @@
             <div class="content" >
               <!-- <div class="title"><a :href="item.url" target="_blank">{{item.title}}</a></div> -->
               <div class="title">
-                <router-link :to="{ name: 'NewsDetail', params: {url:item.url} }">{{item.title}}</router-link>
+                <router-link :to="{ name: 'NewsDetail', query: {url:item.url} }">{{item.title}}</router-link>
               </div>
               <div class="time">
                 2017-11-21  16:31:12

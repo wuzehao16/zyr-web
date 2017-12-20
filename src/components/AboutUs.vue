@@ -16,7 +16,7 @@
         </div>
         <h3>商业模式</h3>
         <img src="../assets/img/business_model.jpg" alt="">
-        <div class="bg">
+        <!-- <div class="bg">
           <img src="../assets/img/intro_1.jpg" alt="">
           <div class="right">
             <div class="">
@@ -28,7 +28,7 @@
               <img src="../assets/img/intro_5.jpg" alt="" class="img2">
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="about-us">
+  <div class="contact-us">
       <top-bar />
     <div class="body">
       <div class="container">
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="scss">
-.about-us{
+.contact-us{
   .body{
     background: url(../assets/img/about_us_bg.jpg) no-repeat;
     height: 907px;

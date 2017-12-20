@@ -128,8 +128,7 @@
                 <div class="head">
                   {{item.title}}
                 </div>
-                <p>
-                  {{item.txt}}
+                <p v-html="item.txt">
                 </p>
               </div>
             </div>

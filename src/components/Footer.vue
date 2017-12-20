@@ -28,7 +28,7 @@ export default {};
   height: 200px;
   background-color: #4e3932;
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   .container{
     width: 1000px;
     margin: 0 auto;

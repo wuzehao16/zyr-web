@@ -3,11 +3,11 @@
   <el-carousel :interval="5000" arrow="always" class="carousel" height="500px">
     <el-carousel-item class="carousel-img" v-for="item in banner" :key="item.logo" :style="{backgroundImage:'url(' + item.logo + ')'}">
     </el-carousel-item>
-    <div class="center">
-      <base-application>
-      </base-application>
-    </div>
   </el-carousel>
+  <div class="center">
+    <base-application>
+    </base-application>
+  </div>
   <div class="approach">
 
   </div>
@@ -73,14 +73,14 @@
           <el-table :data="loan" :show-header="false">
             <el-table-column prop="lendedTime" min-width="50" :formatter="dateFormat">
             </el-table-column>
-            <el-table-column prop="custRelName" min-width="60">
+            <el-table-column prop="custRelName" min-width="60" :formatter="nameFormat">
             </el-table-column>
             <el-table-column min-width="60">
               <template slot-scope="scope">
-                 成功
+                 成功放款
                </template>
             </el-table-column>
-            <el-table-column prop="loanAmt" min-width="80" class="money">
+            <el-table-column prop="loanAmt" min-width="80" class="money" :formatter="moneyFormat">
             </el-table-column>
           </el-table>
         </div>
@@ -293,6 +293,20 @@ export default {
       }
       return `[${date.slice(date.length - 5, date.length)}]`;
     },
+    nameFormat(row, column) {
+      const date = row[column.property];
+      if (date === undefined) {
+        return '';
+      }
+      return `${date.slice(0, 1)} * *`;
+    },
+    moneyFormat(row, column) {
+      const date = row[column.property];
+      if (date === undefined) {
+        return '';
+      }
+      return `￥${date}`;
+    },
     search() {
       this.$router.push({
         name: 'CreditLoan',
@@ -349,21 +363,26 @@ export default {
     background-position: center;
   }
   .carousel {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 0;
+    width: 100%;
     .carousel-img{
       background-repeat: no-repeat;
       background-position: center;
     }
-    .center{
-      width: 1000px;
-      height: 500px;
-      margin: 0 auto;
-      position: relative;
-      .application{
-        position:absolute;
-        top: 15px;
-        right: 0px;
-        z-index: 4;
-      }
+  }
+  .center{
+    width: 1000px;
+    height: 500px;
+    margin: 0 auto;
+    position: relative;
+    .application{
+      position:absolute;
+      top: 15px;
+      right: 0px;
+      z-index: 4;
     }
   }
   .body{

@@ -128,7 +128,7 @@
                 <div class="head">
                   {{item.title}}
                 </div>
-                <p v-html="item.txt">
+                <p class="case-txt" v-html="item.txt">
                 </p>
               </div>
             </div>
@@ -399,7 +399,9 @@ export default {
           .head{
             font-size: 22px;
           }
-          p{
+          .case-txt{
+            height: 100px;
+            overflow-y: auto;
             font-size: 13px;
           }
         }

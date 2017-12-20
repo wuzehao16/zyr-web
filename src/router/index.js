@@ -13,6 +13,7 @@ import ContactUs from '@/components/ContactUs';
 import FeedBack from '@/components/FeedBack';
 import Disclaimer from '@/components/Disclaimer';
 import News from '@/components/News';
+import NewsDetail from '@/components/NewsDetail'
 
 Vue.use(Router);
 
@@ -82,6 +83,11 @@ export default new Router({
       path: '/creditloan',
       name: 'CreditLoan',
       component: CreditLoan,
+    },
+    {
+      path: '/newsdetail',
+      name: 'NewsDetail',
+      component: NewsDetail,
     },
   ],
   scrollBehavior(to, from, savedPosition) {

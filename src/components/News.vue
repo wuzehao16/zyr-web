@@ -10,7 +10,10 @@
               <img :src="item.typeImg" alt="" height="100" width="171">
             </div>
             <div class="content" >
-              <div class="title"><a :href="item.url" target="_blank">{{item.title}}</a></div>
+              <!-- <div class="title"><a :href="item.url" target="_blank">{{item.title}}</a></div> -->
+              <div class="title">
+                <router-link :to="{ name: 'NewsDetail', params: {url:item.url} }">{{item.title}}</router-link>
+              </div>
               <div class="time">
                 2017-11-21  16:31:12
               </div>
@@ -65,11 +68,8 @@ export default {
     },
     handleTxt() {
       this.list.forEach(function (item) {
-        console.log(item.txt)
-        item.txt.replace(/_([^"]*)_/g, '');
-        console.log(item.txt)
+        item.txt = item.txt.replace(/_([^]*)_/g, '');
       });
-      console.log(this.list)
     },
   },
   mounted() {

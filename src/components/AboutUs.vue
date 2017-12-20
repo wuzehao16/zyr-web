@@ -14,6 +14,8 @@
         <div class="info">
           <p>公司以“专注体验，用心服务”为核心价值，一切以用户需求为中心，希望通过专业的水平和不懈的努力，重塑金融行业的形象和口碑。</p>
         </div>
+        <h3>商业模式</h3>
+        <img src="../assets/img/business_model.jpg" alt="">
         <div class="bg">
           <img src="../assets/img/intro_1.jpg" alt="">
           <div class="right">
@@ -46,13 +48,11 @@ export default {
 .about-us{
   .body{
     background: url(../assets/img/about_us_bg.jpg) no-repeat;
-    height: 1057px;
+    overflow-y: auto;
     .container{
       background-color: #fff;
       width: 940px;
-      height: 840px;
-      margin: 0 auto;
-      top: 100px;
+      margin: 100px auto;
       position: relative;
       box-shadow: #999 0px 0px 10px;
       padding: 30px 48px;

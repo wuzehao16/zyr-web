@@ -13,6 +13,7 @@ npm run dev
 
 # build for production with minification
 npm run build
+线上项目在pc文件夹，config的assetsPublicPath改为了/pc
 
 # build for production and view the bundle analyzer report
 npm run build --report

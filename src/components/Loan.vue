@@ -71,11 +71,11 @@
             最新放款动态
           </div>
           <el-table :data="loan" :show-header="false">
-            <el-table-column prop="lendedTime" min-width="50" :formatter="dateFormat">
+            <el-table-column prop="lendedTime" min-width="55" :formatter="dateFormat">
             </el-table-column>
             <el-table-column prop="custRelName" min-width="60" :formatter="nameFormat">
             </el-table-column>
-            <el-table-column min-width="60">
+            <el-table-column min-width="65">
               <template slot-scope="scope">
                  成功放款
                </template>
@@ -291,7 +291,7 @@ export default {
       if (date === undefined) {
         return '';
       }
-      return `[${date.slice(date.length - 5, date.length)}]`;
+      return `[${date.slice(5, 10)}]`;
     },
     nameFormat(row, column) {
       const date = row[column.property];
@@ -305,7 +305,7 @@ export default {
       if (date === undefined) {
         return '';
       }
-      return `￥${date}`;
+      return `￥${date}0000`;
     },
     search() {
       this.$router.push({

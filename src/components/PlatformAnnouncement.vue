@@ -5,7 +5,7 @@
       <div class="container">
         <h2>平台公告</h2>
         <div class="info" v-for="item in list">
-          <a :href="item.url" target="_blank"><span>{{item.title}}</span></a>
+          <router-link target="_blank" :to="{ name: 'NewsDetail', query: {url:item.url} }">{{item.title}}</router-link>
           <span>{{item.releaseDate}}</span>
         </div>
         <el-pagination

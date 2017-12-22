@@ -148,7 +148,7 @@
         <div class="main">
           <ul>
             <li v-for="item in problemList">
-              <a :href="item.url" target="_blank">{{item.title}}</a>
+              <router-link target="_blank" :to="{ name: 'NewsDetail', query: {url:item.url} }">{{item.title}}</router-link>
             </li>
           </ul>
         </div>
@@ -163,7 +163,7 @@
         <div class="main">
           <ul>
             <li v-for="item in newsList">
-              <a :href="item.url" target="_blank">{{item.title}}</a>
+              <router-link target="_blank" :to="{ name: 'NewsDetail', query: {url:item.url} }">{{item.title}}</router-link>
             </li>
           </ul>
         </div>
